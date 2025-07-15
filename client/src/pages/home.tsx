@@ -226,7 +226,8 @@ export default function Home() {
     
     // 정규분포 누적확률 계산
     const cdf = 0.5 * (1 + erf(zScore / Math.sqrt(2)));
-    const percentile = Math.round((1 - cdf) * 100);
+    // 러닝에서는 시간이 짧을수록 좋으므로 cdf를 그대로 사용 (시간이 짧으면 상위 퍼센트)
+    const percentile = Math.round(cdf * 100);
     
     return {
       zScore,
@@ -582,7 +583,7 @@ export default function Home() {
                     return position && (
                       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                         <div className="bg-white p-4 rounded-lg">
-                          <div className="text-2xl font-bold text-purple-600">{results.grade}</div>
+                          <div className={`text-2xl font-bold ${gradeDefinitions[results.grade].textColor}`}>{results.grade}</div>
                           <div className="text-sm text-gray-600">등급</div>
                         </div>
                         <div className="bg-white p-4 rounded-lg">
