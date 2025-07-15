@@ -113,12 +113,12 @@ export default function Home() {
     
     const standards = distanceStandards[distance as keyof typeof distanceStandards].standards;
     
-    if (totalSeconds < standards['SS']) return 'SS';
-    if (totalSeconds < standards['S']) return 'S';
-    if (totalSeconds < standards['A']) return 'A';
-    if (totalSeconds < standards['B']) return 'B';
-    if (totalSeconds < standards['C']) return 'C';
-    return 'D';
+    if (totalSeconds > standards['C']) return 'D';
+    if (totalSeconds > standards['B']) return 'C';
+    if (totalSeconds > standards['A']) return 'B';
+    if (totalSeconds > standards['S']) return 'A';
+    if (totalSeconds > standards['SS']) return 'S';
+    return 'SS';
   };
 
   const formatTime = (totalSeconds: number): string => {
@@ -261,54 +261,77 @@ export default function Home() {
       return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
     }).join(' ');
 
-    // 등급 구간 표시
+    // 등급 구간 표시 (CSS 색상과 동일하게 통일)
     const gradeColors = {
-      'SS': '#8B5CF6',
-      'S': '#F59E0B', 
-      'A': '#10B981',
-      'B': '#3B82F6',
-      'C': '#F97316',
-      'D': '#6B7280'
+      'SS': 'hsl(270, 100%, 70%)',
+      'S': 'hsl(45, 100%, 50%)', 
+      'A': 'hsl(120, 60%, 50%)',
+      'B': 'hsl(210, 80%, 60%)',
+      'C': 'hsl(30, 90%, 65%)',
+      'D': 'hsl(0, 0%, 60%)'
     };
 
     return (
       <div className="w-full">
         <svg width="100%" height={svgHeight} viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="border rounded-lg bg-white">
-          {/* 등급 구간 배경 */}
-          {Object.entries(standards).map(([grade, time]) => {
-            if (grade === 'D') return null;
-            const nextGrade = grade === 'SS' ? null : 
-                            grade === 'S' ? 'SS' :
-                            grade === 'A' ? 'S' :
-                            grade === 'B' ? 'A' :
-                            grade === 'C' ? 'B' : 'C';
-            
-            const startTime = nextGrade ? standards[nextGrade] : mean - 4 * sigma;
-            const endTime = time;
-            
-            const x1 = xScale(startTime);
-            const x2 = xScale(endTime);
-            
-            return (
-              <rect
-                key={grade}
-                x={x1}
-                y={padding}
-                width={x2 - x1}
-                height={svgHeight - 2 * padding}
-                fill={gradeColors[grade as keyof typeof gradeColors]}
-                opacity={0.1}
-              />
-            );
-          })}
+          {/* 등급 구간 배경 - SS급이 오른쪽에 오도록 수정 */}
+          {/* D 등급 구간 (가장 왼쪽) */}
+          <rect
+            x={xScale(mean - 4 * sigma)}
+            y={padding}
+            width={xScale(standards['C']) - xScale(mean - 4 * sigma)}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['D']}
+            opacity={0.1}
+          />
           
-          {/* D 등급 구간 (가장 우측) */}
+          {/* C급 구간 */}
           <rect
             x={xScale(standards['C'])}
             y={padding}
-            width={xScale(mean + 4 * sigma) - xScale(standards['C'])}
+            width={xScale(standards['B']) - xScale(standards['C'])}
             height={svgHeight - 2 * padding}
-            fill={gradeColors['D']}
+            fill={gradeColors['C']}
+            opacity={0.1}
+          />
+          
+          {/* B급 구간 */}
+          <rect
+            x={xScale(standards['B'])}
+            y={padding}
+            width={xScale(standards['A']) - xScale(standards['B'])}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['B']}
+            opacity={0.1}
+          />
+          
+          {/* A급 구간 */}
+          <rect
+            x={xScale(standards['A'])}
+            y={padding}
+            width={xScale(standards['S']) - xScale(standards['A'])}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['A']}
+            opacity={0.1}
+          />
+          
+          {/* S급 구간 */}
+          <rect
+            x={xScale(standards['S'])}
+            y={padding}
+            width={xScale(standards['SS']) - xScale(standards['S'])}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['S']}
+            opacity={0.1}
+          />
+          
+          {/* SS급 구간 (가장 오른쪽) */}
+          <rect
+            x={xScale(standards['SS'])}
+            y={padding}
+            width={xScale(mean + 4 * sigma) - xScale(standards['SS'])}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['SS']}
             opacity={0.1}
           />
           
@@ -339,14 +362,14 @@ export default function Home() {
                 y1={padding}
                 x2={xScale(userTime)}
                 y2={svgHeight - padding}
-                stroke="#7C3AED"
+                stroke="hsl(270, 100%, 70%)"
                 strokeWidth="3"
               />
               <circle
                 cx={xScale(userTime)}
                 cy={yScale(Math.exp(-0.5 * Math.pow((userTime - mean) / sigma, 2)) / (sigma * Math.sqrt(2 * Math.PI)))}
                 r="6"
-                fill="#7C3AED"
+                fill="hsl(270, 100%, 70%)"
               />
             </>
           )}
@@ -628,7 +651,7 @@ export default function Home() {
                                        grade === 'B' ? 'A' : 
                                        grade === 'C' ? 'B' : 'C';
                       const nextTime = standards[nextGrade];
-                      timeRange = `${formatTime(nextTime)} ~ ${formatTime(currentTime)}`;
+                      timeRange = `${formatTime(currentTime)} ~ ${formatTime(nextTime)}`;
                     }
                   }
                   
