@@ -345,17 +345,29 @@ export default function Home() {
             strokeWidth="2"
           />
           
-          {/* 사용자 위치 표시 - 등급 색상과 일치 (동그라미 제거) */}
+          {/* 사용자 위치 표시 - 등급 색상과 일치 */}
           {userTime && userGrade && (
-            <line
-              x1={xScale(userTime)}
-              y1={padding}
-              x2={xScale(userTime)}
-              y2={svgHeight - padding}
-              stroke={gradeColors[userGrade as keyof typeof gradeColors]}
-              strokeWidth="3"
-              className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
-            />
+            <>
+              <line
+                x1={xScale(userTime)}
+                y1={padding}
+                x2={xScale(userTime)}
+                y2={svgHeight - padding}
+                stroke={gradeColors[userGrade as keyof typeof gradeColors]}
+                strokeWidth="3"
+                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
+              />
+              {/* 정규분포 곡선과 사용자 막대의 접점 */}
+              <circle
+                cx={xScale(userTime)}
+                cy={yScale(Math.exp(-0.5 * Math.pow((userTime - mean) / sigma, 2)) / (sigma * Math.sqrt(2 * Math.PI)))}
+                r="4"
+                fill={gradeColors[userGrade as keyof typeof gradeColors]}
+                stroke="white"
+                strokeWidth="2"
+                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
+              />
+            </>
           )}
           
           {/* X축 라벨 */}
@@ -551,11 +563,19 @@ export default function Home() {
                   {/* Statistics Info */}
                   {(() => {
                     const position = getGradePosition(results.totalSeconds, selectedDistance);
-                    console.log('Results grade:', results.grade, 'Grade definitions:', gradeDefinitions);
+                    const gradeColor = {
+                      'SS': 'text-purple-500',
+                      'S': 'text-yellow-500', 
+                      'A': 'text-green-500',
+                      'B': 'text-blue-500',
+                      'C': 'text-orange-500',
+                      'D': 'text-gray-500'
+                    };
+                    
                     return position && (
                       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                         <div className="bg-white p-4 rounded-lg">
-                          <div className={`text-2xl font-bold ${gradeDefinitions[results.grade]?.textColor || 'text-purple-600'}`}>
+                          <div className={`text-2xl font-bold ${gradeColor[results.grade as keyof typeof gradeColor] || 'text-purple-600'}`}>
                             {results.grade || 'N/A'}
                           </div>
                           <div className="text-sm text-gray-600">등급</div>
