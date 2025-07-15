@@ -551,10 +551,13 @@ export default function Home() {
                   {/* Statistics Info */}
                   {(() => {
                     const position = getGradePosition(results.totalSeconds, selectedDistance);
+                    console.log('Results grade:', results.grade, 'Grade definitions:', gradeDefinitions);
                     return position && (
                       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                         <div className="bg-white p-4 rounded-lg">
-                          <div className={`text-2xl font-bold ${gradeDefinitions[results.grade].textColor}`}>{results.grade}</div>
+                          <div className={`text-2xl font-bold ${gradeDefinitions[results.grade]?.textColor || 'text-purple-600'}`}>
+                            {results.grade || 'N/A'}
+                          </div>
                           <div className="text-sm text-gray-600">등급</div>
                         </div>
                         <div className="bg-white p-4 rounded-lg">
