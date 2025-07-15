@@ -345,37 +345,17 @@ export default function Home() {
             strokeWidth="2"
           />
           
-          {/* 평균선 */}
-          <line
-            x1={xScale(mean)}
-            y1={padding}
-            x2={xScale(mean)}
-            y2={svgHeight - padding}
-            stroke="#DC2626"
-            strokeWidth="2"
-            strokeDasharray="5,5"
-          />
-          
-          {/* 사용자 위치 표시 - 등급 색상과 일치 */}
+          {/* 사용자 위치 표시 - 등급 색상과 일치 (동그라미 제거) */}
           {userTime && userGrade && (
-            <>
-              <line
-                x1={xScale(userTime)}
-                y1={padding}
-                x2={xScale(userTime)}
-                y2={svgHeight - padding}
-                stroke={gradeColors[userGrade as keyof typeof gradeColors]}
-                strokeWidth="3"
-                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
-              />
-              <circle
-                cx={xScale(userTime)}
-                cy={yScale(Math.exp(-0.5 * Math.pow((userTime - mean) / sigma, 2)) / (sigma * Math.sqrt(2 * Math.PI)))}
-                r="6"
-                fill={gradeColors[userGrade as keyof typeof gradeColors]}
-                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
-              />
-            </>
+            <line
+              x1={xScale(userTime)}
+              y1={padding}
+              x2={xScale(userTime)}
+              y2={svgHeight - padding}
+              stroke={gradeColors[userGrade as keyof typeof gradeColors]}
+              strokeWidth="3"
+              className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
+            />
           )}
           
           {/* X축 라벨 */}
@@ -394,38 +374,29 @@ export default function Home() {
             </g>
           ))}
           
-          {/* 평균 라벨 */}
-          <text
-            x={xScale(mean)}
-            y={25}
-            textAnchor="middle"
-            fontSize="12"
-            fill="#DC2626"
-            fontWeight="bold"
-          >
-            평균
-          </text>
+
         </svg>
         
-        {/* 범례 */}
+        {/* 범례 - SS급부터 D급까지 내림차순 */}
         <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm">
-          {Object.entries(gradeColors).map(([grade, color]) => (
+          {['SS', 'S', 'A', 'B', 'C', 'D'].map((grade) => (
             <div key={grade} className="flex items-center gap-2">
               <div 
                 className="w-4 h-4 rounded" 
-                style={{ backgroundColor: color, opacity: 0.7 }}
+                style={{ backgroundColor: gradeColors[grade as keyof typeof gradeColors], opacity: 0.7 }}
               ></div>
               <span>{grade}급</span>
             </div>
           ))}
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-2 bg-red-600" style={{ clipPath: 'polygon(0 0, 100% 50%, 0 100%)' }}></div>
-            <span>평균</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-2 bg-purple-600"></div>
-            <span>내 기록</span>
-          </div>
+          {userTime && userGrade && (
+            <div className="flex items-center gap-2">
+              <div 
+                className="w-4 h-2" 
+                style={{ backgroundColor: gradeColors[userGrade as keyof typeof gradeColors] }}
+              ></div>
+              <span>내 기록</span>
+            </div>
+          )}
         </div>
       </div>
     );
