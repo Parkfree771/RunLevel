@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Timer, Route, Trophy, RotateCcw, Lightbulb } from "lucide-react";
 
 interface GradeInfo {
@@ -10,140 +11,158 @@ interface GradeInfo {
   textColor: string;
   message: string;
   advice: string;
-  pace: number;
 }
 
 const gradeDefinitions: Record<string, GradeInfo> = {
-  'SS': {
+  '엘리트': {
     color: 'grade-ss',
     textColor: 'text-white',
-    message: '경이로운 러닝 실력! 당신은 러닝 머신 그 자체입니다! 계속해서 한계를 뛰어넘어보세요!',
-    advice: '이미 최상급이시군요! 이제는 기록 단축뿐 아니라 부상 방지를 위한 스트레칭과 코어 운동을 루틴에 더하고, 마라톤 등 장거리 도전을 통해 더 큰 성취를 목표로 해보세요.',
-    pace: 4.0
+    message: '믿을 수 없는 기록! 당신은 엘리트 러너입니다! 프로 수준의 실력을 보여주셨네요!',
+    advice: '엘리트 러너로서 기록 단축뿐만 아니라 부상 방지를 위한 스트레칭과 코어 운동, 회복 훈련에 집중하세요. 전문적인 코칭과 함께 국제 대회 도전을 고려해보실 수 있습니다.'
   },
-  'S': {
+  '상위권': {
     color: 'grade-s',
     textColor: 'text-white',
-    message: '환상적인 기록! 당신은 S급 러너입니다! 조금만 더 노력하면 SS 등급도 꿈이 아닙니다!',
-    advice: '훌륭한 페이스를 유지하고 계십니다. 이제는 인터벌 트레이닝이나 템포 런을 주 1-2회 추가하여 심폐 지구력과 속도 지속 능력을 강화해보세요. 꾸준한 보강 운동도 잊지 마세요.',
-    pace: 4.33
+    message: '대단한 기록! 상위 5% 안에 드는 실력입니다! 정말 자랑스러운 결과네요!',
+    advice: '상위권 러너로서 인터벌 트레이닝과 템포 런을 활용해 더 높은 수준을 목표로 해보세요. 마라톤 대회 참여나 개인 기록 경신에 도전하실 때입니다.'
   },
-  'A': {
+  '중상위권': {
     color: 'grade-a',
     textColor: 'text-white',
-    message: '멋진 러너! A 등급에 오신 것을 환영합니다! 목표를 향해 순항 중이시네요!',
-    advice: '기본기가 탄탄한 A 등급이십니다. 앞으로는 주 1회 정도 "조금 더 빨리" 달리는 훈련을 추가해 보세요. 예를 들어, 1km 질주 후 1분 휴식하는 인터벌 훈련이나, 꾸준히 같은 페이스를 유지하는 템포 런이 도움이 됩니다.',
-    pace: 4.67
+    message: '훌륭한 기록! 평균보다 빠른 실력을 가지고 계시네요! 꾸준한 노력의 결과입니다!',
+    advice: '중상위권 러너로서 주 1-2회 속도 훈련을 추가해보세요. 5분 빠르게 달리고 2분 회복하는 인터벌 훈련이나 일정한 템포로 달리는 훈련이 도움됩니다.'
   },
-  'B': {
+  '평균': {
     color: 'grade-b',
     textColor: 'text-white',
-    message: '꾸준히 달리는 당신이 챔피언! B 등급은 곧 다음 레벨로 나아갈 준비가 되어 있다는 뜻입니다!',
-    advice: '페이스 유지가 중요합니다. "일정한 속도로 달리기" 훈련에 집중해 보세요. 짧은 거리를 조금 더 빠르게 달려보거나, 천천히 달리는 시간을 늘려 유산소 능력을 키우는 것도 좋습니다. 주 2-3회 꾸준히 달리는 습관을 들이세요.',
-    pace: 5.0
+    message: '좋은 기록입니다! 평균적인 러너의 실력을 보여주고 계세요! 꾸준히 발전하고 있어요!',
+    advice: '평균 수준에서 한 단계 더 올라가려면 일정한 페이스 유지 훈련에 집중하세요. 주 2-3회 규칙적인 러닝과 함께 점진적으로 거리나 속도를 늘려보세요.'
   },
-  'C': {
+  '중하위권': {
     color: 'grade-c',
     textColor: 'text-white',
-    message: '대단해요! C 등급은 러닝의 재미를 알아가고 있다는 증거! 한 걸음씩 나아가면 됩니다!',
-    advice: '꾸준히 달리는 것이 가장 중요합니다. 무리하지 않고 "걷기-뛰기"를 반복하는 인터벌 훈련부터 시작해 보세요. 처음에는 20~30분 정도라도 좋습니다. 러닝 전후 스트레칭은 필수!',
-    pace: 5.5
+    message: '괜찮은 시작입니다! 러닝에 익숙해지고 있는 단계네요! 조금씩 발전하고 있어요!',
+    advice: '기초 체력 향상에 집중하세요. 걷기와 가벼운 조깅을 병행하며 점진적으로 러닝 시간을 늘려가세요. 무리하지 않는 것이 중요합니다.'
   },
-  'D': {
-    color: 'grade-d',
-    textColor: 'text-white',
-    message: '러닝을 시작한 당신은 이미 승자! D 등급은 앞으로의 성장이 더 기대되는 출발점입니다!',
-    advice: '가장 중요한 것은 "꾸준함"입니다. 주 2회 정도, 15~20분이라도 좋으니 규칙적으로 달리세요. 처음에는 걷는 시간이 많아도 괜찮습니다. 러닝화 선택 등 기본적인 준비도 중요합니다!',
-    pace: 6.0
-  },
-  'F': {
+  '초심자': {
     color: 'grade-f',
     textColor: 'text-white',
-    message: '괜찮아요! 러닝은 언제든 시작할 수 있습니다! 지금이 바로 당신의 러닝 여정의 첫 페이지입니다!',
-    advice: '무리하지 않는 것이 가장 중요합니다. 걷기부터 시작해서 점차 걷는 시간을 줄이고 뛰는 시간을 늘려보세요. 10분 걷고 1분 뛰는 것부터 시작해서 점차 러닝 시간을 늘려나가는 것을 추천합니다. 러닝의 즐거움을 느껴보세요!',
-    pace: Infinity
+    message: '훌륭한 도전입니다! 러닝을 시작하신 것만으로도 대단해요! 앞으로 무궁무진한 발전 가능성이 있습니다!',
+    advice: '초심자로서 부상 없이 꾸준히 하는 것이 가장 중요합니다. 걷기부터 시작해서 점차 러닝 비율을 늘려가세요. 올바른 러닝화와 스트레칭으로 기초를 다지세요.'
   }
 };
 
-const gradeTable = [
-  { grade: 'SS', range: '4:00/km 이하', color: 'grade-ss' },
-  { grade: 'S', range: '4:01 ~ 4:20/km', color: 'grade-s' },
-  { grade: 'A', range: '4:21 ~ 4:40/km', color: 'grade-a' },
-  { grade: 'B', range: '4:41 ~ 5:00/km', color: 'grade-b' },
-  { grade: 'C', range: '5:01 ~ 5:30/km', color: 'grade-c' },
-  { grade: 'D', range: '5:31 ~ 6:00/km', color: 'grade-d' },
-  { grade: 'F', range: '6:01/km 이상', color: 'grade-f' }
-];
+// 거리별 기준 시간 (초 단위)
+const distanceStandards = {
+  '10km': {
+    name: '10km',
+    standards: {
+      '엘리트': 38 * 60 + 34,      // 38분 34초 미만
+      '상위권': 48 * 60 + 34,      // 38분 34초 ~ 48분 34초
+      '중상위권': 58 * 60 + 34,     // 48분 34초 ~ 58분 34초
+      '평균': 68 * 60 + 34,        // 58분 34초 ~ 68분 34초
+      '중하위권': 78 * 60 + 34,     // 68분 34초 ~ 78분 34초
+      '초심자': Infinity           // 78분 34초 초과
+    }
+  },
+  '하프마라톤': {
+    name: '하프마라톤 (21.1km)',
+    standards: {
+      '엘리트': 85 * 60 + 51,      // 1시간 25분 51초 미만
+      '상위권': 105 * 60 + 51,     // 1시간 25분 51초 ~ 1시간 45분 51초
+      '중상위권': 125 * 60 + 51,   // 1시간 45분 51초 ~ 2시간 5분 51초
+      '평균': 145 * 60 + 51,       // 2시간 5분 51초 ~ 2시간 25분 51초
+      '중하위권': 165 * 60 + 51,   // 2시간 25분 51초 ~ 2시간 45분 51초
+      '초심자': Infinity           // 2시간 45분 51초 초과
+    }
+  },
+  '풀마라톤': {
+    name: '풀마라톤 (42.2km)',
+    standards: {
+      '엘리트': 202 * 60 + 49,     // 3시간 22분 49초 미만
+      '상위권': 237 * 60 + 49,     // 3시간 22분 49초 ~ 3시간 57분 49초
+      '중상위권': 272 * 60 + 49,   // 3시간 57분 49초 ~ 4시간 32분 49초
+      '평균': 307 * 60 + 49,       // 4시간 32분 49초 ~ 5시간 7분 49초
+      '중하위권': 342 * 60 + 49,   // 5시간 7분 49초 ~ 5시간 42분 49초
+      '초심자': Infinity           // 5시간 42분 49초 초과
+    }
+  }
+};
 
 export default function Home() {
-  const [distance, setDistance] = useState<string>('');
+  const [selectedDistance, setSelectedDistance] = useState<string>('');
   const [hours, setHours] = useState<string>('');
   const [minutes, setMinutes] = useState<string>('');
   const [seconds, setSeconds] = useState<string>('');
   const [results, setResults] = useState<{
-    pace: number;
+    totalSeconds: number;
     grade: string;
-    formattedPace: string;
+    formattedTime: string;
+    distanceName: string;
   } | null>(null);
 
-  const calculatePace = (distance: number, totalMinutes: number): number => {
-    return totalMinutes / distance;
+  const determineGrade = (totalSeconds: number, distance: string): string => {
+    if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return '초심자';
+    
+    const standards = distanceStandards[distance as keyof typeof distanceStandards].standards;
+    
+    if (totalSeconds < standards['엘리트']) return '엘리트';
+    if (totalSeconds < standards['상위권']) return '상위권';
+    if (totalSeconds < standards['중상위권']) return '중상위권';
+    if (totalSeconds < standards['평균']) return '평균';
+    if (totalSeconds < standards['중하위권']) return '중하위권';
+    return '초심자';
   };
 
-  const determineGrade = (pacePerKm: number): string => {
-    if (pacePerKm <= 4.0) return 'SS';
-    if (pacePerKm <= 4.33) return 'S';
-    if (pacePerKm <= 4.67) return 'A';
-    if (pacePerKm <= 5.0) return 'B';
-    if (pacePerKm <= 5.5) return 'C';
-    if (pacePerKm <= 6.0) return 'D';
-    return 'F';
-  };
-
-  const formatPace = (paceInMinutes: number): string => {
-    const minutes = Math.floor(paceInMinutes);
-    const seconds = Math.round((paceInMinutes - minutes) * 60);
+  const formatTime = (totalSeconds: number): string => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    if (hours > 0) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const distanceNum = parseFloat(distance);
+    if (!selectedDistance) {
+      alert('거리를 선택해주세요.');
+      return;
+    }
+
     const hoursNum = parseInt(hours) || 0;
     const minutesNum = parseInt(minutes) || 0;
     const secondsNum = parseInt(seconds) || 0;
-
-    if (!distanceNum || distanceNum <= 0) {
-      alert('올바른 거리를 입력해주세요.');
-      return;
-    }
 
     if (minutesNum === 0 && secondsNum === 0 && hoursNum === 0) {
       alert('올바른 시간을 입력해주세요.');
       return;
     }
 
-    const totalMinutes = (hoursNum * 60) + minutesNum + (secondsNum / 60);
+    const totalSeconds = (hoursNum * 3600) + (minutesNum * 60) + secondsNum;
     
-    if (totalMinutes <= 0) {
+    if (totalSeconds <= 0) {
       alert('올바른 시간을 입력해주세요.');
       return;
     }
 
-    const pace = calculatePace(distanceNum, totalMinutes);
-    const grade = determineGrade(pace);
-    const formattedPace = formatPace(pace);
+    const grade = determineGrade(totalSeconds, selectedDistance);
+    const formattedTime = formatTime(totalSeconds);
+    const distanceName = distanceStandards[selectedDistance as keyof typeof distanceStandards].name;
 
     setResults({
-      pace,
+      totalSeconds,
       grade,
-      formattedPace
+      formattedTime,
+      distanceName
     });
   };
 
   const resetForm = () => {
-    setDistance('');
+    setSelectedDistance('');
     setHours('');
     setMinutes('');
     setSeconds('');
@@ -184,24 +203,22 @@ export default function Home() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Distance Input */}
+                {/* Distance Selection */}
                 <div>
-                  <Label htmlFor="distance" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <Label className="block text-sm font-semibold text-gray-700 mb-2">
                     <Route className="inline text-blue-600 mr-2 h-4 w-4" />
-                    총 거리 (km)
+                    러닝 거리
                   </Label>
-                  <Input 
-                    type="number" 
-                    id="distance" 
-                    step="0.1" 
-                    min="0.1" 
-                    max="100"
-                    className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 text-lg"
-                    placeholder="예: 5.0"
-                    value={distance}
-                    onChange={(e) => setDistance(e.target.value)}
-                    required
-                  />
+                  <Select value={selectedDistance} onValueChange={setSelectedDistance}>
+                    <SelectTrigger className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 text-lg">
+                      <SelectValue placeholder="거리를 선택하세요" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="10km">10km</SelectItem>
+                      <SelectItem value="하프마라톤">하프마라톤 (21.1km)</SelectItem>
+                      <SelectItem value="풀마라톤">풀마라톤 (42.2km)</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Time Input */}
@@ -267,12 +284,12 @@ export default function Home() {
         {/* Results Section */}
         {results && (
           <div className="space-y-6">
-            {/* Pace Display */}
+            {/* Time Display */}
             <Card className="rounded-2xl shadow-lg p-8 text-center">
               <CardContent className="p-0">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">당신의 평균 페이스</h3>
-                <div className="text-4xl font-bold text-blue-600 mb-2">{results.formattedPace}</div>
-                <p className="text-gray-600">분/km</p>
+                <h3 className="text-xl font-semibold text-gray-700 mb-4">{results.distanceName} 완주 시간</h3>
+                <div className="text-4xl font-bold text-blue-600 mb-2">{results.formattedTime}</div>
+                <p className="text-gray-600">시:분:초</p>
               </CardContent>
             </Card>
 
@@ -322,24 +339,46 @@ export default function Home() {
         )}
 
         {/* Grade Information Section */}
-        <Card className="rounded-2xl shadow-lg p-8 mt-8">
-          <CardContent className="p-0">
-            <h3 className="text-xl font-semibold text-gray-700 mb-6 text-center">러닝 등급 기준표</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {gradeTable.map((item, index) => (
-                <div 
-                  key={item.grade} 
-                  className={`${item.color} p-4 rounded-xl text-center ${
-                    item.grade === 'F' ? 'md:col-span-1 lg:col-span-3' : ''
-                  }`}
-                >
-                  <div className="text-2xl font-bold mb-2">{item.grade}</div>
-                  <div className="text-sm">{item.range}</div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        {selectedDistance && (
+          <Card className="rounded-2xl shadow-lg p-8 mt-8">
+            <CardContent className="p-0">
+              <h3 className="text-xl font-semibold text-gray-700 mb-6 text-center">
+                {distanceStandards[selectedDistance as keyof typeof distanceStandards]?.name} 등급 기준표
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {Object.entries(gradeDefinitions).map(([grade, info]) => {
+                  const standards = distanceStandards[selectedDistance as keyof typeof distanceStandards]?.standards;
+                  let timeRange = '';
+                  
+                  if (standards) {
+                    if (grade === '엘리트') {
+                      timeRange = `${formatTime(standards[grade])} 미만`;
+                    } else if (grade === '초심자') {
+                      timeRange = `${formatTime(standards['중하위권'])} 초과`;
+                    } else {
+                      const currentTime = standards[grade];
+                      const nextGrade = grade === '상위권' ? '엘리트' : 
+                                       grade === '중상위권' ? '상위권' :
+                                       grade === '평균' ? '중상위권' : '평균';
+                      const nextTime = standards[nextGrade];
+                      timeRange = `${formatTime(nextTime)} ~ ${formatTime(currentTime)}`;
+                    }
+                  }
+                  
+                  return (
+                    <div 
+                      key={grade} 
+                      className={`${info.color} p-4 rounded-xl text-center`}
+                    >
+                      <div className="text-2xl font-bold mb-2 text-white">{grade}</div>
+                      <div className="text-sm text-white">{timeRange}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </main>
 
       {/* Footer */}
