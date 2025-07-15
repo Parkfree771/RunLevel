@@ -282,7 +282,9 @@ export default function Home() {
                 <div className="text-center">
                   <h3 className="text-xl font-semibold text-gray-700 mb-6">당신의 러닝 등급</h3>
                   <div 
-                    className={`inline-block px-8 py-4 rounded-2xl text-6xl font-bold shadow-xl animate-grade-reveal mb-4 ${gradeDefinitions[results.grade].color} ${gradeDefinitions[results.grade].textColor}`}
+                    className={`inline-block px-8 py-4 rounded-2xl text-6xl font-bold shadow-xl animate-grade-reveal mb-4 ${gradeDefinitions[results.grade].color} ${gradeDefinitions[results.grade].textColor} ${
+                      ['SS', 'S', 'A'].includes(results.grade) ? 'animate-aurora' : ''
+                    }`}
                   >
                     {results.grade}
                   </div>

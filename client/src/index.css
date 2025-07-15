@@ -90,6 +90,30 @@
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes aurora {
+  0%, 100% {
+    filter: hue-rotate(0deg) saturate(1);
+  }
+  25% {
+    filter: hue-rotate(15deg) saturate(1.2);
+  }
+  50% {
+    filter: hue-rotate(-10deg) saturate(1.1);
+  }
+  75% {
+    filter: hue-rotate(10deg) saturate(1.3);
+  }
+}
+
 .animate-grade-reveal {
   animation: fadeInScale 0.6s ease-out;
 }
@@ -98,22 +122,75 @@
   animation: bounceGentle 0.8s ease-out;
 }
 
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+}
+
+.animate-aurora {
+  animation: aurora 3s infinite ease-in-out;
+}
+
 .grade-ss {
   background: linear-gradient(135deg, hsl(270, 100%, 70%), hsl(300, 80%, 60%), hsl(240, 90%, 80%));
+  background-size: 200% 200%;
   color: white;
-  box-shadow: 0 8px 32px rgba(138, 43, 226, 0.4);
+  box-shadow: 0 8px 32px rgba(138, 43, 226, 0.4), 0 0 20px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.grade-ss::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  background-size: 200% 200%;
+  animation: shimmer 2s infinite linear;
 }
 
 .grade-s {
   background: linear-gradient(135deg, hsl(45, 100%, 50%), hsl(50, 100%, 45%), hsl(40, 100%, 55%));
+  background-size: 200% 200%;
   color: white;
-  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.grade-s::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+  background-size: 200% 200%;
+  animation: shimmer 2.5s infinite linear;
 }
 
 .grade-a {
-  background: linear-gradient(135deg, hsl(120, 60%, 50%), hsl(130, 70%, 45%));
+  background: linear-gradient(135deg, hsl(120, 60%, 50%), hsl(130, 70%, 45%), hsl(110, 65%, 55%));
+  background-size: 200% 200%;
   color: white;
-  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3);
+  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3), 0 0 15px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.grade-a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  background-size: 200% 200%;
+  animation: shimmer 3s infinite linear;
 }
 
 .grade-b {
@@ -135,7 +212,7 @@
 }
 
 .grade-f {
-  background: linear-gradient(135deg, hsl(0, 80%, 55%), hsl(10, 85%, 50%));
+  background: linear-gradient(135deg, hsl(0, 0%, 60%), hsl(0, 0%, 50%));
   color: white;
-  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 8px 32px rgba(120, 120, 120, 0.3);
 }
