@@ -234,7 +234,7 @@ export default function Home() {
     };
   };
 
-  const NormalDistributionChart = ({ distance, userTime }: { distance: string; userTime?: number }) => {
+  const NormalDistributionChart = ({ distance, userTime, userGrade }: { distance: string; userTime?: number; userGrade?: string }) => {
     if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return null;
     
     const { mean, sigma, standards } = distanceStandards[distance as keyof typeof distanceStandards];
@@ -249,7 +249,8 @@ export default function Home() {
     const xScale = (time: number) => {
       const minTime = mean - 4 * sigma;
       const maxTime = mean + 4 * sigma;
-      return ((time - minTime) / (maxTime - minTime)) * (svgWidth - 2 * padding) + padding;
+      // X축 반전: 빠른 시간(작은 값)이 오른쪽에 오도록
+      return svgWidth - padding - ((time - minTime) / (maxTime - minTime)) * (svgWidth - 2 * padding);
     };
     
     const yScale = (y: number) => svgHeight - padding - (y / maxY) * (svgHeight - 2 * padding);
@@ -274,12 +275,12 @@ export default function Home() {
     return (
       <div className="w-full">
         <svg width="100%" height={svgHeight} viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="border rounded-lg bg-white">
-          {/* 등급 구간 배경 - SS급이 오른쪽에 오도록 수정 */}
-          {/* D 등급 구간 (가장 왼쪽) */}
+          {/* 등급 구간 배경 - SS급이 오른쪽 (빠른 시간)에 위치 */}
+          {/* D 등급 구간 (가장 왼쪽 - 느린 시간) */}
           <rect
-            x={xScale(mean - 4 * sigma)}
+            x={Math.min(xScale(mean + 4 * sigma), xScale(standards['C']))}
             y={padding}
-            width={xScale(standards['C']) - xScale(mean - 4 * sigma)}
+            width={Math.abs(xScale(standards['C']) - xScale(mean + 4 * sigma))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['D']}
             opacity={0.1}
@@ -287,9 +288,9 @@ export default function Home() {
           
           {/* C급 구간 */}
           <rect
-            x={xScale(standards['C'])}
+            x={Math.min(xScale(standards['C']), xScale(standards['B']))}
             y={padding}
-            width={xScale(standards['B']) - xScale(standards['C'])}
+            width={Math.abs(xScale(standards['B']) - xScale(standards['C']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['C']}
             opacity={0.1}
@@ -297,9 +298,9 @@ export default function Home() {
           
           {/* B급 구간 */}
           <rect
-            x={xScale(standards['B'])}
+            x={Math.min(xScale(standards['B']), xScale(standards['A']))}
             y={padding}
-            width={xScale(standards['A']) - xScale(standards['B'])}
+            width={Math.abs(xScale(standards['A']) - xScale(standards['B']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['B']}
             opacity={0.1}
@@ -307,9 +308,9 @@ export default function Home() {
           
           {/* A급 구간 */}
           <rect
-            x={xScale(standards['A'])}
+            x={Math.min(xScale(standards['A']), xScale(standards['S']))}
             y={padding}
-            width={xScale(standards['S']) - xScale(standards['A'])}
+            width={Math.abs(xScale(standards['S']) - xScale(standards['A']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['A']}
             opacity={0.1}
@@ -317,19 +318,19 @@ export default function Home() {
           
           {/* S급 구간 */}
           <rect
-            x={xScale(standards['S'])}
+            x={Math.min(xScale(standards['S']), xScale(standards['SS']))}
             y={padding}
-            width={xScale(standards['SS']) - xScale(standards['S'])}
+            width={Math.abs(xScale(standards['SS']) - xScale(standards['S']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['S']}
             opacity={0.1}
           />
           
-          {/* SS급 구간 (가장 오른쪽) */}
+          {/* SS급 구간 (가장 오른쪽 - 빠른 시간) */}
           <rect
-            x={xScale(standards['SS'])}
+            x={Math.min(xScale(standards['SS']), xScale(mean - 4 * sigma))}
             y={padding}
-            width={xScale(mean + 4 * sigma) - xScale(standards['SS'])}
+            width={Math.abs(xScale(standards['SS']) - xScale(mean - 4 * sigma))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['SS']}
             opacity={0.1}
@@ -354,22 +355,24 @@ export default function Home() {
             strokeDasharray="5,5"
           />
           
-          {/* 사용자 위치 표시 */}
-          {userTime && (
+          {/* 사용자 위치 표시 - 등급 색상과 일치 */}
+          {userTime && userGrade && (
             <>
               <line
                 x1={xScale(userTime)}
                 y1={padding}
                 x2={xScale(userTime)}
                 y2={svgHeight - padding}
-                stroke="hsl(270, 100%, 70%)"
+                stroke={gradeColors[userGrade as keyof typeof gradeColors]}
                 strokeWidth="3"
+                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
               />
               <circle
                 cx={xScale(userTime)}
                 cy={yScale(Math.exp(-0.5 * Math.pow((userTime - mean) / sigma, 2)) / (sigma * Math.sqrt(2 * Math.PI)))}
                 r="6"
-                fill="hsl(270, 100%, 70%)"
+                fill={gradeColors[userGrade as keyof typeof gradeColors]}
+                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
               />
             </>
           )}
@@ -571,13 +574,13 @@ export default function Home() {
                   정규분포 상에서 내 위치
                 </h3>
                 <div className="bg-gray-50 p-6 rounded-xl">
-                  <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} />
+                  <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} />
                   
                   {/* Statistics Info */}
                   {(() => {
                     const position = getGradePosition(results.totalSeconds, selectedDistance);
                     return position && (
-                      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                         <div className="bg-white p-4 rounded-lg">
                           <div className="text-2xl font-bold text-purple-600">{results.grade}</div>
                           <div className="text-sm text-gray-600">등급</div>
@@ -587,12 +590,6 @@ export default function Home() {
                             {position.percentile}%
                           </div>
                           <div className="text-sm text-gray-600">상위 퍼센트</div>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg">
-                          <div className="text-2xl font-bold text-green-600">
-                            {position.zScore > 0 ? '+' : ''}{position.zScore.toFixed(2)}σ
-                          </div>
-                          <div className="text-sm text-gray-600">표준편차</div>
                         </div>
                       </div>
                     );
