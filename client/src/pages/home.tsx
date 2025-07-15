@@ -23,7 +23,7 @@ const gradeDefinitions: Record<string, GradeInfo> = {
   },
   'S': {
     color: 'grade-s',
-    textColor: 'text-gray-800',
+    textColor: 'text-white',
     message: '환상적인 기록! 당신은 S급 러너입니다! 조금만 더 노력하면 SS 등급도 꿈이 아닙니다!',
     advice: '훌륭한 페이스를 유지하고 계십니다. 이제는 인터벌 트레이닝이나 템포 런을 주 1-2회 추가하여 심폐 지구력과 속도 지속 능력을 강화해보세요. 꾸준한 보강 운동도 잊지 마세요.',
     pace: 4.33
@@ -44,7 +44,7 @@ const gradeDefinitions: Record<string, GradeInfo> = {
   },
   'C': {
     color: 'grade-c',
-    textColor: 'text-gray-800',
+    textColor: 'text-white',
     message: '대단해요! C 등급은 러닝의 재미를 알아가고 있다는 증거! 한 걸음씩 나아가면 됩니다!',
     advice: '꾸준히 달리는 것이 가장 중요합니다. 무리하지 않고 "걷기-뛰기"를 반복하는 인터벌 훈련부터 시작해 보세요. 처음에는 20~30분 정도라도 좋습니다. 러닝 전후 스트레칭은 필수!',
     pace: 5.5
