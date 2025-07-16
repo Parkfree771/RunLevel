@@ -454,8 +454,8 @@ export default function Home() {
             </>
           )}
           
-          {/* X축 라벨 */}
-          {Object.entries(standards).map(([grade, time]) => (
+          {/* X축 라벨 - D등급을 SS급과 대칭 위치에 추가 */}
+          {Object.entries(standards).filter(([grade]) => grade !== 'D').map(([grade, time]) => (
             <g key={grade}>
               <text
                 x={xScale(time)}
@@ -469,13 +469,26 @@ export default function Home() {
               </text>
             </g>
           ))}
+          {/* D등급을 SS급과 대칭 위치에 표시 */}
+          <g key="D">
+            <text
+              x={xScale(mean + (mean - standards['SS']))}
+              y={svgHeight - 10}
+              textAnchor="middle"
+              fontSize="12"
+              fill={gradeColors['D']}
+              fontWeight="bold"
+            >
+              D
+            </text>
+          </g>
           
 
         </svg>
         
-        {/* 범례 - SS급부터 D급까지 성능 순 */}
+        {/* 범례 - D급부터 SS급까지 순서 */}
         <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm">
-          {['SS', 'S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D'].map((grade) => (
+          {['D', 'D+', 'C', 'C+', 'B', 'B+', 'A', 'A+', 'S', 'SS'].map((grade) => (
             <div key={grade} className="flex items-center gap-2">
               <div 
                 className="w-4 h-4 rounded" 
