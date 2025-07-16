@@ -313,8 +313,8 @@ export default function Home() {
       'B': 'hsl(210, 80%, 60%)',
       'C+': 'hsl(50, 90%, 60%)',
       'C': 'hsl(30, 90%, 65%)',
-      'D+': 'hsl(15, 90%, 60%)',
-      'D': 'hsl(10, 85%, 55%)'
+      'D+': 'hsl(0, 0%, 60%)',
+      'D': 'hsl(0, 0%, 50%)'
     };
 
     return (
@@ -413,7 +413,7 @@ export default function Home() {
           
           {/* SS급 구간 (가장 오른쪽 - 빠른 시간) */}
           <rect
-            x={Math.min(xScale(standards['SS']), xScale(mean - 4 * sigma))}
+            x={Math.min(xScale(mean - 4 * sigma), xScale(standards['SS']))}
             y={padding}
             width={Math.abs(xScale(standards['SS']) - xScale(mean - 4 * sigma))}
             height={svgHeight - 2 * padding}

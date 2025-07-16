@@ -239,15 +239,15 @@
 }
 
 .grade-d-plus {
-  background: linear-gradient(135deg, hsl(15, 90%, 60%), hsl(20, 95%, 55%));
+  background: linear-gradient(135deg, hsl(0, 0%, 60%), hsl(0, 0%, 55%));
   color: white;
-  box-shadow: 0 8px 32px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 8px 32px rgba(120, 120, 120, 0.3);
 }
 
 .grade-d {
-  background: linear-gradient(135deg, hsl(10, 85%, 55%), hsl(15, 90%, 50%));
+  background: linear-gradient(135deg, hsl(0, 0%, 50%), hsl(0, 0%, 45%));
   color: white;
-  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 8px 32px rgba(100, 100, 100, 0.3);
 }
 
 .grade-f {
