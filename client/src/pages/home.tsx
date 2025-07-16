@@ -593,15 +593,22 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            {/* Advice Section */}
+            {/* Important Notice Section */}
             <Card className="rounded-2xl shadow-lg p-8">
               <CardContent className="p-0">
                 <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
                   <Lightbulb className="text-yellow-500 mr-3 h-5 w-5" />
-                  맞춤 러닝 조언
+                  중요한 안내사항
                 </h3>
-                <div className="text-gray-700 leading-relaxed bg-gray-50 p-6 rounded-xl">
-                  {gradeDefinitions[results.grade].advice}
+                <div className="text-gray-700 leading-relaxed bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
+                  <p className="font-medium text-yellow-800 mb-3">📊 기록에 대한 중요한 점:</p>
+                  <p className="mb-3">
+                    이 기록들은 <strong>'대회에 참가하여 완주한 사람들'</strong>의 평균입니다. 
+                    따라서 달리기를 전혀 하지 않는 사람들까지 포함하면 평균 기록은 훨씬 느려질 것입니다.
+                  </p>
+                  <p className="text-lg font-semibold text-yellow-800">
+                    즉, 어떤 기록이든 <span className="text-yellow-600">완주 자체만으로도 대단한 것</span>입니다! 🏃‍♀️🏃‍♂️
+                  </p>
                 </div>
               </CardContent>
             </Card>
