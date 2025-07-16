@@ -454,22 +454,11 @@ export default function Home() {
             </>
           )}
           
-          {/* X축 라벨 - SS급이 오른쪽(빠른 시간)에 위치 */}
-          {[
-            ['D', mean + 3.5 * sigma],
-            ['D+', standards['D+']],
-            ['C', standards['C']],
-            ['C+', standards['C+']],
-            ['B', standards['B']],
-            ['B+', standards['B+']],
-            ['A', standards['A']],
-            ['A+', standards['A+']],
-            ['S', standards['S']],
-            ['SS', standards['SS']]
-          ].map(([grade, time]) => (
+          {/* X축 라벨 */}
+          {Object.entries(standards).map(([grade, time]) => (
             <g key={grade}>
               <text
-                x={xScale(time as number)}
+                x={xScale(time)}
                 y={svgHeight - 10}
                 textAnchor="middle"
                 fontSize="12"
@@ -484,7 +473,7 @@ export default function Home() {
 
         </svg>
         
-        {/* 범례 - SS급부터 D급까지 내림차순 */}
+        {/* 범례 - SS급부터 D급까지 성능 순 */}
         <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm">
           {['SS', 'S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D'].map((grade) => (
             <div key={grade} className="flex items-center gap-2">
