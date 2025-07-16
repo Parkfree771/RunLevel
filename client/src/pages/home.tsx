@@ -18,37 +18,55 @@ const gradeDefinitions: Record<string, GradeInfo> = {
     color: 'grade-ss',
     textColor: 'text-white',
     message: '믿을 수 없는 기록! 당신은 SS급 엘리트 러너입니다! 프로 수준의 실력을 보여주셨네요!',
-    advice: 'SS급 엘리트 러너로서 기록 단축뿐만 아니라 부상 방지를 위한 스트레칭과 코어 운동, 회복 훈련에 집중하세요. 전문적인 코칭과 함께 국제 대회 도전을 고려해보실 수 있습니다.'
+    advice: 'SS급 엘리트 러너로서 기록 단축뿐만 아니라 부상 방지를 위한 스트레칭과 코어 운동, 회복 훈련에 집중하세요.'
   },
   'S': {
     color: 'grade-s',
     textColor: 'text-white',
     message: '대단한 기록! S급 상위권 실력입니다! 정말 자랑스러운 결과네요!',
-    advice: 'S급 상위권 러너로서 인터벌 트레이닝과 템포 런을 활용해 더 높은 수준을 목표로 해보세요. 마라톤 대회 참여나 개인 기록 경신에 도전하실 때입니다.'
+    advice: 'S급 상위권 러너로서 인터벌 트레이닝과 템포 런을 활용해 더 높은 수준을 목표로 해보세요.'
+  },
+  'A+': {
+    color: 'grade-a-plus',
+    textColor: 'text-white',
+    message: '훌륭한 기록! A+ 상급자 실력입니다! 뛰어난 러닝 능력을 보여주셨네요!',
+    advice: 'A+ 상급자로서 고강도 인터벌 훈련을 통해 한계를 돌파해보세요.'
   },
   'A': {
     color: 'grade-a',
     textColor: 'text-white',
-    message: '훌륭한 기록! A급 중상위권 실력을 가지고 계시네요! 꾸준한 노력의 결과입니다!',
-    advice: 'A급 중상위권 러너로서 주 1-2회 속도 훈련을 추가해보세요. 5분 빠르게 달리고 2분 회복하는 인터벌 훈련이나 일정한 템포로 달리는 훈련이 도움됩니다.'
+    message: '좋은 기록! A급 중상위권 실력을 가지고 계시네요! 꾸준한 노력의 결과입니다!',
+    advice: 'A급 중상위권 러너로서 주 1-2회 속도 훈련을 추가해보세요.'
+  },
+  'B+': {
+    color: 'grade-b-plus',
+    textColor: 'text-white',
+    message: '괜찮은 기록! B+ 중급자 실력입니다! 꾸준히 향상되고 있어요!',
+    advice: 'B+ 중급자로서 페이스 런과 템포 런을 병행하여 지구력을 늘려보세요.'
   },
   'B': {
     color: 'grade-b',
     textColor: 'text-white',
-    message: '좋은 기록입니다! B급 평균 수준의 러너 실력을 보여주고 계세요! 꾸준히 발전하고 있어요!',
-    advice: 'B급 평균 수준에서 한 단계 더 올라가려면 일정한 페이스 유지 훈련에 집중하세요. 주 2-3회 규칙적인 러닝과 함께 점진적으로 거리나 속도를 늘려보세요.'
+    message: '준수한 기록! B급 평균 수준의 러너 실력을 보여주고 계세요!',
+    advice: 'B급 평균 수준에서 일정한 페이스 유지 훈련에 집중하세요.'
+  },
+  'C+': {
+    color: 'grade-c-plus',
+    textColor: 'text-white',
+    message: '발전하고 있어요! C+ 초중급자로 실력이 늘고 있는 단계네요!',
+    advice: 'C+ 초중급자로서 규칙적인 운동 루틴을 만들어 기초 체력을 더욱 향상시켜보세요.'
   },
   'C': {
     color: 'grade-c',
     textColor: 'text-white',
-    message: '괜찮은 시작입니다! C급으로 러닝에 익숙해지고 있는 단계네요! 조금씩 발전하고 있어요!',
-    advice: 'C급에서 기초 체력 향상에 집중하세요. 걷기와 가벼운 조깅을 병행하며 점진적으로 러닝 시간을 늘려가세요. 무리하지 않는 것이 중요합니다.'
+    message: '괜찮은 시작! C급으로 러닝에 익숙해지고 있는 단계네요!',
+    advice: 'C급에서 기초 체력 향상에 집중하세요. 걷기와 가벼운 조깅을 번갈아 해보세요.'
   },
   'D': {
     color: 'grade-f',
     textColor: 'text-white',
-    message: '훌륭한 도전입니다! D급으로 러닝을 시작하신 것만으로도 대단해요! 앞으로 무궁무진한 발전 가능성이 있습니다!',
-    advice: 'D급 초심자로서 부상 없이 꾸준히 하는 것이 가장 중요합니다. 걷기부터 시작해서 점차 러닝 비율을 늘려가세요. 올바른 러닝화와 스트레칭으로 기초를 다지세요.'
+    message: '첫 걸음을 내디뎠군요! D급이지만 도전하신 것 자체가 멋집니다!',
+    advice: 'D급에서는 우선 완주에 의미를 두세요. 걷기 운동부터 시작해서 체력을 기르세요.'
   }
 };
 
@@ -60,12 +78,15 @@ const distanceStandards = {
     mean: 58 * 60 + 34,          // 평균: 58분 34초
     sigma: 10 * 60,              // 표준편차: 10분
     standards: {
-      'SS': 38 * 60 + 34,        // 38분 34초 미만 (평균 - 2σ 미만)
-      'S': 48 * 60 + 34,         // 38분 34초 ~ 48분 34초 (평균 - 2σ ~ 평균 - 1σ)
-      'A': 58 * 60 + 34,         // 48분 34초 ~ 58분 34초 (평균 - 1σ ~ 평균)
-      'B': 68 * 60 + 34,         // 58분 34초 ~ 68분 34초 (평균 ~ 평균 + 1σ)
-      'C': 78 * 60 + 34,         // 68분 34초 ~ 78분 34초 (평균 + 1σ ~ 평균 + 2σ)
-      'D': Infinity              // 78분 34초 초과 (평균 + 2σ 이상)
+      'SS': 38 * 60 + 34,        // 38분 34초 미만
+      'S': 43 * 60 + 34,         // 38분 34초 ~ 43분 34초
+      'A+': 48 * 60 + 34,        // 43분 34초 ~ 48분 34초
+      'A': 53 * 60 + 34,         // 48분 34초 ~ 53분 34초
+      'B+': 58 * 60 + 34,        // 53분 34초 ~ 58분 34초 (평균)
+      'B': 63 * 60 + 34,         // 58분 34초 ~ 63분 34초
+      'C+': 68 * 60 + 34,        // 63분 34초 ~ 68분 34초
+      'C': 73 * 60 + 34,         // 68분 34초 ~ 73분 34초
+      'D': Infinity              // 73분 34초 초과
     }
   },
   '하프마라톤': {
@@ -74,11 +95,14 @@ const distanceStandards = {
     sigma: 20 * 60,              // 표준편차: 20분
     standards: {
       'SS': 85 * 60 + 51,        // 1시간 25분 51초 미만
-      'S': 105 * 60 + 51,        // 1시간 25분 51초 ~ 1시간 45분 51초
-      'A': 125 * 60 + 51,        // 1시간 45분 51초 ~ 2시간 5분 51초
-      'B': 145 * 60 + 51,        // 2시간 5분 51초 ~ 2시간 25분 51초
-      'C': 165 * 60 + 51,        // 2시간 25분 51초 ~ 2시간 45분 51초
-      'D': Infinity              // 2시간 45분 51초 초과
+      'S': 95 * 60 + 51,         // 1시간 25분 51초 ~ 1시간 35분 51초
+      'A+': 105 * 60 + 51,       // 1시간 35분 51초 ~ 1시간 45분 51초
+      'A': 115 * 60 + 51,        // 1시간 45분 51초 ~ 1시간 55분 51초
+      'B+': 125 * 60 + 51,       // 1시간 55분 51초 ~ 2시간 5분 51초 (평균)
+      'B': 135 * 60 + 51,        // 2시간 5분 51초 ~ 2시간 15분 51초
+      'C+': 145 * 60 + 51,       // 2시간 15분 51초 ~ 2시간 25분 51초
+      'C': 155 * 60 + 51,        // 2시간 25분 51초 ~ 2시간 35분 51초
+      'D': Infinity              // 2시간 35분 51초 초과
     }
   },
   '풀마라톤': {
@@ -87,11 +111,14 @@ const distanceStandards = {
     sigma: 35 * 60,              // 표준편차: 35분
     standards: {
       'SS': 202 * 60 + 49,       // 3시간 22분 49초 미만
-      'S': 237 * 60 + 49,        // 3시간 22분 49초 ~ 3시간 57분 49초
-      'A': 272 * 60 + 49,        // 3시간 57분 49초 ~ 4시간 32분 49초
-      'B': 307 * 60 + 49,        // 4시간 32분 49초 ~ 5시간 7분 49초
-      'C': 342 * 60 + 49,        // 5시간 7분 49초 ~ 5시간 42분 49초
-      'D': Infinity              // 5시간 42분 49초 초과
+      'S': 220 * 60 + 49,        // 3시간 22분 49초 ~ 3시간 40분 49초
+      'A+': 237 * 60 + 49,       // 3시간 40분 49초 ~ 3시간 57분 49초
+      'A': 255 * 60 + 49,        // 3시간 57분 49초 ~ 4시간 15분 49초
+      'B+': 272 * 60 + 49,       // 4시간 15분 49초 ~ 4시간 32분 49초 (평균)
+      'B': 290 * 60 + 49,        // 4시간 32분 49초 ~ 4시간 50분 49초
+      'C+': 307 * 60 + 49,       // 4시간 50분 49초 ~ 5시간 7분 49초
+      'C': 325 * 60 + 49,        // 5시간 7분 49초 ~ 5시간 25분 49초
+      'D': Infinity              // 5시간 25분 49초 초과
     }
   }
 };
@@ -114,9 +141,12 @@ export default function Home() {
     const standards = distanceStandards[distance as keyof typeof distanceStandards].standards;
     
     if (totalSeconds > standards['C']) return 'D';
-    if (totalSeconds > standards['B']) return 'C';
-    if (totalSeconds > standards['A']) return 'B';
-    if (totalSeconds > standards['S']) return 'A';
+    if (totalSeconds > standards['C+']) return 'C';
+    if (totalSeconds > standards['B']) return 'C+';
+    if (totalSeconds > standards['B+']) return 'B';
+    if (totalSeconds > standards['A']) return 'B+';
+    if (totalSeconds > standards['A+']) return 'A';
+    if (totalSeconds > standards['S']) return 'A+';
     if (totalSeconds > standards['SS']) return 'S';
     return 'SS';
   };
@@ -267,8 +297,11 @@ export default function Home() {
     const gradeColors = {
       'SS': 'hsl(270, 100%, 70%)',
       'S': 'hsl(45, 100%, 50%)', 
+      'A+': 'hsl(290, 90%, 60%)',
       'A': 'hsl(120, 60%, 50%)',
+      'B+': 'hsl(180, 80%, 55%)',
       'B': 'hsl(210, 80%, 60%)',
+      'C+': 'hsl(50, 90%, 60%)',
       'C': 'hsl(30, 90%, 65%)',
       'D': 'hsl(0, 0%, 60%)'
     };
@@ -289,31 +322,61 @@ export default function Home() {
           
           {/* C급 구간 */}
           <rect
-            x={Math.min(xScale(standards['C']), xScale(standards['B']))}
+            x={Math.min(xScale(standards['C']), xScale(standards['C+']))}
             y={padding}
-            width={Math.abs(xScale(standards['B']) - xScale(standards['C']))}
+            width={Math.abs(xScale(standards['C+']) - xScale(standards['C']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['C']}
             opacity={0.1}
           />
           
+          {/* C+ 급 구간 */}
+          <rect
+            x={Math.min(xScale(standards['C+']), xScale(standards['B']))}
+            y={padding}
+            width={Math.abs(xScale(standards['B']) - xScale(standards['C+']))}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['C+']}
+            opacity={0.1}
+          />
+          
           {/* B급 구간 */}
           <rect
-            x={Math.min(xScale(standards['B']), xScale(standards['A']))}
+            x={Math.min(xScale(standards['B']), xScale(standards['B+']))}
             y={padding}
-            width={Math.abs(xScale(standards['A']) - xScale(standards['B']))}
+            width={Math.abs(xScale(standards['B+']) - xScale(standards['B']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['B']}
             opacity={0.1}
           />
           
+          {/* B+ 급 구간 */}
+          <rect
+            x={Math.min(xScale(standards['B+']), xScale(standards['A']))}
+            y={padding}
+            width={Math.abs(xScale(standards['A']) - xScale(standards['B+']))}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['B+']}
+            opacity={0.1}
+          />
+          
           {/* A급 구간 */}
           <rect
-            x={Math.min(xScale(standards['A']), xScale(standards['S']))}
+            x={Math.min(xScale(standards['A']), xScale(standards['A+']))}
             y={padding}
-            width={Math.abs(xScale(standards['S']) - xScale(standards['A']))}
+            width={Math.abs(xScale(standards['A+']) - xScale(standards['A']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['A']}
+            opacity={0.1}
+          />
+          
+          {/* A+ 급 구간 */}
+          <rect
+            x={Math.min(xScale(standards['A+']), xScale(standards['S']))}
+            y={padding}
+            width={Math.abs(xScale(standards['S']) - xScale(standards['A+']))}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['A+']}
             opacity={0.1}
           />
           
@@ -355,7 +418,7 @@ export default function Home() {
                 y2={svgHeight - padding}
                 stroke={gradeColors[userGrade as keyof typeof gradeColors]}
                 strokeWidth="3"
-                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
+                className={userGrade && ['SS', 'S', 'A+', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
               />
               {/* 정규분포 곡선과 사용자 막대의 접점 */}
               <circle
@@ -365,7 +428,7 @@ export default function Home() {
                 fill={gradeColors[userGrade as keyof typeof gradeColors]}
                 stroke="white"
                 strokeWidth="2"
-                className={userGrade && ['SS', 'S', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
+                className={userGrade && ['SS', 'S', 'A+', 'A'].includes(userGrade) ? 'animate-pulse' : ''}
               />
             </>
           )}
@@ -391,7 +454,7 @@ export default function Home() {
         
         {/* 범례 - SS급부터 D급까지 내림차순 */}
         <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm">
-          {['SS', 'S', 'A', 'B', 'C', 'D'].map((grade) => (
+          {['SS', 'S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D'].map((grade) => (
             <div key={grade} className="flex items-center gap-2">
               <div 
                 className="w-4 h-4 rounded" 
@@ -538,7 +601,7 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-gray-700 mb-6">당신의 러닝 등급</h3>
                   <div 
                     className={`inline-block px-8 py-4 rounded-2xl text-6xl font-bold shadow-xl animate-grade-reveal mb-4 ${gradeDefinitions[results.grade].color} ${gradeDefinitions[results.grade].textColor} ${
-                      ['SS', 'S', 'A'].includes(results.grade) ? 'animate-aurora' : ''
+                      ['SS', 'S', 'A+', 'A'].includes(results.grade) ? 'animate-aurora' : ''
                     }`}
                   >
                     {results.grade}
