@@ -454,11 +454,22 @@ export default function Home() {
             </>
           )}
           
-          {/* X축 라벨 */}
-          {Object.entries(standards).map(([grade, time]) => (
+          {/* X축 라벨 - SS급이 오른쪽(빠른 시간)에 위치 */}
+          {[
+            ['D', mean + 3.5 * sigma],
+            ['D+', standards['D+']],
+            ['C', standards['C']],
+            ['C+', standards['C+']],
+            ['B', standards['B']],
+            ['B+', standards['B+']],
+            ['A', standards['A']],
+            ['A+', standards['A+']],
+            ['S', standards['S']],
+            ['SS', standards['SS']]
+          ].map(([grade, time]) => (
             <g key={grade}>
               <text
-                x={xScale(time)}
+                x={xScale(time as number)}
                 y={svgHeight - 10}
                 textAnchor="middle"
                 fontSize="12"
