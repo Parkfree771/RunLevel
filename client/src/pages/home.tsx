@@ -62,6 +62,12 @@ const gradeDefinitions: Record<string, GradeInfo> = {
     message: '괜찮은 시작! C급으로 러닝에 익숙해지고 있는 단계네요!',
     advice: 'C급에서 기초 체력 향상에 집중하세요. 걷기와 가벼운 조깅을 번갈아 해보세요.'
   },
+  'D+': {
+    color: 'grade-d-plus',
+    textColor: 'text-white',
+    message: '괜찮은 성과! D+ 초급자로 꾸준히 노력하고 있어요!',
+    advice: 'D+ 초급자로서 기초 체력을 꾸준히 늘려가세요. 걷기와 가벼운 조깅을 병행해보세요.'
+  },
   'D': {
     color: 'grade-f',
     textColor: 'text-white',
@@ -86,7 +92,8 @@ const distanceStandards = {
       'B': 65 * 60,              // 60분 ~ 65분
       'C+': 70 * 60,             // 65분 ~ 70분
       'C': 75 * 60,              // 70분 ~ 75분
-      'D': Infinity              // 75분 초과
+      'D+': 80 * 60,             // 75분 ~ 80분
+      'D': Infinity              // 80분 초과
     }
   },
   '하프마라톤': {
@@ -102,7 +109,8 @@ const distanceStandards = {
       'B': 140 * 60,             // 2시간 10분 ~ 2시간 20분
       'C+': 150 * 60,            // 2시간 20분 ~ 2시간 30분
       'C': 160 * 60,             // 2시간 30분 ~ 2시간 40분
-      'D': Infinity              // 2시간 40분 초과
+      'D+': 170 * 60,            // 2시간 40분 ~ 2시간 50분
+      'D': Infinity              // 2시간 50분 초과
     }
   },
   '풀마라톤': {
@@ -110,15 +118,16 @@ const distanceStandards = {
     mean: 272 * 60 + 49,         // 평균: 4시간 32분 49초
     sigma: 35 * 60,              // 표준편차: 35분
     standards: {
-      'SS': 210 * 60,            // 3시간 30분 미만
-      'S': 240 * 60,             // 3시간 30분 ~ 4시간
-      'A+': 270 * 60,            // 4시간 ~ 4시간 30분
-      'A': 300 * 60,             // 4시간 30분 ~ 5시간
-      'B+': 330 * 60,            // 5시간 ~ 5시간 30분
-      'B': 360 * 60,             // 5시간 30분 ~ 6시간
-      'C+': 390 * 60,            // 6시간 ~ 6시간 30분
-      'C': 420 * 60,             // 6시간 30분 ~ 7시간
-      'D': Infinity              // 7시간 초과
+      'SS': 3 * 3600 + 40 * 60 + 58,   // 3시간 40분 58초 미만
+      'S': 3 * 3600 + 56 * 60 + 22,    // 3시간 40분 58초 ~ 3시간 56분 22초
+      'A+': 4 * 3600 + 7 * 60 + 28,    // 3시간 56분 22초 ~ 4시간 7분 28초
+      'A': 4 * 3600 + 16 * 60 + 57,    // 4시간 7분 28초 ~ 4시간 16분 57초
+      'B+': 4 * 3600 + 25 * 60 + 50,   // 4시간 16분 57초 ~ 4시간 25분 50초
+      'B': 4 * 3600 + 34 * 60 + 42,    // 4시간 25분 50초 ~ 4시간 34분 42초
+      'C+': 4 * 3600 + 44 * 60 + 11,   // 4시간 34분 42초 ~ 4시간 44분 11초
+      'C': 4 * 3600 + 55 * 60 + 17,    // 4시간 44분 11초 ~ 4시간 55분 17초
+      'D+': 5 * 3600 + 10 * 60 + 41,   // 4시간 55분 17초 ~ 5시간 10분 41초
+      'D': Infinity                      // 5시간 10분 41초 초과
     }
   }
 };
@@ -140,7 +149,8 @@ export default function Home() {
     
     const standards = distanceStandards[distance as keyof typeof distanceStandards].standards;
     
-    if (totalSeconds > standards['C']) return 'D';
+    if (totalSeconds > standards['D+']) return 'D';
+    if (totalSeconds > standards['C']) return 'D+';
     if (totalSeconds > standards['C+']) return 'C';
     if (totalSeconds > standards['B']) return 'C+';
     if (totalSeconds > standards['B+']) return 'B';
@@ -303,7 +313,8 @@ export default function Home() {
       'B': 'hsl(210, 80%, 60%)',
       'C+': 'hsl(50, 90%, 60%)',
       'C': 'hsl(30, 90%, 65%)',
-      'D': 'hsl(0, 0%, 60%)'
+      'D+': 'hsl(15, 90%, 60%)',
+      'D': 'hsl(10, 85%, 55%)'
     };
 
     return (
@@ -312,11 +323,21 @@ export default function Home() {
           {/* 등급 구간 배경 - SS급이 오른쪽 (빠른 시간)에 위치 */}
           {/* D 등급 구간 (가장 왼쪽 - 느린 시간) */}
           <rect
-            x={Math.min(xScale(mean + 4 * sigma), xScale(standards['C']))}
+            x={Math.min(xScale(mean + 4 * sigma), xScale(standards['D+']))}
             y={padding}
-            width={Math.abs(xScale(standards['C']) - xScale(mean + 4 * sigma))}
+            width={Math.abs(xScale(standards['D+']) - xScale(mean + 4 * sigma))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['D']}
+            opacity={0.1}
+          />
+          
+          {/* D+ 급 구간 */}
+          <rect
+            x={Math.min(xScale(standards['D+']), xScale(standards['C']))}
+            y={padding}
+            width={Math.abs(xScale(standards['C']) - xScale(standards['D+']))}
+            height={svgHeight - 2 * padding}
+            fill={gradeColors['D+']}
             opacity={0.1}
           />
           
@@ -454,7 +475,7 @@ export default function Home() {
         
         {/* 범례 - SS급부터 D급까지 내림차순 */}
         <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm">
-          {['SS', 'S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D'].map((grade) => (
+          {['SS', 'S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D'].map((grade) => (
             <div key={grade} className="flex items-center gap-2">
               <div 
                 className="w-4 h-4 rounded" 
