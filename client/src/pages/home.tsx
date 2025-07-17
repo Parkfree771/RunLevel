@@ -801,7 +801,7 @@ export default function Home() {
                         </div>
                         <div className="bg-white p-4 rounded-lg">
                           <div className="text-2xl font-bold text-blue-600">
-                            {position.percentile}%
+                            {position.percentile.toFixed(2)}%
                           </div>
                           <div className="text-sm text-gray-600">상위 퍼센트</div>
                         </div>
@@ -828,13 +828,8 @@ export default function Home() {
                   중요한 안내사항
                 </h3>
                 <div className="text-gray-700 leading-relaxed bg-yellow-50 p-6 rounded-xl border-l-4 border-yellow-400">
-                  <p className="font-medium text-yellow-800 mb-3">📊 기록에 대한 중요한 점:</p>
-                  <p className="mb-3">
-                    이 기록들은 <strong>'대회에 참가하여 완주한 사람들'</strong>의 평균입니다. 
-                    따라서 달리기를 전혀 하지 않는 사람들까지 포함하면 평균 기록은 훨씬 느려질 것입니다.
-                  </p>
                   <p className="text-lg font-semibold text-yellow-800">
-                    즉, 어떤 기록이든 <span className="text-yellow-600">완주 자체만으로도 대단한 것</span>입니다! 🏃‍♀️🏃‍♂️
+                    어떤 기록이든 <span className="text-yellow-600">완주 자체만으로도 대단한 것</span>입니다! 🏃‍♀️🏃‍♂️
                   </p>
                 </div>
               </CardContent>
