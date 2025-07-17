@@ -234,7 +234,7 @@ const translations = {
     seconds: "초",
     checkGrade: "등급 확인하기",
     yourGrade: "당신의 러닝 등급",
-    normalDist: "정규분포 상에서 내 위치",
+    normalDist: "나는 어디쯤 달리고 있을까?",
     myRecord: "내 기록",
     retryButton: "다시 측정하기",
     disclaimer: "※ 재미로만 확인해주세요!",
@@ -259,7 +259,7 @@ const translations = {
     seconds: "Seconds",
     checkGrade: "Check Grade",
     yourGrade: "Your Running Grade",
-    normalDist: "Your Position on Normal Distribution",
+    normalDist: "Where am I running among others?",
     myRecord: "My Record",
     retryButton: "Try Again",
     disclaimer: "※ For entertainment purposes only!",
@@ -410,7 +410,7 @@ export default function Home() {
   // 정규분포 그래프를 위한 함수들
   const generateNormalDistribution = (mean: number, sigma: number, userTime?: number) => {
     const points = [];
-    const range = 4 * sigma; // ±4σ 범위
+    const range = 3 * sigma; // ±3σ 범위로 축소하여 가시성 개선
     const start = mean - range;
     const end = mean + range;
     const step = range / 100;
@@ -506,14 +506,15 @@ export default function Home() {
     const points = generateNormalDistribution(mean, sigma, userTime);
     const maxY = Math.max(...points.map(p => p.y));
 
-    // SVG 좌표계로 변환
+    // SVG 좌표계로 변환 - 모바일에서 더 큰 크기
     const svgWidth = 800;
-    const svgHeight = 200;
+    const svgHeight = 300; // 높이 증가
     const padding = 40;
 
     const xScale = (time: number) => {
-      const minTime = mean - 4 * sigma;
-      const maxTime = mean + 4 * sigma;
+      // 차트 범위를 좁혀서 가시성 개선: SS급보다 조금 오른쪽부터 D급보다 조금 왼쪽까지
+      const minTime = Math.max(standards['SS'] - 0.5 * sigma, mean - 3 * sigma);
+      const maxTime = Math.min(standards['D+'] + 0.5 * sigma, mean + 3 * sigma);
       // X축 반전: 빠른 시간(작은 값)이 오른쪽에 오도록
       return svgWidth - padding - ((time - minTime) / (maxTime - minTime)) * (svgWidth - 2 * padding);
     };
@@ -543,7 +544,13 @@ export default function Home() {
 
     return (
       <div className="w-full">
-        <svg width="100%" height={svgHeight} viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="border rounded-lg bg-white">
+        <svg 
+          width="100%" 
+          height={svgHeight} 
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`} 
+          className="border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-600 min-h-[280px] sm:min-h-[350px]"
+          preserveAspectRatio="xMidYMid meet"
+        >
           {/* 등급 구간 배경 - SS급이 오른쪽 (빠른 시간)에 위치 */}
           {/* D 등급 구간 (가장 왼쪽 - 느린 시간) */}
           <rect
@@ -924,7 +931,7 @@ export default function Home() {
                 </h3>
                 <div className="bg-gray-50 dark:bg-gray-700 p-3 sm:p-4 md:p-6 rounded-xl">
                   {/* 모바일에서 차트 크기 확대 */}
-                  <div className="w-full min-h-[250px] sm:min-h-[300px] md:min-h-[350px]">
+                  <div className="w-full min-h-[300px] sm:min-h-[400px] md:min-h-[450px]">
                     <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} gender={results.gender} />
                   </div>
 
