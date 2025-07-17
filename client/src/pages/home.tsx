@@ -660,10 +660,9 @@ export default function Home() {
           <div className="text-center">
             <div className="flex items-center justify-center mb-2">
               <Timer className="text-3xl text-blue-600 mr-3 h-8 w-8" />
-              <h1 className="text-3xl font-bold text-gray-800">런레벨</h1>
+              <h1 className="text-3xl font-bold text-gray-800">RunLevel</h1>
             </div>
             <p className="text-gray-600 text-lg">내 러닝 등급은?</p>
-            <p className="text-gray-600 text-base mt-1">당신의 러닝 실력을 측정하고 맞춤 조언을 받아보세요</p>
           </div>
         </div>
       </header>
@@ -934,7 +933,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-white border-t mt-8">
         <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-          <p className="text-gray-600">© 2024 런레벨 - 당신의 러닝 여정을 응원합니다!</p>
+          <p className="text-gray-600">© 2024 RunLevel - 당신의 러닝 여정을 응원합니다!</p>
         </div>
       </footer>
     </div>

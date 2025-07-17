@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a Korean running performance evaluation web application called "런레벨" (Run Level) with the subtitle "내 러닝 등급은?" (What's My Running Grade?). The system allows users to input their running records (distance and time) and provides them with a grade from SS to F, along with encouraging messages and personalized training advice.
+This is a Korean running performance evaluation web application called "RunLevel" with the subtitle "내 러닝 등급은?" (What's My Running Grade?). The system allows users to input their running records (distance and time) and provides them with a grade from SS to F, along with encouraging messages and personalized training advice.
 
 ## User Preferences
 
