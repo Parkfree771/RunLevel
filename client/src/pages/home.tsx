@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3, User } from "lucide-react";
+import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3, User, Moon, Sun, Globe } from "lucide-react";
 
 interface GradeInfo {
   color: string;
@@ -217,12 +217,68 @@ const distanceStandards = {
   }
 };
 
+// Translation object for Korean/English support
+const translations = {
+  ko: {
+    title: "RunLevel",
+    subtitle: "내 러닝 등급은?",
+    inputTitle: "러닝 기록을 입력해주세요",
+    inputDesc: "거리와 시간을 입력하면 당신의 러닝 등급을 확인할 수 있습니다",
+    gender: "성별",
+    male: "남성",
+    female: "여성",
+    distance: "러닝 거리",
+    totalTime: "총 시간",
+    hours: "시간",
+    minutes: "분",
+    seconds: "초",
+    checkGrade: "등급 확인하기",
+    yourGrade: "당신의 러닝 등급",
+    normalDist: "정규분포 상에서 내 위치",
+    myRecord: "내 기록",
+    retryButton: "다시 측정하기",
+    disclaimer: "※ 재미로만 확인해주세요!",
+    disclaimerText: "본 등급은 수많은 러너들의 평균적인 기록을 바탕으로 한 참고 자료예요. 개인의 나이, 컨디션, 코스 난이도 등 다양한 변수는 담겨있지 않답니다. 숫자 등급보다 중요한 건, 어제의 나보다 성장하는 즐거움이니까요! 😊",
+    footer: "© 2025 RunLevel - 당신의 러닝 여정을 응원합니다!",
+    selectGender: "성별을 선택하세요",
+    selectDistance: "거리를 선택하세요",
+    gradeTable: "등급 기준표"
+  },
+  en: {
+    title: "RunLevel", 
+    subtitle: "What's My Running Grade?",
+    inputTitle: "Enter Your Running Record",
+    inputDesc: "Enter distance and time to check your running grade",
+    gender: "Gender",
+    male: "Male",
+    female: "Female", 
+    distance: "Running Distance",
+    totalTime: "Total Time",
+    hours: "Hours",
+    minutes: "Minutes", 
+    seconds: "Seconds",
+    checkGrade: "Check Grade",
+    yourGrade: "Your Running Grade",
+    normalDist: "Your Position on Normal Distribution",
+    myRecord: "My Record",
+    retryButton: "Try Again",
+    disclaimer: "※ For entertainment purposes only!",
+    disclaimerText: "This grade is based on average records of many runners. Individual factors like age, condition, course difficulty are not included. What matters more than the grade is the joy of growing better than yesterday! 😊",
+    footer: "© 2025 RunLevel - Supporting your running journey!",
+    selectGender: "Select gender",
+    selectDistance: "Select distance", 
+    gradeTable: "Grade Standards"
+  }
+};
+
 export default function Home() {
   const [selectedDistance, setSelectedDistance] = useState<string>('');
   const [gender, setGender] = useState<string>('male'); // 성별 선택 추가
   const [hours, setHours] = useState<string>('');
   const [minutes, setMinutes] = useState<string>('');
   const [seconds, setSeconds] = useState<string>('');
+  const [language, setLanguage] = useState<'ko' | 'en'>('ko');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [results, setResults] = useState<{
     totalSeconds: number;
     grade: string;
@@ -230,6 +286,33 @@ export default function Home() {
     distanceName: string;
     gender: string;
   } | null>(null);
+
+  const t = translations[language];
+
+  // Theme management
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'ko' ? 'en' : 'ko');
+  };
 
   const determineGrade = (totalSeconds: number, distance: string, gender: string): string => {
     if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
@@ -644,7 +727,7 @@ export default function Home() {
                 className="w-4 h-2" 
                 style={{ backgroundColor: gradeColors[userGrade as keyof typeof gradeColors] }}
               ></div>
-              <span>내 기록</span>
+              <span className="text-gray-700 dark:text-gray-300">{t.myRecord}</span>
             </div>
           )}
         </div>
@@ -653,16 +736,37 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen transition-colors">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <Timer className="text-3xl text-blue-600 mr-3 h-8 w-8" />
-              <h1 className="text-3xl font-bold text-gray-800">RunLevel</h1>
+          <div className="flex items-center justify-between">
+            <div className="text-center flex-1">
+              <div className="flex items-center justify-center mb-2">
+                <Timer className="text-3xl text-blue-600 dark:text-blue-400 mr-3 h-8 w-8" />
+                <h1 className="text-3xl font-bold text-gray-800 dark:text-white">{t.title}</h1>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 text-lg">{t.subtitle}</p>
             </div>
-            <p className="text-gray-600 text-lg">내 러닝 등급은?</p>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={toggleLanguage}
+                className="border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800"
+              >
+                <Globe className="h-4 w-4 mr-1" />
+                {language === 'ko' ? 'EN' : '한글'}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={toggleTheme}
+                className="border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800"
+              >
+                {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -671,54 +775,54 @@ export default function Home() {
       <main className="max-w-4xl mx-auto px-4 py-8">
         {/* Input Form Section */}
         {!results && (
-          <Card className="rounded-2xl shadow-lg p-8 mb-8">
+          <Card className="rounded-2xl shadow-lg p-8 mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardContent className="p-0">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">러닝 기록을 입력해주세요</h2>
-                <p className="text-gray-600">거리와 시간을 입력하면 당신의 러닝 등급을 확인할 수 있습니다</p>
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{t.inputTitle}</h2>
+                {language === 'ko' && <p className="text-gray-600 dark:text-gray-300">{t.inputDesc}</p>}
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Gender Selection */}
                 <div>
-                  <Label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <User className="inline text-blue-600 mr-2 h-4 w-4" />
-                    성별
+                  <Label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <User className="inline text-blue-600 dark:text-blue-400 mr-2 h-4 w-4" />
+                    {t.gender}
                   </Label>
                   <Select value={gender} onValueChange={setGender}>
-                    <SelectTrigger className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 text-lg">
-                      <SelectValue placeholder="성별을 선택하세요" />
+                    <SelectTrigger className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
+                      <SelectValue placeholder={t.selectGender} />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="male">남성</SelectItem>
-                      <SelectItem value="female">여성</SelectItem>
+                    <SelectContent className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
+                      <SelectItem value="male" className="text-gray-900 dark:text-white">{t.male}</SelectItem>
+                      <SelectItem value="female" className="text-gray-900 dark:text-white">{t.female}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 {/* Distance Selection */}
                 <div>
-                  <Label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Route className="inline text-blue-600 mr-2 h-4 w-4" />
-                    러닝 거리
+                  <Label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <Route className="inline text-blue-600 dark:text-blue-400 mr-2 h-4 w-4" />
+                    {t.distance}
                   </Label>
                   <Select value={selectedDistance} onValueChange={setSelectedDistance}>
-                    <SelectTrigger className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 text-lg">
-                      <SelectValue placeholder="거리를 선택하세요" />
+                    <SelectTrigger className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
+                      <SelectValue placeholder={t.selectDistance} />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="10km">10km</SelectItem>
-                      <SelectItem value="하프마라톤">하프마라톤 (21.1km)</SelectItem>
-                      <SelectItem value="풀마라톤">풀마라톤 (42.2km)</SelectItem>
+                    <SelectContent className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
+                      <SelectItem value="10km" className="text-gray-900 dark:text-white">10km</SelectItem>
+                      <SelectItem value="하프마라톤" className="text-gray-900 dark:text-white">{language === 'ko' ? '하프마라톤 (21.1km)' : 'Half Marathon (21.1km)'}</SelectItem>
+                      <SelectItem value="풀마라톤" className="text-gray-900 dark:text-white">{language === 'ko' ? '풀마라톤 (42.2km)' : 'Full Marathon (42.2km)'}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 {/* Time Input */}
                 <div>
-                  <Label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Timer className="inline text-blue-600 mr-2 h-4 w-4" />
-                    총 시간
+                  <Label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <Timer className="inline text-blue-600 dark:text-blue-400 mr-2 h-4 w-4" />
+                    {t.totalTime}
                   </Label>
                   <div className="grid grid-cols-3 gap-3">
                     <div>
@@ -726,37 +830,37 @@ export default function Home() {
                         type="number" 
                         min="0" 
                         max="23"
-                        className="w-full px-3 py-3 border-2 rounded-xl focus:border-blue-500 text-lg text-center"
+                        className="w-full px-3 py-3 border-2 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 text-lg text-center bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
                         placeholder="0"
                         value={hours}
                         onChange={(e) => handleNumberInput(e.target.value, setHours, 23)}
                       />
-                      <Label className="block text-xs text-gray-500 text-center mt-1">시간</Label>
+                      <Label className="block text-xs text-gray-500 dark:text-gray-400 text-center mt-1">{t.hours}</Label>
                     </div>
                     <div>
                       <Input 
                         type="number" 
                         min="0" 
                         max="59"
-                        className="w-full px-3 py-3 border-2 rounded-xl focus:border-blue-500 text-lg text-center"
+                        className="w-full px-3 py-3 border-2 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 text-lg text-center bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
                         placeholder="22"
                         value={minutes}
                         onChange={(e) => handleNumberInput(e.target.value, setMinutes, 59)}
                         required
                       />
-                      <Label className="block text-xs text-gray-500 text-center mt-1">분</Label>
+                      <Label className="block text-xs text-gray-500 dark:text-gray-400 text-center mt-1">{t.minutes}</Label>
                     </div>
                     <div>
                       <Input 
                         type="number" 
                         min="0" 
                         max="59"
-                        className="w-full px-3 py-3 border-2 rounded-xl focus:border-blue-500 text-lg text-center"
+                        className="w-full px-3 py-3 border-2 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 text-lg text-center bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
                         placeholder="30"
                         value={seconds}
                         onChange={(e) => handleNumberInput(e.target.value, setSeconds, 59)}
                       />
-                      <Label className="block text-xs text-gray-500 text-center mt-1">초</Label>
+                      <Label className="block text-xs text-gray-500 dark:text-gray-400 text-center mt-1">{t.seconds}</Label>
                     </div>
                   </div>
                 </div>
@@ -764,10 +868,10 @@ export default function Home() {
                 {/* Submit Button */}
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-4 px-6 rounded-xl hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 dark:from-blue-500 dark:to-indigo-500 dark:hover:from-blue-600 dark:hover:to-indigo-600 text-white font-bold py-4 px-6 rounded-xl transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
                 >
                   <Trophy className="mr-2 h-5 w-5" />
-                  등급 확인하기
+                  {t.checkGrade}
                 </Button>
               </form>
             </CardContent>
@@ -778,21 +882,21 @@ export default function Home() {
         {results && (
           <div id="results-section" className="space-y-6">
             {/* Time Display */}
-            <Card className="rounded-2xl shadow-lg p-8 text-center">
+            <Card className="rounded-2xl shadow-lg p-8 text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardContent className="p-0">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
-                  {results.gender === 'male' ? '남성' : '여성'} · {results.distanceName} 완주 시간
+                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
+                  {results.gender === 'male' ? (language === 'ko' ? '남성' : 'Male') : (language === 'ko' ? '여성' : 'Female')} · {results.distanceName} {language === 'ko' ? '완주 시간' : 'Completion Time'}
                 </h3>
-                <div className="text-4xl font-bold text-blue-600 mb-2">{results.formattedTime}</div>
-                <p className="text-gray-600">시:분:초</p>
+                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">{results.formattedTime}</div>
+                <p className="text-gray-600 dark:text-gray-400">{language === 'ko' ? '시:분:초' : 'H:M:S'}</p>
               </CardContent>
             </Card>
 
             {/* Grade Display */}
-            <Card className="rounded-2xl shadow-lg p-8">
+            <Card className="rounded-2xl shadow-lg p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardContent className="p-0">
                 <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-700 mb-6">당신의 러닝 등급</h3>
+                  <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-6">{t.yourGrade}</h3>
                   <div 
                     className={`inline-block px-8 py-4 rounded-2xl text-6xl font-bold shadow-xl animate-grade-reveal mb-4 ${gradeDefinitions[results.grade].color} text-white ${
                       ['SS', 'S', 'A+', 'A'].includes(results.grade) ? 'animate-aurora' : ''
@@ -800,7 +904,7 @@ export default function Home() {
                   >
                     {results.grade}
                   </div>
-                  <div className="text-lg font-medium text-gray-700 mb-4 animate-bounce-gentle">
+                  <div className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4 animate-bounce-gentle">
                     {runnerProfiles[results.gender as keyof typeof runnerProfiles][selectedDistance as keyof typeof runnerProfiles['male']][results.grade]}
                   </div>
                 </div>
@@ -808,11 +912,11 @@ export default function Home() {
             </Card>
 
             {/* Normal Distribution Chart */}
-            <Card className="rounded-2xl shadow-lg p-8">
+            <Card className="rounded-2xl shadow-lg p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardContent className="p-0">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                  <BarChart3 className="text-blue-500 mr-3 h-5 w-5" />
-                  정규분포 상에서 내 위치
+                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4 flex items-center">
+                  <BarChart3 className="text-blue-500 dark:text-blue-400 mr-3 h-5 w-5" />
+                  {t.normalDist}
                 </h3>
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} gender={results.gender} />
@@ -878,10 +982,10 @@ export default function Home() {
             <div className="text-center">
               <Button 
                 onClick={resetForm}
-                className="bg-gray-600 text-white font-semibold py-3 px-8 rounded-xl hover:bg-gray-700 transition-all duration-200"
+                className="bg-gray-600 dark:bg-gray-700 text-white font-semibold py-3 px-8 rounded-xl hover:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
-                다시 측정하기
+                {t.retryButton}
               </Button>
             </div>
           </div>
@@ -889,10 +993,10 @@ export default function Home() {
 
         {/* Grade Information Section */}
         {selectedDistance && (
-          <Card className="rounded-2xl shadow-lg p-8 mt-8">
+          <Card className="rounded-2xl shadow-lg p-8 mt-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardContent className="p-0">
-              <h3 className="text-xl font-semibold text-gray-700 mb-6 text-center">
-                {gender === 'male' ? '남성' : '여성'} · {distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']]?.name} 등급 기준표
+              <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-6 text-center">
+                {gender === 'male' ? (language === 'ko' ? '남성' : 'Male') : (language === 'ko' ? '여성' : 'Female')} · {distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']]?.name} {t.gradeTable}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {Object.entries(gradeDefinitions).map(([grade, info]) => {
@@ -918,12 +1022,12 @@ export default function Home() {
 
       {/* Disclaimer */}
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <Card className="rounded-2xl shadow-lg p-6 bg-blue-50 border-blue-200">
+        <Card className="rounded-2xl shadow-lg p-6 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
           <CardContent className="p-0">
             <div className="text-center">
-              <h4 className="text-lg font-semibold text-blue-800 mb-3">※ 재미로만 확인해주세요!</h4>
-              <p className="text-blue-700 leading-relaxed">
-                본 등급은 수많은 러너들의 평균적인 기록을 바탕으로 한 참고 자료예요. 개인의 나이, 컨디션, 코스 난이도 등 다양한 변수는 담겨있지 않답니다. 숫자 등급보다 중요한 건, 어제의 나보다 성장하는 즐거움이니까요! 😊
+              <h4 className="text-lg font-semibold text-blue-800 dark:text-blue-300 mb-3">{t.disclaimer}</h4>
+              <p className="text-blue-700 dark:text-blue-200 leading-relaxed">
+                {t.disclaimerText}
               </p>
             </div>
           </CardContent>
@@ -931,9 +1035,9 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t mt-8">
+      <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-8">
         <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-          <p className="text-gray-600">© 2024 RunLevel - 당신의 러닝 여정을 응원합니다!</p>
+          <p className="text-gray-600 dark:text-gray-400">{t.footer}</p>
         </div>
       </footer>
     </div>
