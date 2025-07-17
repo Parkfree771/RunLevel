@@ -82,18 +82,18 @@ const distanceStandards = {
   '10km': {
     name: '10km',
     mean: 58 * 60 + 34,          // 평균: 58분 34초
-    sigma: 10 * 60,              // 표준편차: 10분
+    sigma: 10 * 60 + 36,              // 표준편차: 10분 36초
     standards: {
-      'SS': 40 * 60,             // 40분 미만
-      'S': 45 * 60,              // 40분 ~ 45분
-      'A+': 50 * 60,             // 45분 ~ 50분
-      'A': 55 * 60,              // 50분 ~ 55분
-      'B+': 60 * 60,             // 55분 ~ 60분
-      'B': 65 * 60,              // 60분 ~ 65분
-      'C+': 70 * 60,             // 65분 ~ 70분
-      'C': 75 * 60,              // 70분 ~ 75분
-      'D+': 80 * 60,             // 75분 ~ 80분
-      'D': Infinity              // 80분 초과
+      'SS': 32 * 60,                   // 32분 ~ 35분
+      'S': 35 * 60,                    // 35분 ~ 40분
+      'A+': 40 * 60,                   // 40분 ~ 45분
+      'A': 45 * 60,                    // 45분 ~ 50분
+      'B+': 50 * 60,                   // 50분 ~ 55분
+      'B': 55 * 60,                    // 55분 ~ 1시간
+      'C+': 1 * 3600,                  // 1시간 ~ 1시간 5분
+      'C': 1 * 3600 + 5 * 60,          // 1시간 5분 ~ 1시간 10분
+      'D+': 1 * 3600 + 10 * 60,        // 1시간 10분 ~ 1시간 15분
+      'D': Infinity                     // 1시간 15분 초과
     }
   },
   '하프마라톤': {
@@ -101,33 +101,33 @@ const distanceStandards = {
     mean: 125 * 60 + 51,         // 평균: 2시간 5분 51초
     sigma: 20 * 60,              // 표준편차: 20분
     standards: {
-      'SS': 90 * 60,             // 1시간 30분 미만
-      'S': 100 * 60,             // 1시간 30분 ~ 1시간 40분
-      'A+': 110 * 60,            // 1시간 40분 ~ 1시간 50분
-      'A': 120 * 60,             // 1시간 50분 ~ 2시간
-      'B+': 130 * 60,            // 2시간 ~ 2시간 10분
-      'B': 140 * 60,             // 2시간 10분 ~ 2시간 20분
-      'C+': 150 * 60,            // 2시간 20분 ~ 2시간 30분
-      'C': 160 * 60,             // 2시간 30분 ~ 2시간 40분
-      'D+': 170 * 60,            // 2시간 40분 ~ 2시간 50분
-      'D': Infinity              // 2시간 50분 초과
+      'SS': 1 * 3600 + 10 * 60,     // 1시간 10분 (엘리트)
+      'S': 1 * 3600 + 25 * 60,      // 1시간 25분
+      'A+': 1 * 3600 + 40 * 60,     // 1시간 40분
+      'A': 1 * 3600 + 55 * 60,      // 1시간 55분
+      'B+': 2 * 3600 + 10 * 60,     // 2시간 10분
+      'B': 2 * 3600 + 25 * 60,      // 2시간 25분
+      'C+': 2 * 3600 + 40 * 60,     // 2시간 40분
+      'C': 2 * 3600 + 55 * 60,      // 2시간 55분
+      'D+': 3 * 3600 + 10 * 60,     // 3시간 10분
+      'D': Infinity                  // 3시간 10분 초과
     }
   },
   '풀마라톤': {
     name: '풀마라톤 (42.2km)',
-    mean: 272 * 60 + 49,         // 평균: 4시간 32분 49초
-    sigma: 35 * 60,              // 표준편차: 35분
+    mean: 4 * 3600 + 15 * 60,         // 평균: 4시간 15분 (15,300초)
+    sigma: 28 * 60,              // 표준편차: 28분 (1,680초)
     standards: {
-      'SS': 3 * 3600 + 40 * 60 + 58,   // 3시간 40분 58초 미만
-      'S': 3 * 3600 + 56 * 60 + 22,    // 3시간 40분 58초 ~ 3시간 56분 22초
-      'A+': 4 * 3600 + 7 * 60 + 28,    // 3시간 56분 22초 ~ 4시간 7분 28초
-      'A': 4 * 3600 + 16 * 60 + 57,    // 4시간 7분 28초 ~ 4시간 16분 57초
-      'B+': 4 * 3600 + 25 * 60 + 50,   // 4시간 16분 57초 ~ 4시간 25분 50초
-      'B': 4 * 3600 + 34 * 60 + 42,    // 4시간 25분 50초 ~ 4시간 34분 42초
-      'C+': 4 * 3600 + 44 * 60 + 11,   // 4시간 34분 42초 ~ 4시간 44분 11초
-      'C': 4 * 3600 + 55 * 60 + 17,    // 4시간 44분 11초 ~ 4시간 55분 17초
-      'D+': 5 * 3600 + 10 * 60 + 41,   // 4시간 55분 17초 ~ 5시간 10분 41초
-      'D': Infinity                      // 5시간 10분 41초 초과
+      'SS': 2 * 3600 + 30 * 60,     // 2시간 30분 (엘리트)
+      'S': 3 * 3600,                // 3시간 (서브 3)
+      'A+': 3 * 3600 + 30 * 60,     // 3시간 30분
+      'A': 4 * 3600,                // 4시간 (서브 4)
+      'B+': 4 * 3600 + 30 * 60,     // 4시간 30분
+      'B': 5 * 3600,                // 5시간 (서브 5)
+      'C+': 5 * 3600 + 30 * 60,     // 5시간 30분
+      'C': 6 * 3600,                // 6시간 (서브 6)
+      'D+': 6 * 3600 + 30 * 60,     // 6시간 30분
+      'D': Infinity                  // 6시간 30분 초과
     }
   }
 };
@@ -146,9 +146,9 @@ export default function Home() {
 
   const determineGrade = (totalSeconds: number, distance: string): string => {
     if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return 'D';
-    
+
     const standards = distanceStandards[distance as keyof typeof distanceStandards].standards;
-    
+
     if (totalSeconds > standards['D+']) return 'D';
     if (totalSeconds > standards['C']) return 'D+';
     if (totalSeconds > standards['C+']) return 'C';
@@ -165,7 +165,7 @@ export default function Home() {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
-    
+
     if (hours > 0) {
       return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
@@ -174,7 +174,7 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedDistance) {
       alert('거리를 선택해주세요.');
       return;
@@ -190,7 +190,7 @@ export default function Home() {
     }
 
     const totalSeconds = (hoursNum * 3600) + (minutesNum * 60) + secondsNum;
-    
+
     if (totalSeconds <= 0) {
       alert('올바른 시간을 입력해주세요.');
       return;
@@ -260,15 +260,15 @@ export default function Home() {
 
   const getGradePosition = (time: number, distance: string) => {
     if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return null;
-    
+
     const { mean, sigma } = distanceStandards[distance as keyof typeof distanceStandards];
     const zScore = (time - mean) / sigma;
-    
+
     // 정규분포 누적확률 계산
     const cdf = 0.5 * (1 + erf(zScore / Math.sqrt(2)));
     // 러닝에서는 시간이 짧을수록 좋으므로 cdf를 그대로 사용 (시간이 짧으면 상위 퍼센트)
     const percentile = Math.round(cdf * 100);
-    
+
     return {
       zScore,
       percentile: Math.max(0, Math.min(100, percentile))
@@ -277,25 +277,25 @@ export default function Home() {
 
   const NormalDistributionChart = ({ distance, userTime, userGrade }: { distance: string; userTime?: number; userGrade?: string }) => {
     if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return null;
-    
+
     const { mean, sigma, standards } = distanceStandards[distance as keyof typeof distanceStandards];
     const points = generateNormalDistribution(mean, sigma, userTime);
     const maxY = Math.max(...points.map(p => p.y));
-    
+
     // SVG 좌표계로 변환
     const svgWidth = 800;
     const svgHeight = 200;
     const padding = 40;
-    
+
     const xScale = (time: number) => {
       const minTime = mean - 4 * sigma;
       const maxTime = mean + 4 * sigma;
       // X축 반전: 빠른 시간(작은 값)이 오른쪽에 오도록
       return svgWidth - padding - ((time - minTime) / (maxTime - minTime)) * (svgWidth - 2 * padding);
     };
-    
+
     const yScale = (y: number) => svgHeight - padding - (y / maxY) * (svgHeight - 2 * padding);
-    
+
     // 곡선 경로 생성
     const pathData = points.map((point, index) => {
       const x = xScale(point.time);
@@ -330,7 +330,7 @@ export default function Home() {
             fill={gradeColors['D']}
             opacity={0.1}
           />
-          
+
           {/* D+ 급 구간 */}
           <rect
             x={Math.min(xScale(standards['D+']), xScale(standards['C']))}
@@ -340,7 +340,7 @@ export default function Home() {
             fill={gradeColors['D+']}
             opacity={0.1}
           />
-          
+
           {/* C급 구간 */}
           <rect
             x={Math.min(xScale(standards['C']), xScale(standards['C+']))}
@@ -350,7 +350,7 @@ export default function Home() {
             fill={gradeColors['C']}
             opacity={0.1}
           />
-          
+
           {/* C+ 급 구간 */}
           <rect
             x={Math.min(xScale(standards['C+']), xScale(standards['B']))}
@@ -360,7 +360,7 @@ export default function Home() {
             fill={gradeColors['C+']}
             opacity={0.1}
           />
-          
+
           {/* B급 구간 */}
           <rect
             x={Math.min(xScale(standards['B']), xScale(standards['B+']))}
@@ -370,7 +370,7 @@ export default function Home() {
             fill={gradeColors['B']}
             opacity={0.1}
           />
-          
+
           {/* B+ 급 구간 */}
           <rect
             x={Math.min(xScale(standards['B+']), xScale(standards['A']))}
@@ -380,7 +380,7 @@ export default function Home() {
             fill={gradeColors['B+']}
             opacity={0.1}
           />
-          
+
           {/* A급 구간 */}
           <rect
             x={Math.min(xScale(standards['A']), xScale(standards['A+']))}
@@ -390,7 +390,7 @@ export default function Home() {
             fill={gradeColors['A']}
             opacity={0.1}
           />
-          
+
           {/* A+ 급 구간 */}
           <rect
             x={Math.min(xScale(standards['A+']), xScale(standards['S']))}
@@ -400,7 +400,7 @@ export default function Home() {
             fill={gradeColors['A+']}
             opacity={0.1}
           />
-          
+
           {/* S급 구간 */}
           <rect
             x={Math.min(xScale(standards['S']), xScale(standards['SS']))}
@@ -410,7 +410,7 @@ export default function Home() {
             fill={gradeColors['S']}
             opacity={0.1}
           />
-          
+
           {/* SS급 구간 (가장 오른쪽 - 빠른 시간) */}
           <rect
             x={Math.min(xScale(mean - 4 * sigma), xScale(standards['SS']))}
@@ -420,7 +420,7 @@ export default function Home() {
             fill={gradeColors['SS']}
             opacity={0.1}
           />
-          
+
           {/* 정규분포 곡선 */}
           <path
             d={pathData}
@@ -428,7 +428,7 @@ export default function Home() {
             stroke="#1F2937"
             strokeWidth="2"
           />
-          
+
           {/* 사용자 위치 표시 - 등급 색상과 일치 */}
           {userTime && userGrade && (
             <>
@@ -453,7 +453,7 @@ export default function Home() {
               />
             </>
           )}
-          
+
           {/* X축 라벨 - D등급을 SS급과 대칭 위치에 추가 */}
           {Object.entries(standards).filter(([grade]) => grade !== 'D').map(([grade, time]) => (
             <g key={grade}>
@@ -482,10 +482,10 @@ export default function Home() {
               D
             </text>
           </g>
-          
+
 
         </svg>
-        
+
         {/* 범례 - D급부터 SS급까지 순서 */}
         <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm">
           {['D', 'D+', 'C', 'C+', 'B', 'B+', 'A', 'A+', 'S', 'SS'].map((grade) => (
@@ -656,7 +656,7 @@ export default function Home() {
                 </h3>
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} />
-                  
+
                   {/* Statistics Info */}
                   {(() => {
                     const position = getGradePosition(results.totalSeconds, selectedDistance);
@@ -668,7 +668,7 @@ export default function Home() {
                       'C': 'text-orange-500',
                       'D': 'text-gray-500'
                     };
-                    
+
                     return position && (
                       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                         <div className="bg-white p-4 rounded-lg">
@@ -734,7 +734,7 @@ export default function Home() {
                 {Object.entries(gradeDefinitions).map(([grade, info]) => {
                   const standards = distanceStandards[selectedDistance as keyof typeof distanceStandards]?.standards;
                   let timeRange = '';
-                  
+
                   if (standards) {
                     if (grade === 'SS') {
                       timeRange = `${formatTime(standards[grade])} 미만`;
@@ -750,7 +750,7 @@ export default function Home() {
                       timeRange = `${formatTime(currentTime)} ~ ${formatTime(nextTime)}`;
                     }
                   }
-                  
+
                   return (
                     <div 
                       key={grade} 
