@@ -660,9 +660,10 @@ export default function Home() {
           <div className="text-center">
             <div className="flex items-center justify-center mb-2">
               <Timer className="text-3xl text-blue-600 mr-3 h-8 w-8" />
-              <h1 className="text-3xl font-bold text-gray-800">내 러닝 등급은?</h1>
+              <h1 className="text-3xl font-bold text-gray-800">런레벨</h1>
             </div>
-            <p className="text-gray-600 text-lg">당신의 러닝 실력을 측정하고 맞춤 조언을 받아보세요</p>
+            <p className="text-gray-600 text-lg">내 러닝 등급은?</p>
+            <p className="text-gray-600 text-base mt-1">당신의 러닝 실력을 측정하고 맞춤 조언을 받아보세요</p>
           </div>
         </div>
       </header>
@@ -916,10 +917,24 @@ export default function Home() {
         )}
       </main>
 
+      {/* Disclaimer */}
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <Card className="rounded-2xl shadow-lg p-6 bg-blue-50 border-blue-200">
+          <CardContent className="p-0">
+            <div className="text-center">
+              <h4 className="text-lg font-semibold text-blue-800 mb-3">※ 재미로만 확인해주세요!</h4>
+              <p className="text-blue-700 leading-relaxed">
+                본 등급은 수많은 러너들의 평균적인 기록을 바탕으로 한 참고 자료예요. 개인의 나이, 컨디션, 코스 난이도 등 다양한 변수는 담겨있지 않답니다. 숫자 등급보다 중요한 건, 어제의 나보다 성장하는 즐거움이니까요! 😊
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       {/* Footer */}
-      <footer className="bg-white border-t mt-16">
+      <footer className="bg-white border-t mt-8">
         <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-          <p className="text-gray-600">© 2024 내 러닝 등급은? - 당신의 러닝 여정을 응원합니다!</p>
+          <p className="text-gray-600">© 2024 런레벨 - 당신의 러닝 여정을 응원합니다!</p>
         </div>
       </footer>
     </div>
