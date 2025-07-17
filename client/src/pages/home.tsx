@@ -79,55 +79,111 @@ const gradeDefinitions: Record<string, GradeInfo> = {
 // 거리별 기준 시간 (초 단위)
 // 거리별 기준 시간과 통계 정보
 const distanceStandards = {
-  '10km': {
-    name: '10km',
-    mean: 58 * 60 + 34,          // 평균: 58분 34초
-    sigma: 10 * 60 + 36,              // 표준편차: 10분 36초
-    standards: {
-      'SS': 32 * 60,                   // 32분 ~ 35분
-      'S': 35 * 60,                    // 35분 ~ 40분
-      'A+': 40 * 60,                   // 40분 ~ 45분
-      'A': 45 * 60,                    // 45분 ~ 50분
-      'B+': 50 * 60,                   // 50분 ~ 55분
-      'B': 55 * 60,                    // 55분 ~ 1시간
-      'C+': 1 * 3600,                  // 1시간 ~ 1시간 5분
-      'C': 1 * 3600 + 5 * 60,          // 1시간 5분 ~ 1시간 10분
-      'D+': 1 * 3600 + 10 * 60,        // 1시간 10분 ~ 1시간 15분
-      'D': Infinity                     // 1시간 15분 초과
+  male: {
+    '10km': {
+      name: '10km',
+      mean: 58 * 60,              // 평균: 58분 (남성 기준)
+      sigma: 10 * 60,              // 표준편차: 10분
+      standards: {
+        'SS': 40 * 60,             // ~ 40분
+        'S': 44 * 60 + 1,          // 40:01 ~ 44분
+        'A+': 48 * 60 + 1,         // 44:01 ~ 48분
+        'A': 52 * 60 + 1,          // 48:01 ~ 52분
+        'B+': 56 * 60 + 1,         // 52:01 ~ 56분
+        'B': 60 * 60 + 1,          // 56:01 ~ 1시간
+        'C+': 65 * 60 + 1,         // 1:00:01 ~ 1시간 5분
+        'C': 70 * 60 + 1,          // 1:05:01 ~ 1시간 10분
+        'D+': 75 * 60 + 1,         // 1:10:01 ~ 1시간 15분
+        'D': Infinity              // 1시간 15분 초과
+      }
+    },
+    '하프마라톤': {
+      name: '하프마라톤 (21.1km)',
+      mean: 2 * 3600 + 2 * 60,    // 평균: 2시간 2분 (남성 기준)
+      sigma: 20 * 60,              // 표준편차: 20분
+      standards: {
+        'SS': 90 * 60,             // ~ 1시간 30분
+        'S': 98 * 60 + 1,          // 1:30:01 ~ 1시간 38분
+        'A+': 106 * 60 + 1,        // 1:38:01 ~ 1시간 46분
+        'A': 114 * 60 + 1,         // 1:46:01 ~ 1시간 54분
+        'B+': 122 * 60 + 1,        // 1:54:01 ~ 2시간 2분
+        'B': 130 * 60 + 1,         // 2:02:01 ~ 2시간 10분
+        'C+': 140 * 60 + 1,        // 2:10:01 ~ 2시간 20분
+        'C': 150 * 60 + 1,         // 2:20:01 ~ 2시간 30분
+        'D+': 165 * 60 + 1,        // 2:30:01 ~ 2시간 45분
+        'D': Infinity              // 2시간 45분 초과
+      }
+    },
+    '풀마라톤': {
+      name: '풀마라톤 (42.2km)',
+      mean: 4 * 3600 + 14 * 60,   // 평균: 4시간 14분 (남성 기준)
+      sigma: 28 * 60,              // 표준편차: 28분
+      standards: {
+        'SS': 3 * 3600,           // ~ 3시간 (서브-3)
+        'S': 3 * 3600 + 20 * 60 + 1,  // 3:00:01 ~ 3시간 20분
+        'A+': 3 * 3600 + 40 * 60 + 1, // 3:20:01 ~ 3시간 40분
+        'A': 4 * 3600 + 1,        // 3:40:01 ~ 4시간 (서브-4)
+        'B+': 4 * 3600 + 15 * 60 + 1, // 4:00:01 ~ 4시간 15분
+        'B': 4 * 3600 + 30 * 60 + 1,  // 4:15:01 ~ 4시간 30분
+        'C+': 5 * 3600 + 1,       // 4:30:01 ~ 5시간 (서브-5)
+        'C': 5 * 3600 + 30 * 60 + 1,  // 5:00:01 ~ 5시간 30분
+        'D+': 6 * 3600 + 1,       // 5:30:01 ~ 6시간
+        'D': Infinity              // 6시간 초과
+      }
     }
   },
-  '하프마라톤': {
-    name: '하프마라톤 (21.1km)',
-    mean: 125 * 60 + 51,         // 평균: 2시간 5분 51초
-    sigma: 20 * 60,              // 표준편차: 20분
-    standards: {
-      'SS': 1 * 3600 + 10 * 60,     // 1시간 10분 (엘리트)
-      'S': 1 * 3600 + 25 * 60,      // 1시간 25분
-      'A+': 1 * 3600 + 40 * 60,     // 1시간 40분
-      'A': 1 * 3600 + 55 * 60,      // 1시간 55분
-      'B+': 2 * 3600 + 10 * 60,     // 2시간 10분
-      'B': 2 * 3600 + 25 * 60,      // 2시간 25분
-      'C+': 2 * 3600 + 40 * 60,     // 2시간 40분
-      'C': 2 * 3600 + 55 * 60,      // 2시간 55분
-      'D+': 3 * 3600 + 10 * 60,     // 3시간 10분
-      'D': Infinity                  // 3시간 10분 초과
-    }
-  },
-  '풀마라톤': {
-    name: '풀마라톤 (42.2km)',
-    mean: 4 * 3600 + 15 * 60,         // 평균: 4시간 15분 (15,300초)
-    sigma: 28 * 60,              // 표준편차: 28분 (1,680초)
-    standards: {
-      'SS': 2 * 3600 + 30 * 60,     // 2시간 30분 (엘리트)
-      'S': 3 * 3600,                // 3시간 (서브 3)
-      'A+': 3 * 3600 + 30 * 60,     // 3시간 30분
-      'A': 4 * 3600,                // 4시간 (서브 4)
-      'B+': 4 * 3600 + 30 * 60,     // 4시간 30분
-      'B': 5 * 3600,                // 5시간 (서브 5)
-      'C+': 5 * 3600 + 30 * 60,     // 5시간 30분
-      'C': 6 * 3600,                // 6시간 (서브 6)
-      'D+': 6 * 3600 + 30 * 60,     // 6시간 30분
-      'D': Infinity                  // 6시간 30분 초과
+  female: {
+    // 여성 기준은 추후 데이터 제공 시 추가
+    '10km': {
+      name: '10km',
+      mean: 58 * 60,
+      sigma: 10 * 60,
+      standards: {
+        'SS': 40 * 60,
+        'S': 44 * 60 + 1,
+        'A+': 48 * 60 + 1,
+        'A': 52 * 60 + 1,
+        'B+': 56 * 60 + 1,
+        'B': 60 * 60 + 1,
+        'C+': 65 * 60 + 1,
+        'C': 70 * 60 + 1,
+        'D+': 75 * 60 + 1,
+        'D': Infinity
+      }
+    },
+    '하프마라톤': {
+      name: '하프마라톤 (21.1km)',
+      mean: 2 * 3600 + 2 * 60,
+      sigma: 20 * 60,
+      standards: {
+        'SS': 90 * 60,
+        'S': 98 * 60 + 1,
+        'A+': 106 * 60 + 1,
+        'A': 114 * 60 + 1,
+        'B+': 122 * 60 + 1,
+        'B': 130 * 60 + 1,
+        'C+': 140 * 60 + 1,
+        'C': 150 * 60 + 1,
+        'D+': 165 * 60 + 1,
+        'D': Infinity
+      }
+    },
+    '풀마라톤': {
+      name: '풀마라톤 (42.2km)',
+      mean: 4 * 3600 + 14 * 60,
+      sigma: 28 * 60,
+      standards: {
+        'SS': 3 * 3600,
+        'S': 3 * 3600 + 20 * 60 + 1,
+        'A+': 3 * 3600 + 40 * 60 + 1,
+        'A': 4 * 3600 + 1,
+        'B+': 4 * 3600 + 15 * 60 + 1,
+        'B': 4 * 3600 + 30 * 60 + 1,
+        'C+': 5 * 3600 + 1,
+        'C': 5 * 3600 + 30 * 60 + 1,
+        'D+': 6 * 3600 + 1,
+        'D': Infinity
+      }
     }
   }
 };
@@ -146,10 +202,11 @@ export default function Home() {
     gender: string;
   } | null>(null);
 
-  const determineGrade = (totalSeconds: number, distance: string): string => {
-    if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return 'D';
+  const determineGrade = (totalSeconds: number, distance: string, gender: string): string => {
+    if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
+        !distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']]) return 'D';
 
-    const standards = distanceStandards[distance as keyof typeof distanceStandards].standards;
+    const standards = distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']].standards;
 
     if (totalSeconds > standards['D+']) return 'D';
     if (totalSeconds > standards['C']) return 'D+';
@@ -198,9 +255,9 @@ export default function Home() {
       return;
     }
 
-    const grade = determineGrade(totalSeconds, selectedDistance);
+    const grade = determineGrade(totalSeconds, selectedDistance, gender);
     const formattedTime = formatTime(totalSeconds);
-    const distanceName = distanceStandards[selectedDistance as keyof typeof distanceStandards].name;
+    const distanceName = distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']].name;
 
     setResults({
       totalSeconds,
@@ -262,10 +319,11 @@ export default function Home() {
     return sign * y;
   };
 
-  const getGradePosition = (time: number, distance: string) => {
-    if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return null;
+  const getGradePosition = (time: number, distance: string, gender: string) => {
+    if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
+        !distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']]) return null;
 
-    const { mean, sigma } = distanceStandards[distance as keyof typeof distanceStandards];
+    const { mean, sigma } = distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']];
     const zScore = (time - mean) / sigma;
 
     // 정규분포 누적확률 계산
@@ -279,10 +337,11 @@ export default function Home() {
     };
   };
 
-  const NormalDistributionChart = ({ distance, userTime, userGrade }: { distance: string; userTime?: number; userGrade?: string }) => {
-    if (!distance || !distanceStandards[distance as keyof typeof distanceStandards]) return null;
+  const NormalDistributionChart = ({ distance, userTime, userGrade, gender = 'male' }: { distance: string; userTime?: number; userGrade?: string; gender?: string }) => {
+    if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
+        !distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']]) return null;
 
-    const { mean, sigma, standards } = distanceStandards[distance as keyof typeof distanceStandards];
+    const { mean, sigma, standards } = distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']];
     const points = generateNormalDistribution(mean, sigma, userTime);
     const maxY = Math.max(...points.map(p => p.y));
 
@@ -678,11 +737,11 @@ export default function Home() {
                   정규분포 상에서 내 위치
                 </h3>
                 <div className="bg-gray-50 p-6 rounded-xl">
-                  <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} />
+                  <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} gender={results.gender} />
 
                   {/* Statistics Info */}
                   {(() => {
-                    const position = getGradePosition(results.totalSeconds, selectedDistance);
+                    const position = getGradePosition(results.totalSeconds, selectedDistance, results.gender);
                     const gradeColor = {
                       'SS': 'text-purple-500',
                       'S': 'text-yellow-500', 
