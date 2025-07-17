@@ -366,7 +366,7 @@ export default function Home() {
     // 정규분포 누적확률 계산
     const cdf = 0.5 * (1 + erf(zScore / Math.sqrt(2)));
     // 러닝에서는 시간이 짧을수록 좋으므로 cdf를 그대로 사용 (시간이 짧으면 상위 퍼센트)
-    const percentile = Math.round(cdf * 100);
+    const percentile = cdf * 100;
 
     return {
       zScore,
