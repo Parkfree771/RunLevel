@@ -318,6 +318,46 @@ export default function Home() {
     return sign * y;
   };
 
+  const getGradeTimeRange = (grade: string, distance: string, gender: string) => {
+    if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
+        !distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']]) return null;
+
+    const standards = distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']].standards;
+    const gradeOrder = ['SS', 'S', 'A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D'];
+    const currentIndex = gradeOrder.indexOf(grade);
+    
+    if (currentIndex === -1) return null;
+
+    let minTime: number;
+    let maxTime: number;
+
+    if (currentIndex === 0) {
+      // SS급은 상한이 없음 (0부터 SS 기준까지)
+      minTime = 0;
+      maxTime = standards[grade];
+    } else {
+      // 이전 등급의 기준 + 1초부터 현재 등급 기준까지
+      const prevGrade = gradeOrder[currentIndex - 1];
+      minTime = standards[prevGrade] + 1;
+      maxTime = standards[grade];
+    }
+
+    // 무한대인 경우 처리
+    if (maxTime === Infinity) {
+      return {
+        minTime: formatTime(minTime),
+        maxTime: null,
+        range: `${formatTime(minTime)} ~`
+      };
+    }
+
+    return {
+      minTime: formatTime(minTime),
+      maxTime: formatTime(maxTime),
+      range: `${formatTime(minTime)} ~ ${formatTime(maxTime)}`
+    };
+  };
+
   const getGradePosition = (time: number, distance: string, gender: string) => {
     if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
         !distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']]) return null;
@@ -743,6 +783,7 @@ export default function Home() {
                   {/* Statistics Info */}
                   {(() => {
                     const position = getGradePosition(results.totalSeconds, selectedDistance, results.gender);
+                    const timeRange = getGradeTimeRange(results.grade, selectedDistance, results.gender);
                     const gradeColor = {
                       'SS': 'text-purple-500',
                       'S': 'text-yellow-500', 
@@ -753,7 +794,7 @@ export default function Home() {
                     };
 
                     return position && (
-                      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                         <div className="bg-white p-4 rounded-lg">
                           <div className={`text-2xl font-bold ${gradeColor[results.grade as keyof typeof gradeColor] || 'text-purple-600'}`}>
                             {results.grade || 'N/A'}
@@ -766,6 +807,14 @@ export default function Home() {
                           </div>
                           <div className="text-sm text-gray-600">상위 퍼센트</div>
                         </div>
+                        {timeRange && (
+                          <div className="bg-white p-4 rounded-lg">
+                            <div className="text-lg font-bold text-gray-700">
+                              {timeRange.range}
+                            </div>
+                            <div className="text-sm text-gray-600">{results.grade}급 시간 구간</div>
+                          </div>
+                        )}
                       </div>
                     );
                   })()}
