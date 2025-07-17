@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3 } from "lucide-react";
+import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3, User } from "lucide-react";
 
 interface GradeInfo {
   color: string;
@@ -134,6 +134,7 @@ const distanceStandards = {
 
 export default function Home() {
   const [selectedDistance, setSelectedDistance] = useState<string>('');
+  const [gender, setGender] = useState<string>('male'); // 성별 선택 추가
   const [hours, setHours] = useState<string>('');
   const [minutes, setMinutes] = useState<string>('');
   const [seconds, setSeconds] = useState<string>('');
@@ -142,6 +143,7 @@ export default function Home() {
     grade: string;
     formattedTime: string;
     distanceName: string;
+    gender: string;
   } | null>(null);
 
   const determineGrade = (totalSeconds: number, distance: string): string => {
@@ -204,12 +206,14 @@ export default function Home() {
       totalSeconds,
       grade,
       formattedTime,
-      distanceName
+      distanceName,
+      gender
     });
   };
 
   const resetForm = () => {
     setSelectedDistance('');
+    setGender('male');
     setHours('');
     setMinutes('');
     setSeconds('');
@@ -538,6 +542,23 @@ export default function Home() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Gender Selection */}
+                <div>
+                  <Label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <User className="inline text-blue-600 mr-2 h-4 w-4" />
+                    성별
+                  </Label>
+                  <Select value={gender} onValueChange={setGender}>
+                    <SelectTrigger className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 text-lg">
+                      <SelectValue placeholder="성별을 선택하세요" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="male">남성</SelectItem>
+                      <SelectItem value="female">여성</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 {/* Distance Selection */}
                 <div>
                   <Label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -622,7 +643,9 @@ export default function Home() {
             {/* Time Display */}
             <Card className="rounded-2xl shadow-lg p-8 text-center">
               <CardContent className="p-0">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">{results.distanceName} 완주 시간</h3>
+                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+                  {results.gender === 'male' ? '남성' : '여성'} · {results.distanceName} 완주 시간
+                </h3>
                 <div className="text-4xl font-bold text-blue-600 mb-2">{results.formattedTime}</div>
                 <p className="text-gray-600">시:분:초</p>
               </CardContent>
