@@ -295,6 +295,17 @@ export default function Home() {
       distanceName,
       gender
     });
+
+    // 결과 섹션으로 스크롤
+    setTimeout(() => {
+      const resultsElement = document.getElementById('results-section');
+      if (resultsElement) {
+        resultsElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100);
   };
 
   const resetForm = () => {
@@ -765,7 +776,7 @@ export default function Home() {
 
         {/* Results Section */}
         {results && (
-          <div className="space-y-6">
+          <div id="results-section" className="space-y-6">
             {/* Time Display */}
             <Card className="rounded-2xl shadow-lg p-8 text-center">
               <CardContent className="p-0">
