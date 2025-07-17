@@ -739,35 +739,36 @@ export default function Home() {
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen transition-colors">
       {/* Header */}
       <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-4xl mx-auto px-4 py-6">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
           <div className="relative flex items-center justify-center">
             {/* Central content */}
             <div className="text-center">
-              <div className="flex items-center justify-center mb-2">
-                <Timer className="text-3xl text-blue-600 dark:text-blue-400 mr-3 h-8 w-8" />
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white">{t.title}</h1>
+              <div className="flex items-center justify-center mb-1 sm:mb-2">
+                <Timer className="text-blue-600 dark:text-blue-400 mr-2 sm:mr-3 h-6 w-6 sm:h-8 sm:w-8" />
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.title}</h1>
               </div>
-              <p className="text-gray-600 dark:text-gray-300 text-lg">{t.subtitle}</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base md:text-lg">{t.subtitle}</p>
             </div>
             
             {/* Buttons positioned absolutely to the right */}
-            <div className="absolute right-0 flex items-center gap-2">
+            <div className="absolute right-0 flex items-center gap-1 sm:gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={toggleLanguage}
-                className="border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800"
+                className="border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 text-xs sm:text-sm px-2 sm:px-3"
               >
-                <Globe className="h-4 w-4 mr-1" />
-                {language === 'ko' ? 'EN' : '한글'}
+                <Globe className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                <span className="hidden xs:inline">{language === 'ko' ? 'EN' : '한글'}</span>
+                <span className="xs:hidden">{language === 'ko' ? 'EN' : '한'}</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={toggleTheme}
-                className="border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800"
+                className="border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 px-2 sm:px-3"
               >
-                {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                {theme === 'light' ? <Moon className="h-3 w-3 sm:h-4 sm:w-4" /> : <Sun className="h-3 w-3 sm:h-4 sm:w-4" />}
               </Button>
             </div>
           </div>
@@ -775,17 +776,17 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className="max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
         {/* Input Form Section */}
         {!results && (
-          <Card className="rounded-2xl shadow-lg p-8 mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <Card className="rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardContent className="p-0">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{t.inputTitle}</h2>
-                {language === 'ko' && <p className="text-gray-600 dark:text-gray-300">{t.inputDesc}</p>}
+              <div className="text-center mb-6 sm:mb-8">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">{t.inputTitle}</h2>
+                {language === 'ko' && <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">{t.inputDesc}</p>}
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {/* Gender Selection */}
                 <div>
                   <Label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
@@ -793,7 +794,7 @@ export default function Home() {
                     {t.gender}
                   </Label>
                   <Select value={gender} onValueChange={setGender}>
-                    <SelectTrigger className="w-full px-4 py-3 border-2 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
+                    <SelectTrigger className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 text-base sm:text-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
                       <SelectValue placeholder={t.selectGender} />
                     </SelectTrigger>
                     <SelectContent className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
@@ -883,31 +884,31 @@ export default function Home() {
 
         {/* Results Section */}
         {results && (
-          <div id="results-section" className="space-y-6">
+          <div id="results-section" className="space-y-4 sm:space-y-6">
             {/* Time Display */}
-            <Card className="rounded-2xl shadow-lg p-8 text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <Card className="rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardContent className="p-0">
-                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
                   {results.gender === 'male' ? (language === 'ko' ? '남성' : 'Male') : (language === 'ko' ? '여성' : 'Female')} · {results.distanceName} {language === 'ko' ? '완주 시간' : 'Completion Time'}
                 </h3>
-                <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">{results.formattedTime}</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">{results.formattedTime}</div>
                 <p className="text-gray-600 dark:text-gray-400">{language === 'ko' ? '시:분:초' : 'H:M:S'}</p>
               </CardContent>
             </Card>
 
             {/* Grade Display */}
-            <Card className="rounded-2xl shadow-lg p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <Card className="rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardContent className="p-0">
                 <div className="text-center">
-                  <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-6">{t.yourGrade}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4 sm:mb-6">{t.yourGrade}</h3>
                   <div 
-                    className={`inline-block px-8 py-4 rounded-2xl text-6xl font-bold shadow-xl animate-grade-reveal mb-4 ${gradeDefinitions[results.grade].color} text-white ${
+                    className={`inline-block px-6 sm:px-8 py-3 sm:py-4 rounded-2xl text-4xl sm:text-5xl md:text-6xl font-bold shadow-xl animate-grade-reveal mb-3 sm:mb-4 ${gradeDefinitions[results.grade].color} text-white ${
                       ['SS', 'S', 'A+', 'A'].includes(results.grade) ? 'animate-aurora' : ''
                     }`}
                   >
                     {results.grade}
                   </div>
-                  <div className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4 animate-bounce-gentle">
+                  <div className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-4 animate-bounce-gentle px-2">
                     {runnerProfiles[results.gender as keyof typeof runnerProfiles][selectedDistance as keyof typeof runnerProfiles['male']][results.grade]}
                   </div>
                 </div>
@@ -915,14 +916,17 @@ export default function Home() {
             </Card>
 
             {/* Normal Distribution Chart */}
-            <Card className="rounded-2xl shadow-lg p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <Card className="rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardContent className="p-0">
-                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4 flex items-center">
-                  <BarChart3 className="text-blue-500 dark:text-blue-400 mr-3 h-5 w-5" />
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4 flex items-center">
+                  <BarChart3 className="text-blue-500 dark:text-blue-400 mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
                   {t.normalDist}
                 </h3>
-                <div className="bg-gray-50 p-6 rounded-xl">
-                  <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} gender={results.gender} />
+                <div className="bg-gray-50 dark:bg-gray-700 p-3 sm:p-4 md:p-6 rounded-xl">
+                  {/* 모바일에서 차트 크기 확대 */}
+                  <div className="w-full min-h-[250px] sm:min-h-[300px] md:min-h-[350px]">
+                    <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} gender={results.gender} />
+                  </div>
 
                   {/* Statistics Info */}
                   {(() => {
@@ -938,25 +942,25 @@ export default function Home() {
                     };
 
                     return position && (
-                      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                        <div className="bg-white p-4 rounded-lg">
-                          <div className={`text-2xl font-bold ${gradeColor[results.grade as keyof typeof gradeColor] || 'text-purple-600'}`}>
+                      <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-center">
+                        <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg">
+                          <div className={`text-xl sm:text-2xl font-bold ${gradeColor[results.grade as keyof typeof gradeColor] || 'text-purple-600'} dark:${gradeColor[results.grade as keyof typeof gradeColor]?.replace('text-', 'text-') || 'text-purple-400'}`}>
                             {results.grade || 'N/A'}
                           </div>
-                          <div className="text-sm text-gray-600">등급</div>
+                          <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{language === 'ko' ? '등급' : 'Grade'}</div>
                         </div>
-                        <div className="bg-white p-4 rounded-lg">
-                          <div className="text-2xl font-bold text-blue-600">
+                        <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg">
+                          <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
                             {position.percentile.toFixed(2)}%
                           </div>
-                          <div className="text-sm text-gray-600">상위 퍼센트</div>
+                          <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{language === 'ko' ? '상위 퍼센트' : 'Top Percentile'}</div>
                         </div>
                         {timeRange && (
-                          <div className="bg-white p-4 rounded-lg">
-                            <div className="text-lg font-bold text-gray-700">
+                          <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg sm:col-span-2 lg:col-span-1">
+                            <div className="text-base sm:text-lg font-bold text-gray-700 dark:text-gray-200">
                               {timeRange.range}
                             </div>
-                            <div className="text-sm text-gray-600">{results.grade}급 시간 구간</div>
+                            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{results.grade}{language === 'ko' ? '급 시간 구간' : ' Grade Range'}</div>
                           </div>
                         )}
                       </div>
@@ -996,22 +1000,22 @@ export default function Home() {
 
         {/* Grade Information Section */}
         {selectedDistance && (
-          <Card className="rounded-2xl shadow-lg p-8 mt-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <Card className="rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 mt-6 sm:mt-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardContent className="p-0">
-              <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-6 text-center">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4 sm:mb-6 text-center">
                 {gender === 'male' ? (language === 'ko' ? '남성' : 'Male') : (language === 'ko' ? '여성' : 'Female')} · {distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']]?.name} {t.gradeTable}
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
                 {Object.entries(gradeDefinitions).map(([grade, info]) => {
                   const timeRange = getGradeTimeRange(grade, selectedDistance, gender);
 
                   return (
                     <div 
                       key={grade} 
-                      className={`${info.color} p-4 rounded-xl text-center`}
+                      className={`${info.color} p-3 sm:p-4 rounded-xl text-center`}
                     >
-                      <div className="text-2xl font-bold mb-2 text-white">{grade}</div>
-                      <div className="text-sm text-white">
+                      <div className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 text-white">{grade}</div>
+                      <div className="text-xs sm:text-sm text-white">
                         {timeRange ? timeRange.range : ''}
                       </div>
                     </div>
@@ -1024,12 +1028,12 @@ export default function Home() {
       </main>
 
       {/* Disclaimer */}
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <Card className="rounded-2xl shadow-lg p-6 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        <Card className="rounded-2xl shadow-lg p-4 sm:p-6 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
           <CardContent className="p-0">
             <div className="text-center">
-              <h4 className="text-lg font-semibold text-blue-800 dark:text-blue-300 mb-3">{t.disclaimer}</h4>
-              <p className="text-blue-700 dark:text-blue-200 leading-relaxed">
+              <h4 className="text-base sm:text-lg font-semibold text-blue-800 dark:text-blue-300 mb-2 sm:mb-3">{t.disclaimer}</h4>
+              <p className="text-sm sm:text-base text-blue-700 dark:text-blue-200 leading-relaxed">
                 {t.disclaimerText}
               </p>
             </div>
@@ -1038,9 +1042,9 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-8">
-        <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-          <p className="text-gray-600 dark:text-gray-400">{t.footer}</p>
+      <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-6 sm:mt-8">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8 text-center">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{t.footer}</p>
         </div>
       </footer>
     </div>
