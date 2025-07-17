@@ -13,66 +13,96 @@ interface GradeInfo {
   advice: string;
 }
 
-const gradeDefinitions: Record<string, GradeInfo> = {
-  'SS': {
-    color: 'grade-ss',
-    textColor: 'text-white',
-    message: '믿을 수 없는 기록! 당신은 SS급 엘리트 러너입니다! 프로 수준의 실력을 보여주셨네요!',
-    advice: 'SS급 엘리트 러너로서 기록 단축뿐만 아니라 부상 방지를 위한 스트레칭과 코어 운동, 회복 훈련에 집중하세요.'
+const gradeDefinitions = {
+  'SS': { color: 'bg-gradient-to-r from-purple-600 to-purple-400' },
+  'S': { color: 'bg-gradient-to-r from-yellow-500 to-yellow-400' },
+  'A+': { color: 'bg-gradient-to-r from-purple-500 to-pink-400' },
+  'A': { color: 'bg-gradient-to-r from-green-500 to-green-400' },
+  'B+': { color: 'bg-gradient-to-r from-cyan-500 to-blue-400' },
+  'B': { color: 'bg-gradient-to-r from-blue-500 to-blue-400' },
+  'C+': { color: 'bg-gradient-to-r from-yellow-400 to-orange-400' },
+  'C': { color: 'bg-gradient-to-r from-orange-500 to-orange-400' },
+  'D+': { color: 'bg-gradient-to-r from-gray-500 to-gray-400' },
+  'D': { color: 'bg-gradient-to-r from-gray-600 to-gray-500' }
+};
+
+// 거리별, 성별별 러너 특징
+const runnerProfiles = {
+  male: {
+    '10km': {
+      'SS': '엘리트 아마추어. 각종 대회의 연령별 입상을 노리는 최상급자. (상위 1%)',
+      'S': '준 엘리트급 러너. \'서브-40\'을 목표로 꾸준히 훈련하는 상급자. (상위 5%)',
+      'A+': '상급자. 대부분의 동호회에서 에이스 소리를 듣는 실력자. (상위 10%)',
+      'A': '중상급자. 꾸준한 훈련을 통해 50분 벽을 깨는 것을 목표로 하는 러너. (상위 20%)',
+      'B+': '평균 이상. 달리기에 재미를 붙여 꾸준히 기록을 단축해 나가는 러너. (상위 35%)',
+      'B': '평균의 기준. 제시된 **남자 평균(58분)**이 속하는 구간. 가장 많은 러너들이 분포.',
+      'C+': '초심자 탈출. 1시간의 벽을 깨고 달리기의 즐거움을 알아가는 단계.',
+      'C': '초심자. 이제 막 달리기를 시작하여 걷다 뛰다를 반복하며 체력을 기르는 단계.',
+      'D+': '입문자. 아직 달리기가 익숙지 않지만 10km 완주에 도전하는 단계.',
+      'D': '완주에 의의. 기록보다는 10km를 완주했다는 성취감을 목표로 하는 러너.'
+    },
+    '하프마라톤': {
+      'SS': '준 선수급. 각종 대회에서 연령별 최상위권을 다투는 실력.',
+      'S': '상급자. \'서브-100분\'(1시간 40분)을 넘어 더 높은 기록을 목표.',
+      'A+': '중상급자. 꾸준한 훈련량으로 안정적인 페이스 유지가 가능한 러너.',
+      'A': '\'서브-2\' 달성 러너. 많은 아마추어 러너들의 1차 목표를 달성한 실력자.',
+      'B+': '평균 이상. \'서브-2\'를 목표로 꾸준히 훈련하는, 평균(2시간 2분)보다 빠른 러너.',
+      'B': '평균 러너. 하프 코스를 완주할 수 있는 기본적인 체력과 꾸준함을 갖춘 단계.',
+      'C+': '초심자 탈출. 페이스 유지 능력을 기르며 기록 단축의 재미를 알아가는 단계.',
+      'C': '초심자. 걷뛰를 반복하며 하프라는 긴 거리를 처음으로 완주해내는 단계.',
+      'D+': '입문자. 하프 코스 완주를 목표로 도전하는 단계.',
+      'D': '완주에 큰 의의. 긴 시간 자신과의 싸움을 이겨내고 완주한 것에 만족.'
+    },
+    '풀마라톤': {
+      'SS': '꿈의 기록 \'서브-3\'. 아마추어의 한계를 넘어선 최상급자. 존경의 대상.',
+      'S': '초고수. 흔히 \'싱글\'이라 불리며, 대회 시상대 단골인 엘리트 동호인.',
+      'A+': '고수. 안정적인 3시간대 기록을 보유한, 주변에서 인정받는 상급 러너.',
+      'A': '\'서브-4\' 달성. 수많은 노력을 통해 \'마라토너\'라는 칭호가 어울리는 러너.',
+      'B+': '평균 이상. \'서브-4\'를 눈앞에 둔, **대한민국 평균(4시간 14분)**보다 빠른 실력자.',
+      'B': '평균 마라토너. 풀코스를 완주하는 강한 정신력과 체력을 갖춘, 가장 많은 주자.',
+      'C+': '\'서브-5\' 목표. 후반부 페이스 저하를 극복하며 꾸준히 도전하는 러너.',
+      'C': '초심 마라토너. 5시간의 벽을 넘기 위해 자신과 싸우는 강한 의지의 소유자.',
+      'D+': '도전자. 제한 시간 내 완주를 목표로 긴 시간 멈추지 않고 나아가는 러너.',
+      'D': '위대한 완주자. 기록을 떠나, 풀코스를 완주한 것만으로도 박수받아 마땅함.'
+    }
   },
-  'S': {
-    color: 'grade-s',
-    textColor: 'text-white',
-    message: '대단한 기록! S급 상위권 실력입니다! 정말 자랑스러운 결과네요!',
-    advice: 'S급 상위권 러너로서 인터벌 트레이닝과 템포 런을 활용해 더 높은 수준을 목표로 해보세요.'
-  },
-  'A+': {
-    color: 'grade-a-plus',
-    textColor: 'text-white',
-    message: '훌륭한 기록! A+ 상급자 실력입니다! 뛰어난 러닝 능력을 보여주셨네요!',
-    advice: 'A+ 상급자로서 고강도 인터벌 훈련을 통해 한계를 돌파해보세요.'
-  },
-  'A': {
-    color: 'grade-a',
-    textColor: 'text-white',
-    message: '좋은 기록! A급 중상위권 실력을 가지고 계시네요! 꾸준한 노력의 결과입니다!',
-    advice: 'A급 중상위권 러너로서 주 1-2회 속도 훈련을 추가해보세요.'
-  },
-  'B+': {
-    color: 'grade-b-plus',
-    textColor: 'text-white',
-    message: '괜찮은 기록! B+ 중급자 실력입니다! 꾸준히 향상되고 있어요!',
-    advice: 'B+ 중급자로서 페이스 런과 템포 런을 병행하여 지구력을 늘려보세요.'
-  },
-  'B': {
-    color: 'grade-b',
-    textColor: 'text-white',
-    message: '준수한 기록! B급 평균 수준의 러너 실력을 보여주고 계세요!',
-    advice: 'B급 평균 수준에서 일정한 페이스 유지 훈련에 집중하세요.'
-  },
-  'C+': {
-    color: 'grade-c-plus',
-    textColor: 'text-white',
-    message: '발전하고 있어요! C+ 초중급자로 실력이 늘고 있는 단계네요!',
-    advice: 'C+ 초중급자로서 규칙적인 운동 루틴을 만들어 기초 체력을 더욱 향상시켜보세요.'
-  },
-  'C': {
-    color: 'grade-c',
-    textColor: 'text-white',
-    message: '괜찮은 시작! C급으로 러닝에 익숙해지고 있는 단계네요!',
-    advice: 'C급에서 기초 체력 향상에 집중하세요. 걷기와 가벼운 조깅을 번갈아 해보세요.'
-  },
-  'D+': {
-    color: 'grade-d-plus',
-    textColor: 'text-white',
-    message: '괜찮은 성과! D+ 초급자로 꾸준히 노력하고 있어요!',
-    advice: 'D+ 초급자로서 기초 체력을 꾸준히 늘려가세요. 걷기와 가벼운 조깅을 병행해보세요.'
-  },
-  'D': {
-    color: 'grade-f',
-    textColor: 'text-white',
-    message: '첫 걸음을 내디뎠군요! D급이지만 도전하신 것 자체가 멋집니다!',
-    advice: 'D급에서는 우선 완주에 의미를 두세요. 걷기 운동부터 시작해서 체력을 기르세요.'
+  female: {
+    '10km': {
+      'SS': '엘리트 아마추어. 각종 대회에서 연령별 입상이 가능한 최상급 실력.',
+      'S': '상급자. \'서브-50\'을 넘어 더 높은 목표를 향해 훈련하는 실력자.',
+      'A+': '중상급자. 꾸준한 훈련을 통해 안정적으로 50분대 기록을 유지하는 러너.',
+      'A': '\'서브-1시간\' 달성. 많은 여성 러너들의 목표를 달성한, 성실한 러너.',
+      'B+': '평균 이상. \'서브-1시간\'을 목표로 꾸준히 달리는, **평균(1시간 7분)**보다 빠른 러너.',
+      'B': '평균 러너. 10km를 즐겁게 완주할 수 있는 체력을 갖춘, 가장 많은 주자.',
+      'C+': '초심자 탈출. 꾸준함을 바탕으로 기록 단축의 재미를 알아가는 단계.',
+      'C': '초심자. 걷뛰를 반복하며 10km 완주라는 성취를 맛보는 단계.',
+      'D+': '입문자. 달리기에 재미를 붙이며 10km 도전을 시작하는 단계.',
+      'D': '완주에 의의. 기록보다는 건강과 즐거움을 위해 10km를 완주하는 러너.'
+    },
+    '하프마라톤': {
+      'SS': '준 선수급. 대회 시상대를 노리는 최상급 실력의 아마추어 러너.',
+      'S': '상급자. 안정적인 1시간대 기록을 보유한, 주변의 부러움을 사는 실력자.',
+      'A+': '\'서브-2\' 달성. 많은 노력을 통해 2시간의 벽을 깬, 존경받는 러너.',
+      'A': '중상급자. \'서브-2\'를 목표로 꾸준히 훈련하는 성실한 러너.',
+      'B+': '평균 이상. **평균(2시간 22분)**보다 빠른 기록으로, 꾸준함의 힘을 보여주는 러너.',
+      'B': '평균 러너. \'서브-230\'을 달성하며 하프 코스를 즐기는 단계. 가장 많은 주자.',
+      'C+': '초심자 탈출. 페이스 조절 능력을 익히며 더 긴 거리에 대한 자신감을 얻는 단계.',
+      'C': '초심자. 걷뛰를 통해 긴 거리를 완주하며 성취감을 느끼는 단계.',
+      'D+': '도전자. 3시간 이내 완주를 목표로 자신과의 싸움을 이겨내는 러너.',
+      'D': '위대한 완주자. 기록을 넘어 하프 코스를 완주한 것만으로도 대단함.'
+    },
+    '풀마라톤': {
+      'SS': '\'보스턴 퀸(BQ)\'. 보스턴 마라톤 참가 자격을 획득한 최상급 러너.',
+      'S': '초고수. 안정적인 \'서브-4\'를 넘어 더 높은 경지를 추구하는 엘리트 동호인.',
+      'A+': '\'서브-4\' 달성. 수많은 땀과 노력으로 \'철의 여인\' 칭호가 어울리는 러너.',
+      'A': '고수. \'서브-4\'의 문턱에서 꾸준히 도전하는, 강한 정신력의 소유자.',
+      'B+': '평균 이상. **대한민국 평균(4시간 42분)**보다 빠르게 완주하는 실력파 러너.',
+      'B': '평균 마라토너. 풀코스를 완주하는 강인함을 증명한, 가장 많은 주자.',
+      'C+': '\'서브-5\' 달성. 5시간의 벽을 넘으며 자신과의 싸움에서 승리한 러너.',
+      'C': '도전자. 제한 시간 내 완주를 목표로 멈추지 않는 열정을 가진 러너.',
+      'D+': '완주자. 긴 시간의 고통을 이겨내고 결승선을 통과한 강인한 러너.',
+      'D': '위대한 완주자. 기록과 순위를 떠나, 풀코스 완주라는 위대한 도전에 성공.'
+    }
   }
 };
 
@@ -753,16 +783,14 @@ export default function Home() {
                 <div className="text-center">
                   <h3 className="text-xl font-semibold text-gray-700 mb-6">당신의 러닝 등급</h3>
                   <div 
-                    className={`inline-block px-8 py-4 rounded-2xl text-6xl font-bold shadow-xl animate-grade-reveal mb-4 ${gradeDefinitions[results.grade].color} ${gradeDefinitions[results.grade].textColor} ${
+                    className={`inline-block px-8 py-4 rounded-2xl text-6xl font-bold shadow-xl animate-grade-reveal mb-4 ${gradeDefinitions[results.grade].color} text-white ${
                       ['SS', 'S', 'A+', 'A'].includes(results.grade) ? 'animate-aurora' : ''
                     }`}
                   >
                     {results.grade}
                   </div>
                   <div className="text-lg font-medium text-gray-700 mb-4 animate-bounce-gentle">
-                    {results.gender === 'female' && ['SS', 'S', 'A+'].includes(results.grade) 
-                      ? gradeDefinitions[results.grade].message.replace('러너', '여성 러너')
-                      : gradeDefinitions[results.grade].message}
+                    {runnerProfiles[results.gender as keyof typeof runnerProfiles][selectedDistance as keyof typeof runnerProfiles['male']][results.grade]}
                   </div>
                 </div>
               </CardContent>
