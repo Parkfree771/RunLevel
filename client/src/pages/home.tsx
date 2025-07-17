@@ -860,28 +860,11 @@ export default function Home() {
           <Card className="rounded-2xl shadow-lg p-8 mt-8">
             <CardContent className="p-0">
               <h3 className="text-xl font-semibold text-gray-700 mb-6 text-center">
-                {distanceStandards[selectedDistance as keyof typeof distanceStandards]?.name} 등급 기준표
+                {gender === 'male' ? '남성' : '여성'} · {distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']]?.name} 등급 기준표
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {Object.entries(gradeDefinitions).map(([grade, info]) => {
-                  const standards = distanceStandards[selectedDistance as keyof typeof distanceStandards]?.standards;
-                  let timeRange = '';
-
-                  if (standards) {
-                    if (grade === 'SS') {
-                      timeRange = `${formatTime(standards[grade])} 미만`;
-                    } else if (grade === 'D') {
-                      timeRange = `${formatTime(standards['C'])} 초과`;
-                    } else {
-                      const currentTime = standards[grade];
-                      const nextGrade = grade === 'S' ? 'SS' : 
-                                       grade === 'A' ? 'S' :
-                                       grade === 'B' ? 'A' : 
-                                       grade === 'C' ? 'B' : 'C';
-                      const nextTime = standards[nextGrade];
-                      timeRange = `${formatTime(currentTime)} ~ ${formatTime(nextTime)}`;
-                    }
-                  }
+                  const timeRange = getGradeTimeRange(grade, selectedDistance, gender);
 
                   return (
                     <div 
@@ -889,7 +872,9 @@ export default function Home() {
                       className={`${info.color} p-4 rounded-xl text-center`}
                     >
                       <div className="text-2xl font-bold mb-2 text-white">{grade}</div>
-                      <div className="text-sm text-white">{timeRange}</div>
+                      <div className="text-sm text-white">
+                        {timeRange ? timeRange.range : ''}
+                      </div>
                     </div>
                   );
                 })}
