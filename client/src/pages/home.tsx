@@ -740,15 +740,18 @@ export default function Home() {
       {/* Header */}
       <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="text-center flex-1">
+          <div className="relative flex items-center justify-center">
+            {/* Central content */}
+            <div className="text-center">
               <div className="flex items-center justify-center mb-2">
                 <Timer className="text-3xl text-blue-600 dark:text-blue-400 mr-3 h-8 w-8" />
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-white">{t.title}</h1>
               </div>
               <p className="text-gray-600 dark:text-gray-300 text-lg">{t.subtitle}</p>
             </div>
-            <div className="flex items-center gap-2">
+            
+            {/* Buttons positioned absolutely to the right */}
+            <div className="absolute right-0 flex items-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
