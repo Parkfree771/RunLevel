@@ -66,6 +66,7 @@ const runnerProfiles = {
         'C': '5시간의 사투. 그 긴 시간 동안 포기하지 않은 스스로에게 박수를 보낼 자격이 있다.',
         'D+': '움직이는 모든 순간이 감동. 제한 시간을 향해 달려가는, 드라마의 주인공.',
         'D': '42.195km. 숫자만으로도 경이로운 이 거리를 두 발로 완주한 위대한 영웅.'
+      }
     }
   },
   female: {
@@ -184,7 +185,6 @@ const runnerProfiles = {
       }
     }
   }
-}
 };
 
 // 거리별 기준 시간 (초 단위)
@@ -1071,7 +1071,7 @@ export default function Home() {
                     {results.grade}
                   </div>
                   <div className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-4 animate-bounce-gentle px-2">
-                    {runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']][results.grade]}
+                    {runnerProfiles?.[language]?.[results.gender as keyof typeof runnerProfiles[typeof language]]?.[selectedDistance as keyof typeof runnerProfiles[typeof language]['male']]?.[results.grade] || 'Grade description not available'}
                   </div>
                 </div>
               </CardContent>
