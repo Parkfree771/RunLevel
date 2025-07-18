@@ -1,0 +1,72 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- 원형 트랙 배경 -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#2563eb" stroke-width="3" opacity="0.2"/>
+  
+  <!-- 트랙 레인들 -->
+  <circle cx="60" cy="60" r="45" fill="none" stroke="#1e40af" stroke-width="2" opacity="0.3"/>
+  <circle cx="60" cy="60" r="40" fill="none" stroke="#1e40af" stroke-width="2" opacity="0.4"/>
+  <circle cx="60" cy="60" r="35" fill="none" stroke="#1e40af" stroke-width="2" opacity="0.5"/>
+  <circle cx="60" cy="60" r="30" fill="none" stroke="#1e40af" stroke-width="2" opacity="0.6"/>
+  
+  <!-- 중앙 원형 영역 -->
+  <circle cx="60" cy="60" r="25" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+  
+  <!-- 피니시 라인 (세로 줄무늬) -->
+  <g transform="translate(85, 45)">
+    <rect x="0" y="0" width="2" height="6" fill="#1f2937"/>
+    <rect x="2" y="0" width="2" height="6" fill="white"/>
+    <rect x="4" y="0" width="2" height="6" fill="#1f2937"/>
+    <rect x="6" y="0" width="2" height="6" fill="white"/>
+    <rect x="8" y="0" width="2" height="6" fill="#1f2937"/>
+    
+    <rect x="0" y="6" width="2" height="6" fill="white"/>
+    <rect x="2" y="6" width="2" height="6" fill="#1f2937"/>
+    <rect x="4" y="6" width="2" height="6" fill="white"/>
+    <rect x="6" y="6" width="2" height="6" fill="#1f2937"/>
+    <rect x="8" y="6" width="2" height="6" fill="white"/>
+    
+    <rect x="0" y="12" width="2" height="6" fill="#1f2937"/>
+    <rect x="2" y="12" width="2" height="6" fill="white"/>
+    <rect x="4" y="12" width="2" height="6" fill="#1f2937"/>
+    <rect x="6" y="12" width="2" height="6" fill="white"/>
+    <rect x="8" y="12" width="2" height="6" fill="#1f2937"/>
+    
+    <rect x="0" y="18" width="2" height="6" fill="white"/>
+    <rect x="2" y="18" width="2" height="6" fill="#1f2937"/>
+    <rect x="4" y="18" width="2" height="6" fill="white"/>
+    <rect x="6" y="18" width="2" height="6" fill="#1f2937"/>
+    <rect x="8" y="18" width="2" height="6" fill="white"/>
+  </g>
+  
+  <!-- 피니시 플래그 폴대 -->
+  <line x1="85" y1="45" x2="85" y2="75" stroke="#1f2937" stroke-width="1"/>
+  
+  <!-- 중앙 등급 표시 아이콘 -->
+  <g transform="translate(50, 50)">
+    <!-- 메달/등급 심볼 -->
+    <circle cx="10" cy="10" r="8" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
+    <text x="10" y="14" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#92400e">A</text>
+  </g>
+  
+  <!-- 스피드 라인들 (동적 느낌) -->
+  <g opacity="0.4">
+    <path d="M 25 60 Q 35 50, 45 60" stroke="#2563eb" stroke-width="1" fill="none"/>
+    <path d="M 20 65 Q 30 55, 40 65" stroke="#2563eb" stroke-width="1" fill="none"/>
+    <path d="M 75 60 Q 85 50, 95 60" stroke="#2563eb" stroke-width="1" fill="none"/>
+    <path d="M 80 65 Q 90 55, 100 65" stroke="#2563eb" stroke-width="1" fill="none"/>
+  </g>
+  
+  <!-- 러너 실루엣 (작은 크기) -->
+  <g transform="translate(45, 40) scale(0.6)" opacity="0.7">
+    <!-- 머리 -->
+    <circle cx="8" cy="5" r="3" fill="#1f2937"/>
+    <!-- 몸통 -->
+    <rect x="6" y="8" width="4" height="8" rx="2" fill="#1f2937"/>
+    <!-- 팔 (달리는 자세) -->
+    <rect x="3" y="10" width="2" height="4" rx="1" fill="#1f2937" transform="rotate(-20 4 12)"/>
+    <rect x="11" y="10" width="2" height="4" rx="1" fill="#1f2937" transform="rotate(20 12 12)"/>
+    <!-- 다리 (달리는 자세) -->
+    <rect x="5" y="16" width="2" height="6" rx="1" fill="#1f2937" transform="rotate(-15 6 19)"/>
+    <rect x="9" y="16" width="2" height="6" rx="1" fill="#1f2937" transform="rotate(15 10 19)"/>
+  </g>
+</svg>

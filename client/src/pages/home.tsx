@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3, User, Moon, Sun, Globe } from "lucide-react";
+import logoSvg from '@assets/logo.svg';
 
 interface GradeInfo {
   color: string;
@@ -825,7 +826,7 @@ export default function Home() {
             {/* Central content */}
             <div className="text-center">
               <div className="flex items-center justify-center mb-1 sm:mb-2">
-                <Timer className="text-blue-600 dark:text-blue-400 mr-2 sm:mr-3 h-6 w-6 sm:h-8 sm:w-8" />
+                <img src={logoSvg} alt="RunLevel Logo" className="mr-2 sm:mr-3 h-8 w-8 sm:h-10 sm:w-10" />
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.title}</h1>
               </div>
               <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base md:text-lg">{t.subtitle}</p>
