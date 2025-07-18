@@ -634,7 +634,7 @@ export default function Home() {
             height={svgHeight - 2 * padding}
             fill={gradeColors['D']}
             opacity={0.1}
-          /></rect>
+          />
 
           {/* D+ 급 구간 */}
           <rect
@@ -644,7 +644,7 @@ export default function Home() {
             height={svgHeight - 2 * padding}
             fill={gradeColors['D+']}
             opacity={0.1}
-          /></rect>
+          />
 
           {/* C급 구간 */}
           <rect
