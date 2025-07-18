@@ -109,78 +109,78 @@ const runnerProfiles = {
   en: {
     male: {
       '10km': {
-        'SS': 'Elite performer aiming for podium finishes. Top-tier amateur with exceptional skills.',
-        'S': 'Outstanding runner achieving early 40-minute records through countless hours of dedication.',
-        'A+': 'Skilled athlete who easily breaks the symbolic 50-minute barrier, widely recognized talent.',
-        'A': 'Result of consistent training. Veteran runner maintaining stable pace control.',
-        'B+': 'Passionate runner who enjoys the thrill of record improvement, growing stronger than yesterday.',
-        'B': 'Heart of male runners. Healthy enthusiasm with pleasant average performance.',
-        'C+': 'Successful challenger who first broke through personal limits, surpassing the 1-hour mark.',
-        'C': 'Awakening to the joy of running. Heart just started beating with endless possibilities.',
-        'D+': 'Never-give-up spirit. Beginner who first engraved the 10km distance in their body.',
-        'D': 'Victor in the battle with oneself, completing 10km beyond just records.'
+        'SS': 'An elite amateur aiming for the podium in various competitions.',
+        'S': 'An top-tier club runner who achieved a sub-45-minute record with immense effort.',
+        'A+': 'A proven strong runner who easily surpassed the symbolic 50-minute mark.',
+        'A': 'A result of consistent training. A veteran runner who maintains a stable pace.',
+        'B+': 'The stage where the joy of cutting down records begins. A passionate runner growing by beating yesterday\'s self.',
+        'B': 'The very core of male runners in Korea. A pleasant average with healthy passion.',
+        'C+': 'A successful challenger who first broke their limits by surpassing the 1-hour mark.',
+        'C': 'Discovering the joy of running. A runner full of potential, whose heart has just begun to beat.',
+        'D+': 'A never-give-up spirit. A beginner who first ingrained the 10km distance in their body.',
+        'D': 'A runner who completed 10km beyond just the record, winning the fight against themselves.'
       },
       'Half Marathon': {
-        'SS': 'Record beyond amateur limits. Regular winner of age-group competitions.',
-        'S': 'Sub-100-minute completion is basic. Elite runner advancing to higher levels.',
-        'A+': 'Steel heart. Master with overwhelming pace control dominating 21.1km.',
-        'A': 'Skilled runner who made the universal dream of sub-2-hour completion a reality.',
-        'B+': 'Determined runner constantly challenging limits, aiming for 2-hour completion.',
-        'B': 'Qualified half marathoner. Average runner with toughness to run over 2 hours.',
-        'C+': 'Finding personal rhythm. Enjoying the thrill of running in long breathing.',
-        'C': 'Successfully completed 21.1km. Explorer heading to bigger world, realizing joy of long journey.',
-        'D+': 'Challenger who turned fear into courage. 21.1km distance starting to lie under feet.',
-        'D': 'Experience of completion itself is a great medal. You who know the value of patience.'
+        'SS': 'A record beyond amateur limits. A regular on the age-group podium at races.',
+        'S': 'Completing under 100 minutes is basic. A top-tier runner striving for a higher level.',
+        'A+': 'An iron heart. A master with overwhelming pace control ability who dominates 21.1km.',
+        'A': 'A skilled runner who made the common dream of completing within 2 hours a reality.',
+        'B+': 'A persistent runner constantly challenging their limits, aiming for a 2-hour completion.',
+        'B': 'Qualified as a half marathoner. An average runner with the strength to run for over 2 hours.',
+        'C+': 'Finding my own rhythm. A stage of enjoying the exhilaration of running in a long breath.',
+        'C': 'Successful 21.1km completion. An explorer realizing the joy of a long journey and heading towards a bigger world.',
+        'D+': 'A challenger who turned fear into courage. The 21.1km distance now lies beneath their feet.',
+        'D': 'The experience of completion itself is a great medal. You, who know the value of perseverance.'
       },
       'Full Marathon': {
-        'SS': 'Hero of "Sub-3" receiving awe from all amateur runners. Highest level born from talent and effort.',
-        'S': 'Strategist reading entire race, achieving early 3-hour records with superhuman willpower.',
-        'A+': 'Stage of enjoying pain. Race veteran controlling every moment of 42.195km.',
-        'A': '"Sub-4" - True marathoner respected by all who know the weight of this goal.',
-        'B+': 'Runner with shining skills beyond national average, even among full-course runners.',
-        'B': 'Owner of strong mental power. You who completed 42.195km are no longer ordinary.',
-        'C+': 'Successful sub-5-hour completion. Unyielding will overcoming late-race struggles.',
-        'C': '5-hour battle. You deserve applause for not giving up during that long time.',
-        'D+': 'Every moving moment is touching. Protagonist of drama running toward time limit.',
-        'D': '42.195km. Great hero who completed this amazing distance on two feet.'
+        'SS': 'The protagonist of \'Sub-3\', revered by all amateur runners. The highest level born of talent and effort.',
+        'S': 'A strategist who achieves a low 3-hour record with superhuman willpower, reading the entire race.',
+        'A+': 'The stage of enjoying pain. A race veteran controlling every moment of 42.195km.',
+        'A': 'A true marathoner revered by all who know the weight of this goal: \'Sub-4\'.',
+        'B+': 'A runner with skills shining even among full course runners, beyond the Korean average.',
+        'B': 'A possessor of strong willpower. You, who completed 42.195km, are already beyond ordinary.',
+        'C+': 'Successful completion within 5 hours. Unyielding will, overcoming the latter half\'s challenges and breaking limits.',
+        'C': 'A 5-hour struggle. You deserve applause for not giving up during that long time.',
+        'D+': 'Every moment of movement is inspiring. The protagonist of a drama, running towards the time limit.',
+        'D': '42.195km. A great hero who completed this miraculous distance on two feet, a number awe-inspiring in itself.'
       }
     },
     female: {
       '10km': {
-        'SS': 'Regular on competition podium. Top-tier female amateur skill born from talent and effort.',
-        'S': 'Ace easily achieving sub-50-minute records, counted among the best in clubs.',
-        'A+': 'Result of steady effort. Skilled runner gracefully running on track with stable pace.',
-        'A': 'Icon of sincerity and consistency, breaking through the symbolic 1-hour record.',
-        'B+': 'Positive runner aiming for 1-hour completion, creating better self than yesterday.',
-        'B': 'You who truly enjoy running. Most beautiful runner filled with healthy passion.',
-        'C+': 'Joy of growth. Time to meet stronger self blooming in sweat drops.',
-        'C': 'Wonderful challenger gaining confidence to do anything through 10km completion.',
-        'D+': 'Courageous beginner starting 10km challenge while getting hooked on running fun.',
-        'D': 'You who kept promise with yourself. 10km completion medal is irreplaceable treasure.'
+        'SS': 'A regular on the competition podium. Top-tier female amateur skill, born of talent and effort.',
+        'S': 'An ace easily achieving a sub-50-minute record, one of the best in running clubs.',
+        'A+': 'A result cultivated through consistency. A skilled runner gracefully gliding on the course with a stable pace.',
+        'A': 'An icon of diligence and consistency, who broke the symbolic 1-hour mark.',
+        'B+': 'A positive runner striving to be better than yesterday, aiming for a 1-hour completion.',
+        'B': 'You, who truly enjoy running. The most beautiful runner, full of healthy passion.',
+        'C+': 'The joy of growth. A time to meet a stronger self, blossoming amidst sweat drops.',
+        'C': 'A wonderful challenger who gained confidence that anything is possible through 10km completion.',
+        'D+': 'A courageous beginner who starts the 10km challenge, finding joy in running.',
+        'D': 'You, who kept your promise to yourself. The 10km completion medal is a priceless honor.'
       },
       'Half Marathon': {
-        'SS': 'Record inspiring respect. Strong runner possessing both toughness and beauty on track.',
-        'S': 'Outstanding performer with stable 1-hour records, earning envy from surroundings.',
-        'A+': 'Hero who made dream goal reality through much effort - sub-2-hour completion.',
-        'A': 'Sincere runner training self through consistent practice, aiming for 2-hour completion.',
-        'B+': 'Icon of consistency ahead of average, excellently unfolding personal race.',
-        'B': 'Average of most female runners, equipped with toughness to complete half course.',
-        'C+': 'Stage of enjoying pace control, gaining confidence for longer distances.',
-        'C': 'Time to meet true self in long breathing of 21.1km.',
-        'D+': 'Strong challenger overcoming battle with self, aiming for sub-3-hour completion.',
-        'D': 'Completion itself is touching. Protagonist of great drama woven by every step.'
+        'SS': 'A record that commands respect. A strong presence on the course, possessing both strength and grace.',
+        'S': 'An excellent runner with a stable sub-2-hour record, envied by those around them.',
+        'A+': 'The protagonist who made the dream goal of completing within 2 hours a reality through much effort.',
+        'A': 'A diligent runner who trains consistently to strengthen themselves, aiming for a 2-hour completion.',
+        'B+': 'An icon of consistency, outperforming the average and excellently running their own race.',
+        'B': 'The average of many female runners, possessing the toughness to complete a half course.',
+        'C+': 'A stage of feeling the joy of pace control and gaining confidence for longer distances.',
+        'C': 'A time to truly meet yourself in the long breath of 21.1km.',
+        'D+': 'A strong challenger overcoming their struggle, aiming for a sub-3-hour completion.',
+        'D': 'Completion itself is inspiring. You are the protagonist of a great drama created by every step.'
       },
       'Full Marathon': {
-        'SS': 'Object of admiration and respect from all female runners, qualified for Boston Marathon.',
-        'S': 'Elite enthusiast pursuing higher levels beyond "Sub-4".',
-        'A+': '"Sub-4" achievement. True marathoner completing 42.195km with steel-like will.',
-        'A': 'Owner of strong mental power advancing toward great achievement of "Sub-4".',
-        'B+': 'Skill surpassing national female average. Proud result created by your consistency.',
-        'B': 'True runner proving toughness to complete full course, deserving respect.',
-        'C+': 'Successful sub-5-hour completion. Unyielding icon overcoming long battle and breaking limits.',
-        'C': 'Runner deserving self-applause for not giving up during over 5 hours of long time.',
-        'D+': 'You whose every challenging moment is beautiful. Reason why completion medal is more precious than anything.',
-        'D': 'Most beautiful challenger of this era, writing touching drama more valuable than medal weight.'
+        'SS': 'Qualified for the Boston Marathon. The object of admiration and respect for all female runners.',
+        'S': 'An elite club runner striving for a higher level beyond \'Sub-4\'.',
+        'A+': 'Achieved \'Sub-4\'. A true marathoner who completed 42.195km with an iron will.',
+        'A': 'A possessor of strong willpower, progressing towards the great achievement of \'Sub-4\'.',
+        'B+': 'Skill surpassing the Korean female average. A proud result created by your consistency.',
+        'B': 'A true runner who proved the toughness to complete a full course, deserving of respect.',
+        'C+': 'Successful completion within 5 hours. An icon of indomitable will, overcoming a long struggle and breaking limits.',
+        'C': 'A runner who deserves applause for not giving up during a long 5-hour struggle.',
+        'D+': 'You, whose every challenging moment is beautiful. Why the completion medal is more valuable than anything.',
+        'D': 'A true hero of this era, who wrote a dramatic story more valuable than the medal\'s weight by completing 42.195km.'
       }
     }
   }
@@ -1071,10 +1071,7 @@ export default function Home() {
                     {results.grade}
                   </div>
                   <div className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-4 animate-bounce-gentle px-2">
-                    {runnerProfiles[language] && runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]] && runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']] ? 
-                      runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']][results.grade] :
-                      'Grade description not available'
-                    }
+                    {runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']][results.grade]}
                   </div>
                 </div>
               </CardContent>
