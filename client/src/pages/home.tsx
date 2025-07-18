@@ -586,9 +586,9 @@ export default function Home() {
     const padding = 40;
 
     const xScale = (time: number) => {
-      // 차트 범위를 넓혀서 등급 간격 개선
-      const minTime = Math.max(standards['SS'] - 1.2 * sigma, mean - 3.5 * sigma);
-      const maxTime = Math.min(standards['D+'] + 1.2 * sigma, mean + 3.5 * sigma);
+      // 실제 등급 시간 범위를 기준으로 X축 범위 설정
+      const minTime = standards['SS'] - sigma * 0.5; // SS급보다 조금 빠른 시간
+      const maxTime = standards['D+'] + sigma * 0.5; // D+급보다 조금 느린 시간
       // X축 반전: 빠른 시간(작은 값)이 오른쪽에 오도록
       return svgWidth - padding - ((time - minTime) / (maxTime - minTime)) * (svgWidth - 2 * padding);
     };
@@ -628,9 +628,9 @@ export default function Home() {
           {/* 등급 구간 배경 - SS급이 오른쪽 (빠른 시간)에 위치 */}
           {/* D 등급 구간 (가장 왼쪽 - 느린 시간) */}
           <rect
-            x={Math.min(xScale(mean + 3.5 * sigma), xScale(standards['D+'] + (standards['D+'] - standards['C']) * 0.5))}
+            x={xScale(standards['D+'] + sigma * 0.5)}
             y={padding}
-            width={Math.abs(xScale(standards['D+'] + (standards['D+'] - standards['C']) * 0.5) - xScale(mean + 3.5 * sigma))}
+            width={Math.abs(xScale(standards['D+']) - xScale(standards['D+'] + sigma * 0.5))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['D']}
             opacity={0.1}
@@ -777,7 +777,7 @@ export default function Home() {
           {/* D등급 라벨 */}
           <g key="D">
             <text
-              x={xScale(standards['D+'] + (standards['D+'] - standards['C']) * 0.5)}
+              x={xScale(standards['D+'] + sigma * 0.25)}
               y={svgHeight - 10}
               textAnchor="middle"
               fontSize="12"
