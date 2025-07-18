@@ -410,7 +410,7 @@ export default function Home() {
   // 정규분포 그래프를 위한 함수들
   const generateNormalDistribution = (mean: number, sigma: number, userTime?: number) => {
     const points = [];
-    const range = 3 * sigma; // ±3σ 범위로 축소하여 가시성 개선
+    const range = 3.5 * sigma; // ±3.5σ 범위로 확대하여 등급 간격 개선
     const start = mean - range;
     const end = mean + range;
     const step = range / 100;
@@ -498,6 +498,77 @@ export default function Home() {
     };
   };
 
+  const PyramidChart = ({ distance, userTime, userGrade, gender = 'male' }: { distance: string; userTime?: number; userGrade?: string; gender?: string }) => {
+    if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
+        !distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']]) return null;
+
+    const { standards } = distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']];
+    
+    // 피라미드 데이터 (각 등급의 비율)
+    const pyramidData = [
+      { grade: 'SS', percentage: 5, color: 'hsl(270, 100%, 70%)' },
+      { grade: 'S', percentage: 10, color: 'hsl(45, 100%, 50%)' },
+      { grade: 'A+', percentage: 15, color: 'hsl(290, 90%, 60%)' },
+      { grade: 'A', percentage: 20, color: 'hsl(120, 60%, 50%)' },
+      { grade: 'B+', percentage: 20, color: 'hsl(180, 80%, 55%)' },
+      { grade: 'B', percentage: 15, color: 'hsl(210, 80%, 60%)' },
+      { grade: 'C+', percentage: 10, color: 'hsl(50, 90%, 60%)' },
+      { grade: 'C', percentage: 8, color: 'hsl(30, 90%, 65%)' },
+      { grade: 'D+', percentage: 5, color: 'hsl(0, 0%, 60%)' },
+      { grade: 'D', percentage: 2, color: 'hsl(0, 0%, 50%)' }
+    ];
+
+    const maxWidth = 300;
+    const blockHeight = 35;
+    const spacing = 2;
+
+    return (
+      <div className="w-full flex flex-col items-center">
+        <div className="space-y-1">
+          {pyramidData.map((item, index) => {
+            const width = (item.percentage / 20) * maxWidth; // 20%가 최대 너비
+            const isUserGrade = userGrade === item.grade;
+            const timeRange = getGradeTimeRange(item.grade, distance, gender);
+            
+            return (
+              <div key={item.grade} className="flex items-center">
+                <div 
+                  className={`flex items-center justify-center text-white font-bold text-sm rounded transition-all duration-300 ${
+                    isUserGrade ? 'ring-4 ring-blue-500 ring-opacity-50 scale-105' : ''
+                  }`}
+                  style={{ 
+                    backgroundColor: item.color,
+                    width: `${width}px`,
+                    height: `${blockHeight}px`,
+                    minWidth: '80px'
+                  }}
+                >
+                  <span className="text-xs font-bold">{item.grade}</span>
+                </div>
+                <div className="ml-3 text-xs text-gray-600 dark:text-gray-400">
+                  {timeRange?.range || ''}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        
+        {/* 사용자 기록 표시 */}
+        {userTime && userGrade && (
+          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+            <div className="flex items-center gap-2 text-sm">
+              <div 
+                className="w-4 h-4 rounded" 
+                style={{ backgroundColor: pyramidData.find(p => p.grade === userGrade)?.color }}
+              ></div>
+              <span className="font-medium text-gray-700 dark:text-gray-300">{t.myRecord}</span>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const NormalDistributionChart = ({ distance, userTime, userGrade, gender = 'male' }: { distance: string; userTime?: number; userGrade?: string; gender?: string }) => {
     if (!distance || !distanceStandards[gender as keyof typeof distanceStandards] || 
         !distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']]) return null;
@@ -512,9 +583,9 @@ export default function Home() {
     const padding = 40;
 
     const xScale = (time: number) => {
-      // 차트 범위를 좁혀서 가시성 개선: SS급보다 조금 오른쪽부터 D급보다 조금 왼쪽까지
-      const minTime = Math.max(standards['SS'] - 0.5 * sigma, mean - 3 * sigma);
-      const maxTime = Math.min(standards['D+'] + 0.5 * sigma, mean + 3 * sigma);
+      // 차트 범위를 넓혀서 등급 간격 개선
+      const minTime = Math.max(standards['SS'] - 1.2 * sigma, mean - 3.5 * sigma);
+      const maxTime = Math.min(standards['D+'] + 1.2 * sigma, mean + 3.5 * sigma);
       // X축 반전: 빠른 시간(작은 값)이 오른쪽에 오도록
       return svgWidth - padding - ((time - minTime) / (maxTime - minTime)) * (svgWidth - 2 * padding);
     };
@@ -554,9 +625,9 @@ export default function Home() {
           {/* 등급 구간 배경 - SS급이 오른쪽 (빠른 시간)에 위치 */}
           {/* D 등급 구간 (가장 왼쪽 - 느린 시간) */}
           <rect
-            x={Math.min(xScale(mean + 4 * sigma), xScale(standards['D+']))}
+            x={Math.min(xScale(mean + 3.5 * sigma), xScale(standards['D+']))}
             y={padding}
-            width={Math.abs(xScale(standards['D+']) - xScale(mean + 4 * sigma))}
+            width={Math.abs(xScale(standards['D+']) - xScale(mean + 3.5 * sigma))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['D']}
             opacity={0.1}
@@ -644,9 +715,9 @@ export default function Home() {
 
           {/* SS급 구간 (가장 오른쪽 - 빠른 시간) */}
           <rect
-            x={Math.min(xScale(mean - 4 * sigma), xScale(standards['SS']))}
+            x={Math.min(xScale(mean - 3.5 * sigma), xScale(standards['SS']))}
             y={padding}
-            width={Math.abs(xScale(standards['SS']) - xScale(mean - 4 * sigma))}
+            width={Math.abs(xScale(standards['SS']) - xScale(mean - 3.5 * sigma))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['SS']}
             opacity={0.1}
@@ -930,49 +1001,54 @@ export default function Home() {
                   {t.normalDist}
                 </h3>
                 <div className="bg-gray-50 dark:bg-gray-700 p-3 sm:p-4 md:p-6 rounded-xl">
-                  {/* 모바일에서 차트 크기 확대 */}
-                  <div className="w-full min-h-[300px] sm:min-h-[400px] md:min-h-[450px]">
+                  {/* 모바일에서는 피라미드형, PC에서는 정규분포 */}
+                  <div className="block md:hidden">
+                    <PyramidChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} gender={results.gender} />
+                  </div>
+                  <div className="hidden md:block w-full min-h-[400px] md:min-h-[450px]">
                     <NormalDistributionChart distance={selectedDistance} userTime={results.totalSeconds} userGrade={results.grade} gender={results.gender} />
                   </div>
 
-                  {/* Statistics Info */}
-                  {(() => {
-                    const position = getGradePosition(results.totalSeconds, selectedDistance, results.gender);
-                    const timeRange = getGradeTimeRange(results.grade, selectedDistance, results.gender);
-                    const gradeColor = {
-                      'SS': 'text-purple-500',
-                      'S': 'text-yellow-500', 
-                      'A': 'text-green-500',
-                      'B': 'text-blue-500',
-                      'C': 'text-orange-500',
-                      'D': 'text-gray-500'
-                    };
+                  {/* Statistics Info - PC에서만 표시 */}
+                  <div className="hidden md:block">
+                    {(() => {
+                      const position = getGradePosition(results.totalSeconds, selectedDistance, results.gender);
+                      const timeRange = getGradeTimeRange(results.grade, selectedDistance, results.gender);
+                      const gradeColor = {
+                        'SS': 'text-purple-500',
+                        'S': 'text-yellow-500', 
+                        'A': 'text-green-500',
+                        'B': 'text-blue-500',
+                        'C': 'text-orange-500',
+                        'D': 'text-gray-500'
+                      };
 
-                    return position && (
-                      <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-center">
-                        <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg">
-                          <div className={`text-xl sm:text-2xl font-bold ${gradeColor[results.grade as keyof typeof gradeColor] || 'text-purple-600'} dark:${gradeColor[results.grade as keyof typeof gradeColor]?.replace('text-', 'text-') || 'text-purple-400'}`}>
-                            {results.grade || 'N/A'}
-                          </div>
-                          <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{language === 'ko' ? '등급' : 'Grade'}</div>
-                        </div>
-                        <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg">
-                          <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
-                            {position.percentile.toFixed(2)}%
-                          </div>
-                          <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{language === 'ko' ? '상위 퍼센트' : 'Top Percentile'}</div>
-                        </div>
-                        {timeRange && (
-                          <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg sm:col-span-2 lg:col-span-1">
-                            <div className="text-base sm:text-lg font-bold text-gray-700 dark:text-gray-200">
-                              {timeRange.range}
+                      return position && (
+                        <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-center">
+                          <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg">
+                            <div className={`text-xl sm:text-2xl font-bold ${gradeColor[results.grade as keyof typeof gradeColor] || 'text-purple-600'} dark:${gradeColor[results.grade as keyof typeof gradeColor]?.replace('text-', 'text-') || 'text-purple-400'}`}>
+                              {results.grade || 'N/A'}
                             </div>
-                            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{results.grade}{language === 'ko' ? '급 시간 구간' : ' Grade Range'}</div>
+                            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{language === 'ko' ? '등급' : 'Grade'}</div>
                           </div>
-                        )}
-                      </div>
-                    );
-                  })()}
+                          <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg">
+                            <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
+                              {position.percentile.toFixed(2)}%
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{language === 'ko' ? '상위 퍼센트' : 'Top Percentile'}</div>
+                          </div>
+                          {timeRange && (
+                            <div className="bg-white dark:bg-gray-600 p-3 sm:p-4 rounded-lg sm:col-span-2 lg:col-span-1">
+                              <div className="text-base sm:text-lg font-bold text-gray-700 dark:text-gray-200">
+                                {timeRange.range}
+                              </div>
+                              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{results.grade}{language === 'ko' ? '급 시간 구간' : ' Grade Range'}</div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
                 </div>
               </CardContent>
             </Card>
