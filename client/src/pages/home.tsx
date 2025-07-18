@@ -718,9 +718,9 @@ export default function Home() {
 
           {/* SS급 구간 (가장 오른쪽 - 빠른 시간) */}
           <rect
-            x={Math.min(xScale(mean - 3.5 * sigma), xScale(standards['SS']))}
+            x={xScale(standards['SS'])}
             y={padding}
-            width={Math.abs(xScale(standards['SS']) - xScale(mean - 3.5 * sigma))}
+            width={Math.abs((svgWidth - padding) - xScale(standards['SS']))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['SS']}
             opacity={0.1}
