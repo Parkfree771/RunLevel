@@ -184,7 +184,7 @@ const runnerProfiles = {
       }
     }
   }
-  }
+}
 };
 
 // 거리별 기준 시간 (초 단위)
