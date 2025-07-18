@@ -456,10 +456,13 @@ export default function Home() {
         range: `~ ${formatTime(standards[grade])}`
       };
     } else if (grade === 'D') {
+      // D등급의 시간 범위를 더 명확하게 표시
+      const dStartTime = standards['D+'] + 1;
+      const dEndTime = dStartTime + (standards['D+'] - standards['C']) * 0.8; // 적당한 범위 설정
       return {
-        minTime: formatTime(standards['D+'] + 1),
-        maxTime: null,
-        range: `${formatTime(standards['D+'] + 1)} ~`
+        minTime: formatTime(dStartTime),
+        maxTime: formatTime(dEndTime),
+        range: `${formatTime(dStartTime)} ~`
       };
     } else {
       // 다른 등급들은 이전 등급 + 1초부터 현재 등급까지
@@ -625,13 +628,13 @@ export default function Home() {
           {/* 등급 구간 배경 - SS급이 오른쪽 (빠른 시간)에 위치 */}
           {/* D 등급 구간 (가장 왼쪽 - 느린 시간) */}
           <rect
-            x={Math.min(xScale(mean + 3.5 * sigma), xScale(standards['D+']))}
+            x={Math.min(xScale(mean + 3.5 * sigma), xScale(standards['D+'] + (standards['D+'] - standards['C']) * 0.5))}
             y={padding}
-            width={Math.abs(xScale(standards['D+']) - xScale(mean + 3.5 * sigma))}
+            width={Math.abs(xScale(standards['D+'] + (standards['D+'] - standards['C']) * 0.5) - xScale(mean + 3.5 * sigma))}
             height={svgHeight - 2 * padding}
             fill={gradeColors['D']}
             opacity={0.1}
-          />
+          /></rect>
 
           {/* D+ 급 구간 */}
           <rect
@@ -641,7 +644,7 @@ export default function Home() {
             height={svgHeight - 2 * padding}
             fill={gradeColors['D+']}
             opacity={0.1}
-          />
+          /></rect>
 
           {/* C급 구간 */}
           <rect
@@ -771,10 +774,10 @@ export default function Home() {
               </text>
             </g>
           ))}
-          {/* D등급을 SS급과 대칭 위치에 표시 */}
+          {/* D등급 라벨 */}
           <g key="D">
             <text
-              x={xScale(mean + (mean - standards['SS']))}
+              x={xScale(standards['D+'] + (standards['D+'] - standards['C']) * 0.5)}
               y={svgHeight - 10}
               textAnchor="middle"
               fontSize="12"
