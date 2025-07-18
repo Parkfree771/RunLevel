@@ -628,9 +628,9 @@ export default function Home() {
           {/* 등급 구간 배경 - SS급이 오른쪽 (빠른 시간)에 위치 */}
           {/* D 등급 구간 (가장 왼쪽 - 느린 시간) */}
           <rect
-            x={xScale(standards['D+'] + sigma * 0.5)}
+            x={padding}
             y={padding}
-            width={Math.abs(xScale(standards['D+']) - xScale(standards['D+'] + sigma * 0.5))}
+            width={Math.abs(xScale(standards['D+']) - padding)}
             height={svgHeight - 2 * padding}
             fill={gradeColors['D']}
             opacity={0.1}
@@ -777,7 +777,7 @@ export default function Home() {
           {/* D등급 라벨 */}
           <g key="D">
             <text
-              x={xScale(standards['D+'] + sigma * 0.25)}
+              x={(padding + xScale(standards['D+'])) / 2}
               y={svgHeight - 10}
               textAnchor="middle"
               fontSize="12"
