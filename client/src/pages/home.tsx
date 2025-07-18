@@ -29,42 +29,43 @@ const gradeDefinitions = {
 
 // 거리별, 성별별 러너 특징 (ver. Natural Pride)
 const runnerProfiles = {
-  male: {
-    '10km': {
-      'SS': '각종 대회의 시상대를 노리는, 아마추어 최상위 그룹의 실력자.',
-      'S': '수많은 땀으로 40분 초반대 기록을 달성한, 동호회 최상급 러너.',
-      'A+': '50분이라는 상징적인 기록을 가뿐히 넘어선, 누구나 인정하는 실력파.',
-      'A': '꾸준한 훈련이 만들어낸 결과. 안정적인 페이스를 유지하는 베테랑 러너.',
-      'B+': '기록 단축의 재미를 아는 단계. 어제의 나를 이기며 성장하는 열정적인 주자.',
-      'B': '대한민국 남성 러너의 가장 중심. 건강한 열정을 가진 기분 좋은 평균.',
-      'C+': '1시간의 기록을 넘어선, 자신의 한계를 처음으로 돌파한 성공적인 도전자.',
-      'C': '달리기의 즐거움에 눈뜨다. 이제 막 심장이 뛰기 시작한, 가능성으로 가득 찬 러너.',
-      'D+': '포기하지 않는 마음. 10km라는 거리를 처음으로 몸에 새긴 입문자.',
-      'D': '기록을 넘어 10km를 완주한, 자신과의 싸움에서 승리한 주자.'
-    },
-    '하프마라톤': {
-      'SS': '아마추어의 한계를 넘어선 기록. 대회 연령별 시상식의 단골 주인공.',
-      'S': '100분 이내 완주는 기본. 더 높은 경지를 향해 나아가는 최상급 러너.',
-      'A+': '강철 심장. 21.1km를 지배하는 압도적인 페이스 컨트롤 능력을 갖춘 고수.',
-      'A': '2시간 이내 완주라는, 러너들의 보편적인 꿈을 현실로 만든 실력자.',
-      'B+': '2시간 완주를 목표로, 자신의 한계에 끊임없이 도전하는 집념의 러너.',
-      'B': '하프 마라토너라는 이름의 자격. 2시간 넘게 뛸 수 있는 강인함을 갖춘 평균의 주자.',
-      'C+': '나만의 리듬을 찾아서. 긴 호흡 속에서 달리기의 희열을 만끽하는 단계.',
-      'C': '21.1km 완주 성공. 긴 여정의 즐거움을 깨닫고 더 큰 세상을 향해 나아가는 탐험가.',
-      'D+': '두려움을 용기로 바꾼 도전자. 21.1km의 거리가 발아래 놓이기 시작했다.',
-      'D': '완주의 경험 자체가 위대한 훈장. 인내의 가치를 아는 당신.'
-    },
-    '풀마라톤': {
-      'SS': '모든 아마추어 러너의 경외를 받는 \'서브-3\'의 주인공. 재능과 노력이 빚어낸 최고의 경지.',
-      'S': '초인적인 의지력으로 3시간 초반의 기록을 달성하는, 레이스 전체를 읽는 전략가.',
-      'A+': '고통을 즐기는 단계. 42.195km의 모든 순간을 통제하는 레이스의 베테랑.',
-      'A': '\'서브-4\', 이 목표의 무게를 아는 모든 이들의 존경을 받는 진정한 마라토너.',
-      'B+': '대한민국 평균을 넘어, 풀코스 주자들 사이에서도 빛나는 실력을 갖춘 러너.',
-      'B': '강인한 정신력의 소유자. 42.195km를 완주한 당신은 이미 보통 사람이 아니다.',
-      'C+': '5시간 이내 완주 성공. 후반의 고비를 이겨내고 한계를 돌파한, 불굴의 의지.',
-      'C': '5시간의 사투. 그 긴 시간 동안 포기하지 않은 스스로에게 박수를 보낼 자격이 있다.',
-      'D+': '움직이는 모든 순간이 감동. 제한 시간을 향해 달려가는, 드라마의 주인공.',
-      'D': '42.195km. 숫자만으로도 경이로운 이 거리를 두 발로 완주한 위대한 영웅.'
+  ko: {
+    male: {
+      '10km': {
+        'SS': '각종 대회의 시상대를 노리는, 아마추어 최상위 그룹의 실력자.',
+        'S': '수많은 땀으로 40분 초반대 기록을 달성한, 동호회 최상급 러너.',
+        'A+': '50분이라는 상징적인 기록을 가뿐히 넘어선, 누구나 인정하는 실력파.',
+        'A': '꾸준한 훈련이 만들어낸 결과. 안정적인 페이스를 유지하는 베테랑 러너.',
+        'B+': '기록 단축의 재미를 아는 단계. 어제의 나를 이기며 성장하는 열정적인 주자.',
+        'B': '대한민국 남성 러너의 가장 중심. 건강한 열정을 가진 기분 좋은 평균.',
+        'C+': '1시간의 기록을 넘어선, 자신의 한계를 처음으로 돌파한 성공적인 도전자.',
+        'C': '달리기의 즐거움에 눈뜨다. 이제 막 심장이 뛰기 시작한, 가능성으로 가득 찬 러너.',
+        'D+': '포기하지 않는 마음. 10km라는 거리를 처음으로 몸에 새긴 입문자.',
+        'D': '기록을 넘어 10km를 완주한, 자신과의 싸움에서 승리한 주자.'
+      },
+      'Half Marathon': {
+        'SS': '아마추어의 한계를 넘어선 기록. 대회 연령별 시상식의 단골 주인공.',
+        'S': '100분 이내 완주는 기본. 더 높은 경지를 향해 나아가는 최상급 러너.',
+        'A+': '강철 심장. 21.1km를 지배하는 압도적인 페이스 컨트롤 능력을 갖춘 고수.',
+        'A': '2시간 이내 완주라는, 러너들의 보편적인 꿈을 현실로 만든 실력자.',
+        'B+': '2시간 완주를 목표로, 자신의 한계에 끊임없이 도전하는 집념의 러너.',
+        'B': '하프 마라토너라는 이름의 자격. 2시간 넘게 뛸 수 있는 강인함을 갖춘 평균의 주자.',
+        'C+': '나만의 리듬을 찾아서. 긴 호흡 속에서 달리기의 희열을 만끽하는 단계.',
+        'C': '21.1km 완주 성공. 긴 여정의 즐거움을 깨닫고 더 큰 세상을 향해 나아가는 탐험가.',
+        'D+': '두려움을 용기로 바꾼 도전자. 21.1km의 거리가 발아래 놓이기 시작했다.',
+        'D': '완주의 경험 자체가 위대한 훈장. 인내의 가치를 아는 당신.'
+      },
+      'Full Marathon': {
+        'SS': '모든 아마추어 러너의 경외를 받는 \'서브-3\'의 주인공. 재능과 노력이 빚어낸 최고의 경지.',
+        'S': '초인적인 의지력으로 3시간 초반의 기록을 달성하는, 레이스 전체를 읽는 전략가.',
+        'A+': '고통을 즐기는 단계. 42.195km의 모든 순간을 통제하는 레이스의 베테랑.',
+        'A': '\'서브-4\', 이 목표의 무게를 아는 모든 이들의 존경을 받는 진정한 마라토너.',
+        'B+': '대한민국 평균을 넘어, 풀코스 주자들 사이에서도 빛나는 실력을 갖춘 러너.',
+        'B': '강인한 정신력의 소유자. 42.195km를 완주한 당신은 이미 보통 사람이 아니다.',
+        'C+': '5시간 이내 완주 성공. 후반의 고비를 이겨내고 한계를 돌파한, 불굴의 의지.',
+        'C': '5시간의 사투. 그 긴 시간 동안 포기하지 않은 스스로에게 박수를 보낼 자격이 있다.',
+        'D+': '움직이는 모든 순간이 감동. 제한 시간을 향해 달려가는, 드라마의 주인공.',
+        'D': '42.195km. 숫자만으로도 경이로운 이 거리를 두 발로 완주한 위대한 영웅.'
     }
   },
   female: {
@@ -80,7 +81,7 @@ const runnerProfiles = {
       'D+': '달리기에 재미를 붙이며 10km 도전을 시작하는, 용기 있는 입문자.',
       'D': '자신과의 약속을 지킨 당신. 10km 완주 메달은 그 무엇과도 바꿀 수 없는 훈장.'
     },
-    '하프마라톤': {
+    'Half Marathon': {
       'SS': '존경을 부르는 기록. 강인함과 아름다움을 모두 갖춘, 주로 위의 강자.',
       'S': '안정적인 1시간대 기록을 보유한, 주변의 부러움을 사는 뛰어난 실력자.',
       'A+': '2시간 이내 완주라는, 많은 노력을 통해 꿈의 목표를 현실로 만든 주인공.',
@@ -92,7 +93,7 @@ const runnerProfiles = {
       'D+': '3시간 이내 완주를 목표로, 자신과의 싸움을 이겨내는 강인한 도전자.',
       'D': '완주, 그 자체가 감동. 모든 걸음이 모여 만들어낸 위대한 드라마의 주인공.'
     },
-    '풀마라톤': {
+    'Full Marathon': {
       'SS': '보스턴 마라톤 참가 자격을 획득한, 모든 여성 러너들의 선망과 존경의 대상.',
       'S': '\'서브-4\'를 넘어, 더 높은 경지를 추구하는 엘리트 동호인.',
       'A+': '\'서브-4\' 달성. 강철같은 의지로 42.195km를 완주한 진정한 마라토너.',
@@ -104,6 +105,85 @@ const runnerProfiles = {
       'D+': '도전하는 모든 순간이 아름다운 당신. 완주 메달이 그 무엇보다 값진 이유.',
       'D': '메달의 무게보다 더 값진 감동의 드라마를 쓴, 이 시대의 가장 아름다운 도전자.'
     }
+  },
+  en: {
+    male: {
+      '10km': {
+        'SS': 'Elite performer aiming for podium finishes. Top-tier amateur with exceptional skills.',
+        'S': 'Outstanding runner achieving early 40-minute records through countless hours of dedication.',
+        'A+': 'Skilled athlete who easily breaks the symbolic 50-minute barrier, widely recognized talent.',
+        'A': 'Result of consistent training. Veteran runner maintaining stable pace control.',
+        'B+': 'Passionate runner who enjoys the thrill of record improvement, growing stronger than yesterday.',
+        'B': 'Heart of male runners. Healthy enthusiasm with pleasant average performance.',
+        'C+': 'Successful challenger who first broke through personal limits, surpassing the 1-hour mark.',
+        'C': 'Awakening to the joy of running. Heart just started beating with endless possibilities.',
+        'D+': 'Never-give-up spirit. Beginner who first engraved the 10km distance in their body.',
+        'D': 'Victor in the battle with oneself, completing 10km beyond just records.'
+      },
+      'Half Marathon': {
+        'SS': 'Record beyond amateur limits. Regular winner of age-group competitions.',
+        'S': 'Sub-100-minute completion is basic. Elite runner advancing to higher levels.',
+        'A+': 'Steel heart. Master with overwhelming pace control dominating 21.1km.',
+        'A': 'Skilled runner who made the universal dream of sub-2-hour completion a reality.',
+        'B+': 'Determined runner constantly challenging limits, aiming for 2-hour completion.',
+        'B': 'Qualified half marathoner. Average runner with toughness to run over 2 hours.',
+        'C+': 'Finding personal rhythm. Enjoying the thrill of running in long breathing.',
+        'C': 'Successfully completed 21.1km. Explorer heading to bigger world, realizing joy of long journey.',
+        'D+': 'Challenger who turned fear into courage. 21.1km distance starting to lie under feet.',
+        'D': 'Experience of completion itself is a great medal. You who know the value of patience.'
+      },
+      'Full Marathon': {
+        'SS': 'Hero of "Sub-3" receiving awe from all amateur runners. Highest level born from talent and effort.',
+        'S': 'Strategist reading entire race, achieving early 3-hour records with superhuman willpower.',
+        'A+': 'Stage of enjoying pain. Race veteran controlling every moment of 42.195km.',
+        'A': '"Sub-4" - True marathoner respected by all who know the weight of this goal.',
+        'B+': 'Runner with shining skills beyond national average, even among full-course runners.',
+        'B': 'Owner of strong mental power. You who completed 42.195km are no longer ordinary.',
+        'C+': 'Successful sub-5-hour completion. Unyielding will overcoming late-race struggles.',
+        'C': '5-hour battle. You deserve applause for not giving up during that long time.',
+        'D+': 'Every moving moment is touching. Protagonist of drama running toward time limit.',
+        'D': '42.195km. Great hero who completed this amazing distance on two feet.'
+      }
+    },
+    female: {
+      '10km': {
+        'SS': 'Regular on competition podium. Top-tier female amateur skill born from talent and effort.',
+        'S': 'Ace easily achieving sub-50-minute records, counted among the best in clubs.',
+        'A+': 'Result of steady effort. Skilled runner gracefully running on track with stable pace.',
+        'A': 'Icon of sincerity and consistency, breaking through the symbolic 1-hour record.',
+        'B+': 'Positive runner aiming for 1-hour completion, creating better self than yesterday.',
+        'B': 'You who truly enjoy running. Most beautiful runner filled with healthy passion.',
+        'C+': 'Joy of growth. Time to meet stronger self blooming in sweat drops.',
+        'C': 'Wonderful challenger gaining confidence to do anything through 10km completion.',
+        'D+': 'Courageous beginner starting 10km challenge while getting hooked on running fun.',
+        'D': 'You who kept promise with yourself. 10km completion medal is irreplaceable treasure.'
+      },
+      'Half Marathon': {
+        'SS': 'Record inspiring respect. Strong runner possessing both toughness and beauty on track.',
+        'S': 'Outstanding performer with stable 1-hour records, earning envy from surroundings.',
+        'A+': 'Hero who made dream goal reality through much effort - sub-2-hour completion.',
+        'A': 'Sincere runner training self through consistent practice, aiming for 2-hour completion.',
+        'B+': 'Icon of consistency ahead of average, excellently unfolding personal race.',
+        'B': 'Average of most female runners, equipped with toughness to complete half course.',
+        'C+': 'Stage of enjoying pace control, gaining confidence for longer distances.',
+        'C': 'Time to meet true self in long breathing of 21.1km.',
+        'D+': 'Strong challenger overcoming battle with self, aiming for sub-3-hour completion.',
+        'D': 'Completion itself is touching. Protagonist of great drama woven by every step.'
+      },
+      'Full Marathon': {
+        'SS': 'Object of admiration and respect from all female runners, qualified for Boston Marathon.',
+        'S': 'Elite enthusiast pursuing higher levels beyond "Sub-4".',
+        'A+': '"Sub-4" achievement. True marathoner completing 42.195km with steel-like will.',
+        'A': 'Owner of strong mental power advancing toward great achievement of "Sub-4".',
+        'B+': 'Skill surpassing national female average. Proud result created by your consistency.',
+        'B': 'True runner proving toughness to complete full course, deserving respect.',
+        'C+': 'Successful sub-5-hour completion. Unyielding icon overcoming long battle and breaking limits.',
+        'C': 'Runner deserving self-applause for not giving up during over 5 hours of long time.',
+        'D+': 'You whose every challenging moment is beautiful. Reason why completion medal is more precious than anything.',
+        'D': 'Most beautiful challenger of this era, writing touching drama more valuable than medal weight.'
+      }
+    }
+  }
   }
 };
 
@@ -112,7 +192,7 @@ const runnerProfiles = {
 const distanceStandards = {
   male: {
     '10km': {
-      name: '10km',
+      name: { ko: '10km', en: '10km' },
       mean: 58 * 60,              // 평균: 58분 (남성 기준)
       sigma: 10 * 60,              // 표준편차: 10분
       standards: {
@@ -128,8 +208,8 @@ const distanceStandards = {
         'D': Infinity              // 1시간 15분 초과
       }
     },
-    '하프마라톤': {
-      name: '하프마라톤 (21.1km)',
+    'Half Marathon': {
+      name: { ko: '하프마라톤 (21.1km)', en: 'Half Marathon (21.1km)' },
       mean: 2 * 3600 + 2 * 60,    // 평균: 2시간 2분 (남성 기준)
       sigma: 20 * 60,              // 표준편차: 20분
       standards: {
@@ -145,8 +225,8 @@ const distanceStandards = {
         'D': Infinity              // 2시간 45분 초과
       }
     },
-    '풀마라톤': {
-      name: '풀마라톤 (42.2km)',
+    'Full Marathon': {
+      name: { ko: '풀마라톤 (42.2km)', en: 'Full Marathon (42.2km)' },
       mean: 4 * 3600 + 14 * 60,   // 평균: 4시간 14분 (남성 기준)
       sigma: 28 * 60,              // 표준편차: 28분
       standards: {
@@ -165,7 +245,7 @@ const distanceStandards = {
   },
   female: {
     '10km': {
-      name: '10km',
+      name: { ko: '10km', en: '10km' },
       mean: 67 * 60,              // 평균: 1시간 7분 (여성 기준)
       sigma: 12 * 60,              // 표준편차: 12분
       standards: {
@@ -181,8 +261,8 @@ const distanceStandards = {
         'D': Infinity              // 1시간 30분 초과
       }
     },
-    '하프마라톤': {
-      name: '하프마라톤 (21.1km)',
+    'Half Marathon': {
+      name: { ko: '하프마라톤 (21.1km)', en: 'Half Marathon (21.1km)' },
       mean: 2 * 3600 + 22 * 60,   // 평균: 2시간 22분 (여성 기준)
       sigma: 25 * 60,              // 표준편차: 25분
       standards: {
@@ -198,8 +278,8 @@ const distanceStandards = {
         'D': Infinity              // 3시간 초과
       }
     },
-    '풀마라톤': {
-      name: '풀마라톤 (42.2km)',
+    'Full Marathon': {
+      name: { ko: '풀마라톤 (42.2km)', en: 'Full Marathon (42.2km)' },
       mean: 4 * 3600 + 42 * 60,   // 평균: 4시간 42분 (여성 기준)
       sigma: 32 * 60,              // 표준편차: 32분
       standards: {
@@ -370,7 +450,7 @@ export default function Home() {
 
     const grade = determineGrade(totalSeconds, selectedDistance, gender);
     const formattedTime = formatTime(totalSeconds);
-    const distanceName = distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']].name;
+    const distanceName = distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']].name[language];
 
     setResults({
       totalSeconds,
@@ -898,8 +978,8 @@ export default function Home() {
                     </SelectTrigger>
                     <SelectContent className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600">
                       <SelectItem value="10km" className="text-gray-900 dark:text-white">10km</SelectItem>
-                      <SelectItem value="하프마라톤" className="text-gray-900 dark:text-white">{language === 'ko' ? '하프마라톤 (21.1km)' : 'Half Marathon (21.1km)'}</SelectItem>
-                      <SelectItem value="풀마라톤" className="text-gray-900 dark:text-white">{language === 'ko' ? '풀마라톤 (42.2km)' : 'Full Marathon (42.2km)'}</SelectItem>
+                      <SelectItem value="Half Marathon" className="text-gray-900 dark:text-white">{language === 'ko' ? '하프마라톤 (21.1km)' : 'Half Marathon (21.1km)'}</SelectItem>
+                      <SelectItem value="Full Marathon" className="text-gray-900 dark:text-white">{language === 'ko' ? '풀마라톤 (42.2km)' : 'Full Marathon (42.2km)'}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -991,7 +1071,7 @@ export default function Home() {
                     {results.grade}
                   </div>
                   <div className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-4 animate-bounce-gentle px-2">
-                    {runnerProfiles[results.gender as keyof typeof runnerProfiles][selectedDistance as keyof typeof runnerProfiles['male']][results.grade]}
+                    {runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']][results.grade]}
                   </div>
                 </div>
               </CardContent>
@@ -1090,7 +1170,7 @@ export default function Home() {
           <Card className="rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 mt-6 sm:mt-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardContent className="p-0">
               <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4 sm:mb-6 text-center">
-                {gender === 'male' ? (language === 'ko' ? '남성' : 'Male') : (language === 'ko' ? '여성' : 'Female')} · {distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']]?.name} {t.gradeTable}
+                {gender === 'male' ? (language === 'ko' ? '남성' : 'Male') : (language === 'ko' ? '여성' : 'Female')} · {distanceStandards[gender as keyof typeof distanceStandards][selectedDistance as keyof typeof distanceStandards['male']]?.name[language]} {t.gradeTable}
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
                 {Object.entries(gradeDefinitions).map(([grade, info]) => {
