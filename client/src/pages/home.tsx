@@ -847,7 +847,7 @@ export default function Home() {
                 x={xScale(time)}
                 y={svgHeight - 10}
                 textAnchor="middle"
-                fontSize="12"
+                fontSize="16"
                 fill={gradeColors[grade as keyof typeof gradeColors]}
                 fontWeight="bold"
               >
@@ -861,7 +861,7 @@ export default function Home() {
               x={(padding + xScale(standards['D+'])) / 2}
               y={svgHeight - 10}
               textAnchor="middle"
-              fontSize="12"
+              fontSize="16"
               fill={gradeColors['D']}
               fontWeight="bold"
             >
@@ -1071,7 +1071,10 @@ export default function Home() {
                     {results.grade}
                   </div>
                   <div className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 mb-4 animate-bounce-gentle px-2">
-                    {runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']][results.grade]}
+                    {runnerProfiles[language] && runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]] && runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']] ? 
+                      runnerProfiles[language][results.gender as keyof typeof runnerProfiles[typeof language]][selectedDistance as keyof typeof runnerProfiles[typeof language]['male']][results.grade] :
+                      'Grade description not available'
+                    }
                   </div>
                 </div>
               </CardContent>
