@@ -507,18 +507,18 @@ export default function Home() {
 
     const { standards } = distanceStandards[gender as keyof typeof distanceStandards][distance as keyof typeof distanceStandards['male']];
     
-    // 피라미드 데이터 (각 등급의 비율)
+    // 피라미드 데이터 (B/B+가 가장 길고 계단식으로 감소)
     const pyramidData = [
-      { grade: 'SS', percentage: 5, color: 'hsl(270, 100%, 70%)' },
-      { grade: 'S', percentage: 10, color: 'hsl(45, 100%, 50%)' },
-      { grade: 'A+', percentage: 15, color: 'hsl(290, 90%, 60%)' },
-      { grade: 'A', percentage: 20, color: 'hsl(120, 60%, 50%)' },
-      { grade: 'B+', percentage: 20, color: 'hsl(180, 80%, 55%)' },
-      { grade: 'B', percentage: 15, color: 'hsl(210, 80%, 60%)' },
-      { grade: 'C+', percentage: 10, color: 'hsl(50, 90%, 60%)' },
-      { grade: 'C', percentage: 8, color: 'hsl(30, 90%, 65%)' },
-      { grade: 'D+', percentage: 5, color: 'hsl(0, 0%, 60%)' },
-      { grade: 'D', percentage: 2, color: 'hsl(0, 0%, 50%)' }
+      { grade: 'SS', percentage: 8, color: 'hsl(270, 100%, 70%)' },
+      { grade: 'S', percentage: 12, color: 'hsl(45, 100%, 50%)' },
+      { grade: 'A+', percentage: 16, color: 'hsl(290, 90%, 60%)' },
+      { grade: 'A', percentage: 18, color: 'hsl(120, 60%, 50%)' },
+      { grade: 'B+', percentage: 22, color: 'hsl(180, 80%, 55%)' },  // 가장 긴 막대
+      { grade: 'B', percentage: 22, color: 'hsl(210, 80%, 60%)' },   // 가장 긴 막대
+      { grade: 'C+', percentage: 18, color: 'hsl(50, 90%, 60%)' },
+      { grade: 'C', percentage: 14, color: 'hsl(30, 90%, 65%)' },
+      { grade: 'D+', percentage: 10, color: 'hsl(0, 0%, 60%)' },
+      { grade: 'D', percentage: 6, color: 'hsl(0, 0%, 50%)' }        // D+와 다른 길이
     ];
 
     const maxWidth = 300;
