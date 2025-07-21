@@ -8,7 +8,6 @@ Sitemap: https://runlevel.replit.app/sitemap.xml
 Allow: /about
 Allow: /privacy-policy
 Allow: /terms-of-service
-Allow: /contact
 
 # Avoid crawling assets
 Disallow: /assets/

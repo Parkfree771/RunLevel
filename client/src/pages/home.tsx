@@ -1217,9 +1217,6 @@ export default function Home() {
               <Link href="/about" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                 서비스 소개
               </Link>
-              <Link href="/contact" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
-                문의하기
-              </Link>
               <Link href="/privacy-policy" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                 개인정보처리방침
               </Link>
