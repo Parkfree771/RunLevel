@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3, User, Moon, Sun, Globe } from "lucide-react";
+import { Link } from 'wouter';
 import logoSvg from '@assets/logo.svg';
 
 interface GradeInfo {
@@ -1210,8 +1211,29 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-6 sm:mt-8">
-        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8 text-center">
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{t.footer}</p>
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
+          <div className="text-center mb-4">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-4">
+              <Link href="/about" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                서비스 소개
+              </Link>
+              <Link href="/contact" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                문의하기
+              </Link>
+              <Link href="/privacy-policy" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                개인정보처리방침
+              </Link>
+              <Link href="/terms-of-service" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                이용약관
+              </Link>
+            </div>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{t.footer}</p>
+            <div className="mt-2">
+              <p className="text-xs text-gray-500 dark:text-gray-500">
+                © 2025 RunLevel. 과학적 데이터 기반 러닝 퍼포먼스 분석 서비스
+              </p>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
