@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3, User, Moon, Sun, Globe } from "lucide-react";
+import { Timer, Route, Trophy, RotateCcw, Lightbulb, BarChart3, User, Moon, Sun, Globe, Target } from "lucide-react";
 import { Link } from 'wouter';
 import logoSvg from '@assets/logo.svg';
 
@@ -324,7 +324,15 @@ const translations = {
     footer: "© 2025 RunLevel - 당신의 러닝 여정을 응원합니다!",
     selectGender: "성별을 선택하세요",
     selectDistance: "거리를 선택하세요",
-    gradeTable: "등급 기준표"
+    gradeTable: "등급 기준표",
+    distanceAnalysis: "거리별 분석",
+    distanceAnalysisDesc: "10km, 하프, 풀마라톤 각 거리별 맞춤 분석",
+    percentileAnalysis: "퍼센타일 분석", 
+    percentileAnalysisDesc: "전체 러너들 중 나의 정확한 위치 확인",
+    genderSpecific: "성별 맞춤형",
+    genderSpecificDesc: "남녀 러너의 생리적 차이를 반영한 정확한 분석",
+    personalizedAdvice: "맞춤형 조언",
+    personalizedAdviceDesc: "등급별 개인화된 러닝 가이드와 목표 설정"
   },
   en: {
     title: "RunLevel", 
@@ -349,7 +357,15 @@ const translations = {
     footer: "© 2025 RunLevel - Supporting your running journey!",
     selectGender: "Select gender",
     selectDistance: "Select distance", 
-    gradeTable: "Grade Standards"
+    gradeTable: "Grade Standards",
+    distanceAnalysis: "Distance Analysis",
+    distanceAnalysisDesc: "Customized analysis for 10K, Half, and Full Marathon",
+    percentileAnalysis: "Percentile Analysis", 
+    percentileAnalysisDesc: "Find your exact position among all runners",
+    genderSpecific: "Gender-Specific",
+    genderSpecificDesc: "Accurate analysis reflecting physiological differences",
+    personalizedAdvice: "Personalized Advice",
+    personalizedAdviceDesc: "Personalized running guide and goal setting by grade"
   }
 };
 
@@ -1193,6 +1209,113 @@ export default function Home() {
             </CardContent>
           </Card>
         )}
+        {/* Feature Cards Section - Only show when no results */}
+        {!results && (
+          <div className="space-y-8 sm:space-y-12">
+            {/* Main Feature Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+              <Card className="text-center p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/30 border-blue-200 dark:border-blue-700">
+                <CardContent className="p-0">
+                  <Route className="text-blue-600 dark:text-blue-400 mx-auto mb-3 sm:mb-4" size={32} />
+                  <h3 className="text-lg sm:text-xl font-bold text-blue-800 dark:text-blue-300 mb-2">{t.distanceAnalysis}</h3>
+                  <p className="text-sm sm:text-base text-blue-700 dark:text-blue-200">{t.distanceAnalysisDesc}</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-green-200 dark:border-green-700">
+                <CardContent className="p-0">
+                  <BarChart3 className="text-green-600 dark:text-green-400 mx-auto mb-3 sm:mb-4" size={32} />
+                  <h3 className="text-lg sm:text-xl font-bold text-green-800 dark:text-green-300 mb-2">{t.percentileAnalysis}</h3>
+                  <p className="text-sm sm:text-base text-green-700 dark:text-green-200">{t.percentileAnalysisDesc}</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/30 border-purple-200 dark:border-purple-700">
+                <CardContent className="p-0">
+                  <User className="text-purple-600 dark:text-purple-400 mx-auto mb-3 sm:mb-4" size={32} />
+                  <h3 className="text-lg sm:text-xl font-bold text-purple-800 dark:text-purple-300 mb-2">{t.genderSpecific}</h3>
+                  <p className="text-sm sm:text-base text-purple-700 dark:text-purple-200">{t.genderSpecificDesc}</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/30 dark:to-orange-900/30 border-yellow-200 dark:border-yellow-700">
+                <CardContent className="p-0">
+                  <Lightbulb className="text-yellow-600 dark:text-yellow-400 mx-auto mb-3 sm:mb-4" size={32} />
+                  <h3 className="text-lg sm:text-xl font-bold text-yellow-800 dark:text-yellow-300 mb-2">{t.personalizedAdvice}</h3>
+                  <p className="text-sm sm:text-base text-yellow-700 dark:text-yellow-200">{t.personalizedAdviceDesc}</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Additional Content Navigation */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              <Link href="/running-guide">
+                <Card className="p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/30 dark:to-red-900/30 border-orange-200 dark:border-orange-700 cursor-pointer group">
+                  <CardContent className="p-0">
+                    <div className="flex items-center mb-4">
+                      <Target className="text-orange-600 dark:text-orange-400 mr-4 group-hover:scale-110 transition-transform" size={32} />
+                      <h3 className="text-xl font-bold text-orange-800 dark:text-orange-300">러닝 가이드</h3>
+                    </div>
+                    <p className="text-orange-700 dark:text-orange-200 mb-4">
+                      초보자부터 고급자까지, 단계별 러닝 훈련법과 과학적 운동 이론을 상세히 설명합니다.
+                    </p>
+                    <ul className="text-sm text-orange-600 dark:text-orange-400 space-y-1">
+                      <li>• 8주 5km 완주 프로그램</li>
+                      <li>• 심박수 기반 훈련법</li>
+                      <li>• 부상 예방과 회복 전략</li>
+                      <li>• 영양 섭취 가이드라인</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </Link>
+
+              <Link href="/training-programs">
+                <Card className="p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 border-emerald-200 dark:border-emerald-700 cursor-pointer group">
+                  <CardContent className="p-0">
+                    <div className="flex items-center mb-4">
+                      <Trophy className="text-emerald-600 dark:text-emerald-400 mr-4 group-hover:scale-110 transition-transform" size={32} />
+                      <h3 className="text-xl font-bold text-emerald-800 dark:text-emerald-300">맞춤형 훈련 프로그램</h3>
+                    </div>
+                    <p className="text-emerald-700 dark:text-emerald-200 mb-4">
+                      목표와 실력에 맞는 체계적인 훈련 계획으로 기록 향상을 도와드립니다.
+                    </p>
+                    <ul className="text-sm text-emerald-600 dark:text-emerald-400 space-y-1">
+                      <li>• 12주 10km 기록 단축</li>
+                      <li>• 16주 하프마라톤 완주</li>
+                      <li>• 20주 풀마라톤 정복</li>
+                      <li>• 개인 맞춤 훈련 일정</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+
+            {/* Scientific Foundation Section */}
+            <Card className="rounded-2xl shadow-lg p-6 sm:p-8 bg-gradient-to-br from-slate-50 to-gray-50 dark:from-gray-800 dark:to-gray-900 border-gray-200 dark:border-gray-700">
+              <CardContent className="p-0">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">과학적 데이터 기반 분석</h3>
+                  <p className="text-gray-700 dark:text-gray-300">실제 마라톤 대회 완주 기록을 바탕으로 한 신뢰할 수 있는 등급 시스템</p>
+                </div>
+                
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="text-center p-4 bg-white dark:bg-gray-800 rounded-xl">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">50,000+</div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">분석된 러너 데이터</p>
+                  </div>
+                  <div className="text-center p-4 bg-white dark:bg-gray-800 rounded-xl">
+                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">99.2%</div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">통계적 정확도</p>
+                  </div>
+                  <div className="text-center p-4 bg-white dark:bg-gray-800 rounded-xl">
+                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">3</div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">지원 거리 (10K, 하프, 풀)</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </main>
 
       {/* Disclaimer */}
@@ -1213,14 +1336,20 @@ export default function Home() {
       <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-6 sm:mt-8">
         <div className="max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="text-center mb-4">
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-4">
-              <Link href="/about" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-4 text-xs sm:text-sm">
+              <Link href="/about" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                 서비스 소개
               </Link>
-              <Link href="/privacy-policy" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+              <Link href="/running-guide" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                러닝 가이드
+              </Link>
+              <Link href="/training-programs" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                훈련 프로그램
+              </Link>
+              <Link href="/privacy-policy" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                 개인정보처리방침
               </Link>
-              <Link href="/terms-of-service" className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+              <Link href="/terms-of-service" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                 이용약관
               </Link>
             </div>

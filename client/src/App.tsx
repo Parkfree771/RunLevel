@@ -8,6 +8,8 @@ import Home from "@/pages/home";
 import About from "@/pages/about";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import TermsOfService from "@/pages/terms-of-service";
+import RunningGuide from "@/pages/running-guide";
+import TrainingPrograms from "@/pages/training-programs";
 
 function Router() {
   return (
@@ -16,6 +18,8 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
+      <Route path="/running-guide" component={RunningGuide} />
+      <Route path="/training-programs" component={TrainingPrograms} />
       <Route component={NotFound} />
     </Switch>
   );

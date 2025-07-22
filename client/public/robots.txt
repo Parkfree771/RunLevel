@@ -6,6 +6,8 @@ Sitemap: https://runlevel.replit.app/sitemap.xml
 
 # Important pages for crawling
 Allow: /about
+Allow: /running-guide
+Allow: /training-programs
 Allow: /privacy-policy
 Allow: /terms-of-service
 
