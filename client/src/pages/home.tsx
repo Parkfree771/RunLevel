@@ -1764,7 +1764,7 @@ export default function Home() {
 
 <Button 
     // 👇 아래 navigate 함수 안의 URL 구조를 수정합니다.
-    onClick={() => navigate(`/training-program/${selectedDistance}/${results.gender}/${getGradeLevel(results.grade)}?totalSeconds=${results.totalSeconds}&grade=${results.grade}&formattedTime=${encodeURIComponent(results.formattedTime)}&distanceName=${encodeURIComponent(results.distanceName)}&gender=${results.gender}&selectedDistance=${encodeURIComponent(selectedDistance)}&lang=${language}`)}
+    onClick={() => navigate(`/training-program/${selectedDistance}/${results.gender}/${getGradeLevel(results.grade)}?totalSeconds=${results.totalSeconds}&grade=${results.grade}&formattedTime=${encodeURIComponent(results.formattedTime)}&distanceName=${encodeURIComponent(distanceName)}&gender=${results.gender}&selectedDistance=${encodeURIComponent(selectedDistance)}&lang=${language}`)}
     className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
 >
     {language === 'ko' ? '맞춤 훈련 프로그램 보기' : 'View Customized Training Program'}
