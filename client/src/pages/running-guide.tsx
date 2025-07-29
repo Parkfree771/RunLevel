@@ -1,4 +1,4 @@
-import { ArrowLeft, Clock, Heart, Target, TrendingUp, Trophy, Users } from 'lucide-react';
+import { ArrowLeft, Clock, Heart, Target, TrendingUp, Trophy, Users, Link as LinkIcon } from 'lucide-react';
 import { Link } from 'wouter';
 
 export default function RunningGuide() {
@@ -57,6 +57,10 @@ export default function RunningGuide() {
                   </div>
                 </div>
               </div>
+              <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">RunLevel 등급 연계 팁</h4>
+                <p className="text-sm text-gray-700 dark:text-gray-300">이 가이드를 성공적으로 마치면, 당신은 <strong>D등급</strong>을 넘어 <strong>C등급</strong> 러너로 성장할 수 있는 기반을 다지게 됩니다. 꾸준함이 가장 중요합니다!</p>
+              </div>
             </section>
 
             {/* 거리별 훈련법 */}
@@ -90,13 +94,13 @@ export default function RunningGuide() {
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-3">목표 시간별 전략</h4>
                       <div className="space-y-3">
                         <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                          <p className="text-sm"><strong>서브 50분 목표:</strong> 5:00/km 페이스 유지 훈련</p>
+                          <p className="text-sm"><strong>서브 50분 목표 (A등급):</strong> 5:00/km 페이스 유지 훈련</p>
                         </div>
                         <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                          <p className="text-sm"><strong>서브 45분 목표:</strong> 4:30/km 페이스, 강도 높은 인터벌 필수</p>
+                          <p className="text-sm"><strong>서브 45분 목표 (S등급):</strong> 4:30/km 페이스, 강도 높은 인터벌 필수</p>
                         </div>
                         <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                          <p className="text-sm"><strong>서브 40분 목표:</strong> 4:00/km 페이스, 전문적 코칭 권장</p>
+                          <p className="text-sm"><strong>서브 40분 목표 (SS등급):</strong> 4:00/km 페이스, 전문적 코칭 권장</p>
                         </div>
                       </div>
                     </div>
@@ -149,7 +153,7 @@ export default function RunningGuide() {
                   <div className="space-y-4">
                     <div className="grid md:grid-cols-3 gap-4">
                       <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
-                        <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2">초급자 (서브 5시간)</h4>
+                        <h4 className="font-semibold text-red-800 dark:text-red-300 mb-2">초급자 (서브 5시간, C등급)</h4>
                         <ul className="text-xs text-gray-700 dark:text-gray-300 space-y-1">
                           <li>• 주간 러닝량: 40-60km</li>
                           <li>• 롱런: 최대 32km</li>
@@ -158,7 +162,7 @@ export default function RunningGuide() {
                         </ul>
                       </div>
                       <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                        <h4 className="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">중급자 (서브 4시간)</h4>
+                        <h4 className="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">중급자 (서브 4시간, A등급)</h4>
                         <ul className="text-xs text-gray-700 dark:text-gray-300 space-y-1">
                           <li>• 주간 러닝량: 60-80km</li>
                           <li>• 롱런: 최대 35km</li>
@@ -167,7 +171,7 @@ export default function RunningGuide() {
                         </ul>
                       </div>
                       <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                        <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-2">고급자 (서브 3시간)</h4>
+                        <h4 className="font-semibold text-purple-800 dark:text-purple-300 mb-2">고급자 (서브 3시간, SS등급)</h4>
                         <ul className="text-xs text-gray-700 dark:text-gray-300 space-y-1">
                           <li>• 주간 러닝량: 80-120km</li>
                           <li>• 롱런: 최대 38km</li>
@@ -234,6 +238,10 @@ export default function RunningGuide() {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="mt-6 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">더 알아보기</h4>
+                <p className="text-sm text-gray-700 dark:text-gray-300">심박수 훈련에 대한 더 깊이 있는 정보는 <a href="https://www.runnersworld.com/training/a20812270/heart-rate-training-can-make-you-a-better-runner/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Runner's World의 가이드</a>를 참고하세요.</p>
               </div>
             </section>
 
@@ -322,12 +330,18 @@ export default function RunningGuide() {
                     </ul>
                   </div>
                 </div>
+                <div className="mt-6 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">RunLevel 등급 연계 팁</h4>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">부상은 모든 등급의 러너에게 찾아올 수 있습니다. 특히 기록 단축을 목표로 하는 <strong>B등급 이상</strong>의 러너들은 부상 예방에 각별히 신경 써야 합니다. 통증이 느껴지면 즉시 휴식을 취하고 전문가의 진료를 받으세요.</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">부상 예방에 대한 자세한 정보는 <a href="https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/running/art-20047897" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Mayo Clinic의 가이드</a>를 참고하세요.</p>
+                </div>
               </div>
             </section>
 
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

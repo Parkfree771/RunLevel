@@ -1,5 +1,9 @@
-import { ArrowLeft, Target, Users, BarChart3, Award } from 'lucide-react';
+import { ArrowLeft, Target, Users, BarChart3, Award, Database, Mail } from 'lucide-react';
 import { Link } from 'wouter';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+
 
 export default function About() {
   return (
@@ -118,6 +122,52 @@ export default function About() {
               </div>
             </section>
 
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <Database className="text-teal-500 mr-3 h-6 w-6" />
+                데이터 분석 방법론
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                RunLevel의 등급 시스템은 국내 주요 마라톤 대회에서 공개된 수만 건의 완주 기록 데이터를 기반으로 구축되었습니다. 수집된 데이터는 성별과 거리(10km, 하프, 풀코스)에 따라 분류되며, 통계적 기법을 통해 정제됩니다.
+              </p>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                정규분포 모델을 적용하여 각 기록의 백분위(percentile)를 계산하고, 이를 바탕으로 SS부터 D까지의 객관적인 등급 경계를 설정합니다. 이 과정은 러너가 전체 주자 그룹 내에서 자신의 상대적인 위치를 명확히 파악할 수 있도록 돕습니다. 저희는 지속적으로 최신 데이터를 반영하여 분석의 정확도를 높여나가고 있습니다.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <Mail className="text-rose-500 mr-3 h-6 w-6" />
+                문의하기
+              </h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                서비스에 대한 질문, 제안, 파트너십 문의 등 궁금한 점이 있으시면 언제든지 아래 양식을 통해 연락주세요.
+              </p>
+              <div className="bg-white dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600">
+                <form className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">이름</label>
+                      <Input type="text" id="name" placeholder="성함을 입력하세요" className="w-full bg-gray-50 dark:bg-gray-800" />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">이메일</label>
+                      <Input type="email" id="email" placeholder="답변 받으실 이메일을 입력하세요" className="w-full bg-gray-50 dark:bg-gray-800" />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">메시지</label>
+                    <Textarea id="message" rows={5} placeholder="문의 내용을 입력하세요..." className="w-full bg-gray-50 dark:bg-gray-800" />
+                  </div>
+                  <div>
+                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                      문의 보내기
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
             <section className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">RunLevel과 함께하는 러닝 여정</h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -136,6 +186,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
