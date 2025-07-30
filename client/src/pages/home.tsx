@@ -459,7 +459,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 const GradeDistributionBarChart = ({ userGrade }: { userGrade?: Grade }) => {
   // B/B+가 가장 높고, 양 옆으로 갈수록 낮아지는 삼각형 모양으로 데이터 수정
-  const gradeDistribution = [
+  const gradeDistribution: { grade: Grade, percent: number}[] = [
     { grade: 'D', percent: 2 },
     { grade: 'D+', percent: 4 },
     { grade: 'C', percent: 8 },
