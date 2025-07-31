@@ -602,7 +602,10 @@ export default function Home() {
       };
     
       const toggleLanguage = () => {
-        setLanguage(language === 'ko' ? 'en' : 'ko');
+        const newLang = language === 'ko' ? 'en' : 'ko';
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('lang', newLang);
+        navigate(window.location.pathname + '?' + queryParams.toString());
       };
 
       const determineGrade = (totalSeconds: number, distance: Distance, gender: Gender): Grade => {
