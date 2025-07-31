@@ -17,5 +17,16 @@ export default defineConfig({
   build: {
     outDir: '../dist',
     emptyOutDir: true, // 빌드 시 기존 dist 폴더를 깨끗하게 비웁니다.
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'client/index.html'),
+      },
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === '_redirects.txt') return '_redirects';
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
+    },
   }
 })
