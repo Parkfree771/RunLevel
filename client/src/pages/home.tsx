@@ -541,53 +541,138 @@ export default function Home() {
     
       const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-      // home.tsx 파일
-
-  // 👇 여기서부터 복사 시작
-  // home.tsx 파일의 useEffect 부분을 이 코드로 교체해주세요.
-
-  useEffect(() => {
-    const historyState = window.history.state;
-    if (match && historyState && historyState.grade) {
-      setResults(historyState);
-      if(historyState.selectedDistance) {
-        setSelectedDistance(historyState.selectedDistance);
-      }
-      return;
-    }
+      const [theme, setTheme] = useState<'light' | 'dark'>('light');
     
-    const queryParams = new URLSearchParams(window.location.search);
-    const lang = queryParams.get('lang');
-    if (lang && (lang === 'en' || lang === 'ko') && lang !== language) {
-      setLanguage(lang);
-    }
-    
-    if (match) {
-      const totalSeconds = queryParams.get('totalSeconds');
-      const grade = queryParams.get('grade') as Grade;
-      const formattedTime = queryParams.get('formattedTime');
-      const distanceName = queryParams.get('distanceName');
-      const genderParam = queryParams.get('gender') as Gender;
-      const selectedDistanceParam = queryParams.get('selectedDistance');
+      // Effect to sync theme from localStorage and apply it
+      useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        const initialTheme = savedTheme === 'dark' ? 'dark' : 'light';
+        setTheme(initialTheme);
+        
+        if (initialTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }, []);
 
-      if (totalSeconds && grade && formattedTime && genderParam && selectedDistanceParam) {
-        const currentDistanceName = distanceStandards[genderParam][decodeURIComponent(selectedDistanceParam) as Distance].name[language];
-        setResults({
-          totalSeconds: parseInt(totalSeconds),
+      // Effect to sync language from URL
+      useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const langFromUrl = queryParams.get('lang');
+        const currentLang = (langFromUrl === 'en' || langFromUrl === 'ko') ? langFromUrl : 'ko';
+        if (language !== currentLang) {
+            setLanguage(currentLang);
+        }
+      }, [location]);
+
+      // Effect to sync results data from URL and current language
+      useEffect(() => {
+        if (match) { // On /results page
+            const queryParams = new URLSearchParams(window.location.search);
+            const totalSeconds = queryParams.get('totalSeconds');
+            const grade = queryParams.get('grade') as Grade;
+            const formattedTime = queryParams.get('formattedTime');
+            const genderParam = queryParams.get('gender') as Gender;
+            const selectedDistanceParam = queryParams.get('selectedDistance');
+
+            if (totalSeconds && grade && formattedTime && genderParam && selectedDistanceParam) {
+                const decodedDistance = decodeURIComponent(selectedDistanceParam) as Distance;
+                const distanceName = distanceStandards[genderParam]?.[decodedDistance]?.name[language];
+                
+                if (distanceName) {
+                    setResults({
+                        totalSeconds: parseInt(totalSeconds),
+                        grade,
+                        formattedTime: decodeURIComponent(formattedTime),
+                        distanceName: distanceName,
+                        gender: genderParam,
+                        selectedDistance: decodedDistance
+                    });
+                    setSelectedDistance(decodedDistance);
+                } else {
+                    // Invalid params, go home
+                    navigate(`/?lang=${language}`, { replace: true });
+                }
+            }
+        } else {
+            setResults(null);
+        }
+      }, [match, location, language]);
+    
+      const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+        if (newTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+      };
+    
+      const toggleLanguage = () => {
+        const newLang = language === 'ko' ? 'en' : 'ko';
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('lang', newLang);
+        navigate(`${window.location.pathname}?${queryParams.toString()}`, { replace: true });
+      };
+
+      const determineGrade = (totalSeconds: number, distance: Distance, gender: Gender): Grade => {
+        const standards = distanceStandards[gender][distance].standards;
+        if (totalSeconds <= standards.SS) return 'SS';
+        if (totalSeconds <= standards.S) return 'S';
+        if (totalSeconds <= standards['A+']) return 'A+';
+        if (totalSeconds <= standards.A) return 'A';
+        if (totalSeconds <= standards['B+']) return 'B+';
+        if (totalSeconds <= standards.B) return 'B';
+        if (totalSeconds <= standards['C+']) return 'C+';
+        if (totalSeconds <= standards.C) return 'C';
+        if (totalSeconds <= standards['D+']) return 'D+';
+        return 'D';
+      };
+
+      const formatTime = (totalSeconds: number): string => {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+    
+        if (hours > 0) {
+          return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      };
+
+      const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!selectedDistance) {
+          alert(t.selectDistance);
+          return;
+        }
+        const hoursNum = parseInt(hours) || 0;
+        const minutesNum = parseInt(minutes) || 0;
+        const secondsNum = parseInt(seconds) || 0;
+        const totalSeconds = (hoursNum * 3600) + (minutesNum * 60) + secondsNum;
+
+        if (totalSeconds <= 0) {
+          alert('올바른 시간을 입력해주세요.');
+          return;
+        }
+
+        const grade = determineGrade(totalSeconds, selectedDistance, gender);
+        const formattedTime = formatTime(totalSeconds);
+        
+        const queryParams = new URLSearchParams({
+          totalSeconds: totalSeconds.toString(),
           grade,
-          formattedTime: decodeURIComponent(formattedTime),
-          distanceName: currentDistanceName,
-          gender: genderParam,
-          selectedDistance: decodeURIComponent(selectedDistanceParam)
+          formattedTime: encodeURIComponent(formattedTime),
+          gender,
+          selectedDistance: encodeURIComponent(selectedDistance),
+          lang: language,
         });
-        // 👇 이 부분에 as Distance를 추가했습니다.
-        setSelectedDistance(decodeURIComponent(selectedDistanceParam) as Distance);
-      }
-    } else {
-      setResults(null);
-    }
-  }, [location, match, language]);
-  // 👆 여기까지 교체
+        
+        navigate(`/results?${queryParams.toString()}`);
+      };
 
       useEffect(() => {
         localStorage.setItem('theme', theme);
