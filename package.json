@@ -6,7 +6,7 @@
   "scripts": {
       "dev": "vite",
       "build": "npm run build:client && npm run build:server",
-      "build:client": "tsc && vite build client --outDir dist/client",
+      "build:client": "tsc && vite build client --config vite.config.ts --outDir dist/client",
       "build:server": "esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist/server",
       "lint": "eslint . --ext ts,tsx--report-unused-disable-directives --max-warnings 0",
      "preview": "vite preview client"
