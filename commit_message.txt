@@ -1,1 +1,1 @@
-Refactor: Move '러닝 계산기' card below '다시 측정하기' button in pace-calculator.tsx
+fix: Netlify 404 by directly renaming _redirects.txt to _redirects and simplifying vite config

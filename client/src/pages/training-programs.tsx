@@ -15,7 +15,7 @@ const TrainingProgramPage = () => {
   const gender = params?.gender || 'male';
   const gradeLevel = params?.gradeLevel || 'average';
 
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const queryParams = new URLSearchParams(location.split('?')[1] || '');
 
   const [language, setLanguage] = useState<'ko' | 'en'>(() => {
@@ -34,13 +34,31 @@ const TrainingProgramPage = () => {
   }, []);
 
   useEffect(() => {
+  const queryParams = new URLSearchParams(location.split('?')[1] || '');
+  const langFromUrl = queryParams.get('lang');
+  if (langFromUrl && (langFromUrl === 'ko' || langFromUrl === 'en') && language !== langFromUrl) {
+    setLanguage(langFromUrl);
+  }
+}, [location]);
+
+  useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  const toggleLanguage = () => setLanguage(prev => (prev === 'ko' ? 'en' : 'ko'));
+ const toggleLanguage = () => {
+  // 현재 언어와 반대되는 새 언어를 결정합니다.
+  const newLang = language === 'ko' ? 'en' : 'ko';
+  const queryParams = new URLSearchParams(location.split('?')[1] || '');
 
+  // URL의 lang 파라미터를 새 언어로 설정합니다.
+  queryParams.set('lang', newLang);
+
+  // 현재 페이지의 경로를 유지하면서 변경된 쿼리 파라미터로 주소를 업데이트합니다.
+  const path = `/training-program/${distance}/${gender}/${gradeLevel}`;
+  navigate(`${path}?${queryParams.toString()}`, { replace: true });
+};
   const t = pageTranslations[language];
   
   const programData = trainingData[distance as keyof typeof trainingData]?.[gender as keyof typeof trainingData['10km']]?.[language];
