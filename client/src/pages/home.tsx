@@ -547,7 +547,7 @@ export default function Home() {
       }
     }, []);
 
-    // Effect to sync language from URL
+    // Effect to sync language from URL when it changes (e.g., back/forward buttons)
     useEffect(() => {
       const queryParams = new URLSearchParams(window.location.search);
       const langFromUrl = queryParams.get('lang');
@@ -557,7 +557,7 @@ export default function Home() {
       }
     }, [location]);
 
-    // Effect to sync results data from URL and current language
+    // Effect to sync results data from URL. Re-runs when URL or language state changes.
     useEffect(() => {
       if (match) { // On /results page
           const queryParams = new URLSearchParams(window.location.search);
@@ -569,7 +569,6 @@ export default function Home() {
 
           if (totalSeconds && grade && formattedTime && genderParam && selectedDistanceParam) {
               const decodedDistance = decodeURIComponent(selectedDistanceParam) as Distance;
-              // Check if params are valid before setting results
               const distanceName = distanceStandards[genderParam]?.[decodedDistance]?.name[language];
               
               if (distanceName) {
@@ -583,14 +582,13 @@ export default function Home() {
                   });
                   setSelectedDistance(decodedDistance);
               } else {
-                  // Invalid params, go home
                   navigate(`/?lang=${language}`, { replace: true });
               }
           }
       } else {
           setResults(null);
       }
-    }, [match, location, language]); // Rerun when URL or language changes
+    }, [match, location, language]);
 
     // --- Helper Functions ---
 
@@ -651,9 +649,12 @@ export default function Home() {
   
     const toggleLanguage = () => {
       const newLang = language === 'ko' ? 'en' : 'ko';
+      // 1. Update state directly to trigger re-render with new language
+      setLanguage(newLang);
+      
+      // 2. Sync the URL to match the new state
       const queryParams = new URLSearchParams(window.location.search);
       queryParams.set('lang', newLang);
-      // Use replace to avoid adding to history stack
       navigate(`${window.location.pathname}?${queryParams.toString()}`, { replace: true });
     };
 
@@ -784,6 +785,7 @@ export default function Home() {
           </div>
       );
     }
+
 
 
   return (
