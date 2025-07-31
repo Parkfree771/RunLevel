@@ -16,12 +16,13 @@ const TrainingProgramPage = () => {
   const gradeLevel = params?.gradeLevel || 'average';
 
   const [location, navigate] = useLocation();
-  const queryParams = new URLSearchParams(location.split('?')[1] || '');
 
-  const [language, setLanguage] = useState<'ko' | 'en'>(() => {
-    const lang = queryParams.get('lang');
-    return (lang === 'en' || lang === 'ko') ? lang : 'ko';
-  });
+  // --- 수정된 부분 ---
+  // window.location.search를 사용해 URL 파라미터를 직접 읽어옵니다.
+  const queryParams = new URLSearchParams(window.location.search);
+  const langFromUrl = queryParams.get('lang');
+  const language = (langFromUrl === 'en' || langFromUrl === 'ko') ? langFromUrl : 'ko';
+  // --- 여기까지 수정 ---
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
@@ -34,31 +35,22 @@ const TrainingProgramPage = () => {
   }, []);
 
   useEffect(() => {
-  const queryParams = new URLSearchParams(location.split('?')[1] || '');
-  const langFromUrl = queryParams.get('lang');
-  if (langFromUrl && (langFromUrl === 'ko' || langFromUrl === 'en') && language !== langFromUrl) {
-    setLanguage(langFromUrl);
-  }
-}, [location]);
-
-  useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
- const toggleLanguage = () => {
-  // 현재 언어와 반대되는 새 언어를 결정합니다.
-  const newLang = language === 'ko' ? 'en' : 'ko';
-  const queryParams = new URLSearchParams(location.split('?')[1] || '');
+  
+  const toggleLanguage = () => {
+    const newLang = language === 'ko' ? 'en' : 'ko';
+    // 여기도 window.location.search를 사용하도록 통일합니다.
+    const currentParams = new URLSearchParams(window.location.search);
+    currentParams.set('lang', newLang);
 
-  // URL의 lang 파라미터를 새 언어로 설정합니다.
-  queryParams.set('lang', newLang);
+    const path = `/training-program/${distance}/${gender}/${gradeLevel}`;
+    navigate(`${path}?${currentParams.toString()}`, { replace: true });
+  };
 
-  // 현재 페이지의 경로를 유지하면서 변경된 쿼리 파라미터로 주소를 업데이트합니다.
-  const path = `/training-program/${distance}/${gender}/${gradeLevel}`;
-  navigate(`${path}?${queryParams.toString()}`, { replace: true });
-};
   const t = pageTranslations[language];
   
   const programData = trainingData[distance as keyof typeof trainingData]?.[gender as keyof typeof trainingData['10km']]?.[language];
@@ -77,10 +69,7 @@ const TrainingProgramPage = () => {
   };
 
   const { title, goal, program } = getProgram();
-
  
-
-  // 거리별/성별 특별 안내 문구
   const getSpecificGuide = () => {
     if (gender === 'female') return t.femaleRunnerGuide;
     if (distance === 'Full Marathon') return t.fullMarathonGuide;
@@ -114,7 +103,6 @@ const TrainingProgramPage = () => {
           </div>
         </div>
       </header>
-      {/* src/pages/training-programs.tsx 파일 */}
 
       <main className="max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8">
@@ -124,7 +112,6 @@ const TrainingProgramPage = () => {
           <CardContent className="p-0">
             <div className="space-y-12">
               
-              {/* --- 등급별 훈련 계획 섹션 --- */}
               <section>
                 <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-center mb-6">
                   <h3 className="font-bold text-xl text-gray-800 dark:text-gray-100">{title}</h3>
@@ -162,7 +149,6 @@ const TrainingProgramPage = () => {
           </CardContent>
         </div>
 
-        {/* --- 공통 가이드 카드 --- */}
         <Card className="rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 mt-6 sm:mt-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-center">{t.commonGuide.title}</CardTitle>

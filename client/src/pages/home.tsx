@@ -451,10 +451,6 @@ const translations = {
 
 // home.tsx 파일의 GradeDistributionBarChart 부분을 이 코드로 교체하세요.
 
-// home.tsx 파일의 GradeDistributionBarChart 부분을 이 코드로 교체하세요.
-
-// home.tsx 파일의 GradeDistributionBarChart 부분을 이 코드로 교체하세요.
-
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const GradeDistributionBarChart = ({ userGrade }: { userGrade?: Grade }) => {
@@ -527,7 +523,10 @@ export default function Home() {
     const [calcResult, setCalcResult] = useState<string>('');
     const [calculatedTotalSeconds, setCalculatedTotalSeconds] = useState<number | null>(null);
 
-    const [language, setLanguage] = useState<Language>('ko');
+    const queryParams = new URLSearchParams(window.location.search);
+    const langFromUrl = queryParams.get('lang');
+    const language: Language = (langFromUrl === 'en' || langFromUrl === 'ko') ? langFromUrl : 'ko';
+  
     const [results, setResults] = useState<any>(null);
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
@@ -548,14 +547,7 @@ export default function Home() {
     }, []);
 
     // Effect to sync language from URL when it changes (e.g., back/forward buttons)
-    useEffect(() => {
-      const queryParams = new URLSearchParams(window.location.search);
-      const langFromUrl = queryParams.get('lang');
-      const currentLang = (langFromUrl === 'en' || langFromUrl === 'ko') ? langFromUrl : 'ko';
-      if (language !== currentLang) {
-          setLanguage(currentLang);
-      }
-    }, [location]);
+
 
     // Effect to sync results data from URL. Re-runs when URL or language state changes.
     useEffect(() => {
@@ -588,7 +580,7 @@ export default function Home() {
       } else {
           setResults(null);
       }
-    }, [match, location, language]);
+    }, [match, location]);
 
     // --- Helper Functions ---
 
