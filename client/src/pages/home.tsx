@@ -523,9 +523,11 @@ export default function Home() {
     const [calcResult, setCalcResult] = useState<string>('');
     const [calculatedTotalSeconds, setCalculatedTotalSeconds] = useState<number | null>(null);
 
-    const queryParams = new URLSearchParams(window.location.search);
-    const langFromUrl = queryParams.get('lang');
-    const language: Language = (langFromUrl === 'en' || langFromUrl === 'ko') ? langFromUrl : 'ko';
+    const [language, setLanguage] = useState<Language>(() => {
+  // 페이지가 처음 로딩될 때 localStorage에서 언어 설정을 읽어옵니다.
+  // 저장된 값이 없으면 기본값으로 'ko'를 사용합니다.
+  return (localStorage.getItem('language') as Language) || 'ko';
+});
   
     const [results, setResults] = useState<any>(null);
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -574,7 +576,7 @@ export default function Home() {
                   });
                   setSelectedDistance(decodedDistance);
               } else {
-                  navigate(`/?lang=${language}`, { replace: true });
+                  navigate('/', { replace: true });
               }
           }
       } else {
@@ -640,13 +642,13 @@ export default function Home() {
     };
   
     const toggleLanguage = () => {
-      const newLang = language === 'ko' ? 'en' : 'ko';
-      
-      // Sync the URL to match the new state
-      const queryParams = new URLSearchParams(window.location.search);
-      queryParams.set('lang', newLang);
-      navigate(`${window.location.pathname}?${queryParams.toString()}`, { replace: true });
-    };
+  // 현재 언어와 반대되는 언어로 변경
+  const newLang = language === 'ko' ? 'en' : 'ko';
+  // 브라우저 저장소(localStorage)에 새 언어 값을 저장
+  localStorage.setItem('language', newLang);
+  // 화면을 다시 그리기 위해 언어 상태를 업데이트
+  setLanguage(newLang);
+};
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -673,7 +675,6 @@ export default function Home() {
         formattedTime: encodeURIComponent(formattedTime),
         gender,
         selectedDistance: encodeURIComponent(selectedDistance),
-        lang: language,
       });
       
       navigate(`/results?${queryParams.toString()}`);
@@ -686,7 +687,7 @@ export default function Home() {
       setMinutes('');
       setSeconds('');
       setResults(null);
-      navigate(`/?lang=${language}`);
+      navigate('/');
     };
 
     // --- Calculator Functions ---
@@ -783,7 +784,7 @@ export default function Home() {
       <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
           <div className="relative flex items-center justify-center">
-            <Link href={`/?lang=${language}`} className="text-center cursor-pointer">
+            <Link href="/" className="text-center cursor-pointer">
                 <div className="flex items-center justify-center mb-1 sm:mb-2">
                     <img src={logoSvg} alt="RunLevel Logo" className="mr-2 sm:mr-3 h-8 w-8 sm:h-10 sm:w-10" />
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.title}</h1>

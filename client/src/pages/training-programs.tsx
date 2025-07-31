@@ -19,10 +19,9 @@ const TrainingProgramPage = () => {
 
   // --- 수정된 부분 ---
   // window.location.search를 사용해 URL 파라미터를 직접 읽어옵니다.
-  const queryParams = new URLSearchParams(window.location.search);
-  const langFromUrl = queryParams.get('lang');
-  const language = (langFromUrl === 'en' || langFromUrl === 'ko') ? langFromUrl : 'ko';
-  // --- 여기까지 수정 ---
+  const [language, setLanguage] = useState<'ko' | 'en'>(() => {
+  return (localStorage.getItem('language') as 'ko' | 'en') || 'ko';
+});
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
@@ -41,15 +40,11 @@ const TrainingProgramPage = () => {
 
   const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   
-  const toggleLanguage = () => {
-    const newLang = language === 'ko' ? 'en' : 'ko';
-    // 여기도 window.location.search를 사용하도록 통일합니다.
-    const currentParams = new URLSearchParams(window.location.search);
-    currentParams.set('lang', newLang);
-
-    const path = `/training-program/${distance}/${gender}/${gradeLevel}`;
-    navigate(`${path}?${currentParams.toString()}`, { replace: true });
-  };
+const toggleLanguage = () => {
+  const newLang = language === 'ko' ? 'en' : 'ko';
+  localStorage.setItem('language', newLang);
+  setLanguage(newLang);
+};
 
   const t = pageTranslations[language];
   
@@ -82,7 +77,7 @@ const TrainingProgramPage = () => {
       <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
           <div className="relative flex items-center justify-center">
-            <Link href={`/?lang=${language}`} className="text-center cursor-pointer">
+            <Link href="/" className="text-center cursor-pointer">
               <div className="flex items-center justify-center mb-1 sm:mb-2">
                 <img src={logoSvg} alt="RunLevel Logo" className="mr-2 sm:mr-3 h-8 w-8 sm:h-10 sm:w-10" />
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">{t.title}</h1>
