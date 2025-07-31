@@ -649,10 +649,8 @@ export default function Home() {
   
     const toggleLanguage = () => {
       const newLang = language === 'ko' ? 'en' : 'ko';
-      // 1. Update state directly to trigger re-render with new language
-      setLanguage(newLang);
       
-      // 2. Sync the URL to match the new state
+      // Sync the URL to match the new state
       const queryParams = new URLSearchParams(window.location.search);
       queryParams.set('lang', newLang);
       navigate(`${window.location.pathname}?${queryParams.toString()}`, { replace: true });
