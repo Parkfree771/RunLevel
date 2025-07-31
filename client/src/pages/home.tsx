@@ -570,12 +570,13 @@ export default function Home() {
       const genderParam = queryParams.get('gender') as Gender;
       const selectedDistanceParam = queryParams.get('selectedDistance');
 
-      if (totalSeconds && grade && formattedTime && distanceName && genderParam && selectedDistanceParam) {
+      if (totalSeconds && grade && formattedTime && genderParam && selectedDistanceParam) {
+        const currentDistanceName = distanceStandards[genderParam][decodeURIComponent(selectedDistanceParam) as Distance].name[language];
         setResults({
           totalSeconds: parseInt(totalSeconds),
           grade,
           formattedTime: decodeURIComponent(formattedTime),
-          distanceName: decodeURIComponent(distanceName),
+          distanceName: currentDistanceName,
           gender: genderParam,
           selectedDistance: decodeURIComponent(selectedDistanceParam)
         });
@@ -666,7 +667,6 @@ export default function Home() {
       totalSeconds: totalSeconds.toString(),
       grade,
       formattedTime: encodeURIComponent(formattedTime),
-      distanceName: encodeURIComponent(distanceName),
       gender,
       selectedDistance: encodeURIComponent(selectedDistance),
       lang: language,
