@@ -8,7 +8,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "RunLevel",
   description: "Running pace calculator and training guides",
-
+  verification: {
+    // 코드가 여기에 추가되었습니다
+    google: "mHpIGJIZ-hof-Pv9KqeY0oaQZKhsek4eTuRC4UaBuwc",
+  },
 };
 
 export default function RootLayout({
