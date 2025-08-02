@@ -1,0 +1,97 @@
+남성 풀코스 한글
+생각하는 과정 표시
+풀 마라톤 등급별 주간 맞춤 훈련 프로그램
+제공해주신 풀 마라톤(42.195km) 기록 데이터를 바탕으로, 각 등급의 러너가 다음 목표를 달성할 수 있도록 일주일 훈련 계획표를 제안합니다. 풀 마라톤은 장거리 중에서도 가장 긴 도전이므로, 점진적인 훈련량 증가, 전략적인 영양 섭취(카보로딩), 그리고 충분한 휴식이 무엇보다 중요합니다.
+
+1. C+, C, D+, D 등급 러너를 위한 B, B+ 등급 목표 주간 계획
+목표: 부상 없이 42.195km를 완주하는 강력한 기초 체력을 만들고, 장거리 달리기에 대한 자신감을 기르는 데 집중합니다. (목표 기록: 3시간 58분 ~ 4시간 35분)
+
+요일	훈련 종류	훈련 내용	훈련 목표 및 팁
+월요일	휴식 또는 교차 훈련	완전 휴식 또는 수영, 자전거 30~40분	🚴 부상 방지: 주말 장거리 훈련 후 관절에 부담이 적은 운동으로 회복을 돕습니다.
+화요일	가벼운 조깅	50~60분간 편안한 페이스로 조깅	😊 지속성 유지: 긴 거리를 달리기 위한 기본 체력을 꾸준히 쌓아 나갑니다.
+수요일	지속주 훈련	15분 워밍업
+본운동: 8~10km를 편안한 페이스보다 약간 빠르게 달리기
+15분 쿨다운	🔥 지구력 향상: 마라톤의 기본이 되는 '오래 달리는 능력'을 강화합니다.
+목요일	휴식	완전한 휴식	🛌 완전한 회복: 강도 높은 훈련과 장거리 훈련 사이, 몸이 재충전할 시간을 줍니다.
+금요일	가벼운 조깅	40분간 매우 편안한 속도로 조깅	🍃 컨디션 조절: 주말 핵심 훈련인 장거리 달리기를 위해 몸을 가볍게 만듭니다.
+토요일	장거리주 (LSD)	16~20km를 대화 가능한 속도로 천천히 달리기 (매주 1~2km씩 점진적 증가, 3주 훈련 후 1주는 거리 단축)	🏃‍♂️ 거리 적응: 가장 중요한 훈련입니다. 지방을 에너지원으로 쓰는 능력을 키웁니다.
+일요일	휴식	완전한 휴식	☕️ 재충전의 시간: 다음 주 훈련을 위해 에너지를 비축하고 근육 성장을 돕습니다.
+
+2. B, B+ 등급 러너를 위한 S, A+, A 등급 목표 주간 계획
+목표: '서브-4'(4시간 이내 완주)를 넘어 3시간 중반대 진입을 위해, 실제 마라톤 페이스(MP) 적응력을 높이는 데 집중합니다. (목표 기록: 3시간 3분 ~ 3시간 58분)
+
+요일	훈련 종류	훈련 내용	훈련 목표 및 팁
+월요일	휴식	완전한 휴식	🛌 초기화: 강도 높은 주간 훈련 시작 전 완벽히 회복합니다.
+화요일	마라톤 페이스 훈련(MP)	15분 워밍업
+본운동: 8~12km를 실제 목표 마라톤 페이스로 달리기
+15분 쿨다운	🎯 실전 감각 훈련: 목표 페이스를 몸에 각인시켜 효율적인 에너지 분배 능력을 기릅니다.
+수요일	회복 달리기	50~60분간 매우 편안한 속도로 조깅	🍃 피로 해소: 어제 훈련으로 쌓인 피로를 부드럽게 풀어주고 혈액순환을 돕습니다.
+목요일	템포 런	15분 워밍업
+본운동: 7~9km를 '조금 힘든' 페이스로 달리기
+15분 쿨다운	🚀 젖산 역치 훈련: 힘든 페이스를 오래 유지하는 능력을 길러, 30km 이후 페이스 저하를 막습니다.
+금요일	휴식	완전한 휴식	🧘 완전한 재충전: 주말 장거리 훈련을 대비하여 글리코겐을 축적합니다.
+토요일	장거리주 (LSD)	22~28km를 편안한 페이스로 달리기	🏞️ 핵심 지구력: 마라톤 후반부를 버틸 수 있는 강력한 신체적, 정신적 기반을 다집니다.
+일요일	가벼운 활동 또는 휴식	가벼운 산책, 스트레칭 또는 완전 휴식	😊 유연한 마무리: 컨디션에 따라 자유롭게 활동하며 주간 훈련을 마칩니다.
+
+3. S 등급 러너를 위한 SS 등급 목표 주간 계획
+목표: '서브-3'(3시간 이내 완주)에 근접하는 엘리트 수준의 기록을 위해, 훈련의 총량을 늘리고 레이스 후반까지 페이스를 유지하는 능력을 극대화합니다. (목표 기록: 3시간 3분 이내)
+
+요일	훈련 종류	훈련 내용	훈련 목표 및 팁
+월요일	회복 달리기	60분 이내의 매우 가벼운 조깅	🍃 능동적 회복: 높은 훈련량을 소화하기 위한 필수 과정입니다.
+화요일	고강도 인터벌	20분 워밍업
+본운동: (1.6km(1마일) 10km 페이스로 달리기 + 3분 조깅) x 4~5회
+15분 쿨다운	💥 스피드 한계 돌파: 전반적인 러닝 이코노미(효율)를 개선하여 마라톤 페이스를 더 쉽게 느끼게 합니다.
+수요일	중거리 지속주	70~80분간 편안한 페이스로 달리기	🔥 지속주 강화: 높은 훈련 볼륨을 유지하며 유산소 능력을 꾸준히 자극합니다.
+목요일	마라톤 페이스 훈련 (장거리)	15분 워밍업
+본운동: 16~20km를 목표 마라톤 페이스(MP)로 달리기
+15분 쿨다운	🎯 최강의 실전 훈련: 지친 상태에서도 목표 페이스를 유지하는 능력을 길러 '35km의 벽'을 극복합니다.
+금요일	휴식	완전한 휴식	🛌 초회복: 강도 높은 훈련으로 인한 미세 손상을 회복하고 더 강한 몸을 만듭니다.
+토요일	장거리주 (LSD)	30~35km를 편안한 페이스로 달리기 (실전 3주 전까지만)	marathon 최종 담금질: 마라톤 완주에 대한 모든 능력을 점검하고 완성하는 가장 중요한 훈련입니다.
+일요일	회복 달리기 또는 휴식	40분 가벼운 조깅 또는 완전 휴식	🧘‍♂️ 마무리 및 재정비: 컨디션을 세심하게 살피며 다음 주 훈련을 준비합니다.
+
+Weekly Customized Training Program for Full Marathon Runners by Grade
+Based on the full marathon (42.195km) record data you provided, here is a one-week training plan to help runners of each grade achieve their next goal. As the full marathon is the longest of all long-distance challenges, gradual increases in training volume, strategic nutrition (carb-loading), and sufficient rest are paramount.
+
+1. Weekly Plan for C+, C, D+, D Grade Runners Aiming for B, B+
+Goal: To focus on building strong foundational fitness to complete 42.195km without injury and to develop confidence in long-distance running. (Target Time: 3:58:01 ~ 4:35:00)
+
+Day	Workout Type	Workout Details	Training Goal & Tips
+Monday	Rest or Cross-Training	Complete rest or 30-40 minutes of swimming, cycling.	🚴 Injury Prevention: Aid recovery with low-impact exercises for your joints after the weekend's long run.
+Tuesday	Light Jog	Jog for 50-60 minutes at a comfortable pace.	😊 Maintain Consistency: Steadily build the foundational fitness required for long distances.
+Wednesday	Steady-State Run	15-min warm-up
+Main set: Run 8-10km at a slightly faster than comfortable pace.
+15-min cool-down	🔥 Improve Endurance: Strengthen the "ability to run for a long time," which is the basis of a marathon.
+Thursday	Rest	Complete rest.	🛌 Full Recovery: Allows your body to recharge between intense workouts and long runs.
+Friday	Light Jog	Jog for 40 minutes at a very comfortable pace.	🍃 Conditioning: Loosen up your body to prepare for the weekend's key long run.
+Saturday	Long Slow Distance (LSD)	Run 16-20km at a slow, conversational pace (increase by 1-2km weekly, with a reduced distance week after 3 weeks).	🏃‍♂️ Distance Adaptation: The most important workout. Develops the ability to use fat as an energy source.
+Sunday	Rest	Complete rest.	☕️ Recharge: Store up energy for the next week's training and aid muscle growth.
+2. Weekly Plan for B, B+ Grade Runners Aiming for S, A+, A
+Goal: To move beyond a "Sub-4" (sub-4-hour finish) and enter the mid-3-hour range by focusing on improving adaptation to actual Marathon Pace (MP). (Target Time: 3:03:01 ~ 3:58:00)
+
+Day	Workout Type	Workout Details	Training Goal & Tips
+Monday	Rest	Complete rest.	🛌 Reset: Fully recover before starting a week of intense training.
+Tuesday	Marathon Pace (MP) Run	15-min warm-up
+Main set: Run 8-12km at your actual target marathon pace.
+15-min cool-down	🎯 Race-Sense Training: Engrain the target pace into your body to develop efficient energy distribution.
+Wednesday	Recovery Run	Jog for 50-60 minutes at a very comfortable pace.	🍃 Relieve Fatigue: Gently loosen up to relieve fatigue from yesterday's workout and aid blood circulation.
+Thursday	Tempo Run	15-min warm-up
+Main set: Run 7-9km at a "comfortably hard" pace.
+15-min cool-down	🚀 Lactate Threshold Training: Develops the ability to sustain a hard pace, preventing your pace from dropping after 30km.
+Friday	Rest	Complete rest.	🧘 Full Recharge: Store glycogen to prepare for the weekend's long run.
+Saturday	Long Slow Distance (LSD)	Run for 22-28km at a comfortable pace.	🏞️ Core Endurance: Build the strong physical and mental foundation to endure the latter half of the marathon.
+Sunday	Light Activity or Rest	Light walk, stretching, or complete rest.	😊 Flexible Finish: End the week by choosing an activity based on your condition.
+3. Weekly Plan for S Grade Runners Aiming for SS
+Goal: To approach an elite-level "Sub-3" (sub-3-hour finish) by increasing total training volume and maximizing the ability to maintain pace until the end of the race. (Target Time: Under 3:03:00)
+
+Day	Workout Type	Workout Details	Training Goal & Tips
+Monday	Recovery Run	Very light jog for under 60 minutes.	🍃 Active Recovery: An essential process to handle high training volume.
+Tuesday	High-Intensity Intervals	20-min warm-up
+Main set: (1.6km (1 mile) at 10k pace + 3 min jog) x 4-5 reps
+15-min cool-down	💥 Break Speed Limits: Improve overall running economy (efficiency) to make marathon pace feel easier.
+Wednesday	Mid-distance Steady Run	Run for 70-80 minutes at a comfortable pace.	🔥 Strengthen Steady-State: Maintain high training volume and consistently stimulate your aerobic capacity.
+Thursday	Long Marathon Pace (MP) Run	15-min warm-up
+Main set: Run 16-20km at your target marathon pace (MP).
+15-min cool-down	🎯 The Ultimate Race-Specific Workout: Develops the ability to maintain pace when tired to overcome the '35km wall.'
+Friday	Rest	Complete rest.	🛌 Supercompensation: A key time for your body to recover from micro-damage caused by intense training and become stronger.
+Saturday	Long Slow Distance (LSD)	Run 30-35km at a comfortable pace (only until 3 weeks before the race).	marathon The Final Sharpening: The most important workout to check and complete all abilities for the marathon.
+Sunday	Recovery Run or Rest	40-minute light jog or complete rest.	🧘‍♂️ Finish and Readjust: Carefully check your condition and prepare for the next week's training.
