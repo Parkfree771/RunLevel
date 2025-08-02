@@ -1,4 +1,12 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/api/training-plan/route": "app/api/training-plan/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/results/page": "app/results/page.js",
+  "/training-plan/page": "app/training-plan/page.js",
+  "/training-program/[distance]/[gender]/[gradeLevel]/page": "app/training-program/[distance]/[gender]/[gradeLevel]/page.js",
+  "/training-program/[distance]/page": "app/training-program/[distance]/page.js",
+  "/custom-training/page": "app/custom-training/page.js",
+  "/privacy-policy/page": "app/privacy-policy/page.js"
 }

@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import HomeContent from './HomeContent';
+import HomeContent from '@/components/PageContent';
 import { SearchParamsProvider } from './SearchParamsProvider';
 
 export default function Page() {
