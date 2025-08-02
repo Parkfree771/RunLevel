@@ -1,8 +1,8 @@
-
-import { getCustomTrainingData, CustomTrainingData, TrainingPlan } from '@/lib/customTrainingParser';
+import { getCustomTrainingData } from '@/lib/customTrainingParser';
 import Link from 'next/link';
 import { Home } from 'lucide-react';
 import ClientComponent from './client-page';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: '맞춤 훈련 프로그램 | RunLevel',
@@ -38,7 +38,9 @@ export default function CustomTrainingPage() {
       </header>
       
       <main className="container mx-auto p-4">
-        <ClientComponent trainingData={trainingData} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ClientComponent trainingData={trainingData} />
+        </Suspense>
       </main>
     </div>
   );
